@@ -3,20 +3,22 @@
 </head>
 <body>
 
-    <main class="container bg-secondary d-flex w-100 h-100 justify-content-between">
+    <main class="container-fluid d-flex w-100 h-100 justify-content-center">
 
-        <div class=" col-4 d-flex bg-black flex-column justify-content-end align-items-end">
-            <p style="font-size:20px;">Indigo é uma plataforma de gestão de equipamentos industriais gerando indicadores confiaveis para você extraia o maximo do seu negocio</p>
-            <img class="img-fluid" src="images/erp-solutions.gif">
+        <div class=" col-4 d-flex  flex-column justify-content-start align-items-start">
+            <p style="font-size:27px;padding-top:20%;">Indigo é uma plataforma de gestão de equipamentos industriais gerando indicadores confiaveis para que você extraia o maximo do seu negocio</p>
+            <img class="img-fluid" src="~/images/erp-solutions.gif">
         </div>
 
-        <section class="col-5 d-flex h-100 bg-info justify-content-center align-items-center">
-            <form class=" h-50 w-50 bg-primary" asp-action="Login" asp-controller="User" method="post">
-                <div class="d-flex flex-column">
-                    <input type="text" class="form-control" name="username" placeholder="Usuário">
-                    <input type="password" name="password" placeholder="Senha">
-                    <input type="submit" value="Entrar"><br>
-                    <a href="recupsenha.html" id="recuperar">Esqueci a senha</a>
+        <section class="col-5 d-flex h-100 justify-content-center align-items-center">
+            <form class=" h-50 w-50" asp-action="Login" asp-controller="User" method="post">
+                <div class="d-flex h-75 flex-column justify-content-between align-content-md-center">
+                    <div>
+                        <input type="text" class="form-control  border-2 fw-bold " style="margin-bottom:5%;" name="username" placeholder="Usuário">
+                        <input type="password" class="form-control  border-2 fw-bold " name="password" placeholder="Senha">
+                    </div>
+                        <input type="submit" class="btn btn-outline-primary border-2 fw-bold " value="Entrar"><br>
+                        <a href="recupsenha.html" id="recuperar">Esqueci a senha</a>
                 </div>
             </form>
         </section>
@@ -24,3 +26,4 @@
     </main>
 
 </body>
+
