@@ -9,25 +9,45 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">IndigoErp</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-                        </li>
-                    </ul>
-                </div>
+        <nav class="navbar navbar-expand-md navbar-light bg-light" m>
+            <a class="navbar-brand" href="#">
+                <img src="placeholder.png" width="100" height="100" alt="Logo">
+            </a>
+            <button class="navbar-toggler menu-i" type="button" data-toggle="collapse" data-target="#HeaderNavBar" onclick="this.classList.toggle('active') aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="HeaderNavBar">
+                <ul class="navbar-nav w-100 align-items-center">
+                    <li class="nav-item">
+                        <a class="nav-link" href="cadastro.html">Cadastro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="produtos.html">Produtos</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="financeiro.html">Financeiro</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="manutencao.html">Manutenção</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="clientes.html">Clientes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="perfil.html">Perfil</a>
+                    </li>
+                    <div class="navbar-nav ml-auto">
+                        <a href="#" id="user-dropdown" role="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class='user-avatar' src="placeholder.png" width="50" height="50"> {{ user["username"] }}</a>
+                        <div class="dropdown-menu dropdown-menu-right mr-4 bg-lightblue" aria-labelledby="user_dropdown">
+                            <a class="nav-link pl-1" href="login.html" class="dropdown-item"><i class="fas fa-sign-out-alt"></i> Deslogar</a>
+                            <a class="nav-link pl-1" href="#" class="dropdown-item"><i class="fas fa-profile-alt"></i> Perfil</a>
+                        </div>
+                    </div>
+                    </li>
+                </ul>
             </div>
         </nav>
+
     </header>
     <div class="container-fluid " style="height:86%;">
 
