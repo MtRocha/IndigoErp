@@ -11,7 +11,7 @@ namespace IndigoErp.Services
 
         private string mailName => "indigoerp3773@gmail.com";
 
-        private  string mailPassword => "pablolore6969";
+        private  string mailPassword => "gmwq eirn wmny asly";
 
         public  void SendMail(string email, string subject, string body)
         { 
