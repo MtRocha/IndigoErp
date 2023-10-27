@@ -5,19 +5,19 @@ namespace IndigoErp.Services
 {
     public class MailService : IMailService
     {
-        private static string setAdress = "smtp.gmail.com";
+        private string setAdress => "smtp.gmail.com";
 
-        private static int setPortNumber= 587;
+        private int setPortNumber => 587;
 
-        private static string mailName = "indigoerp3773@gmail.com";
+        private string mailName => "indigoerp3773@gmail.com";
 
-        private static string mailPassword = "kamilymatheusendrewpablo";
+        private  string mailPassword => "pablolore6969";
 
-        public void SendRecoveryCode(string email, string subject, string body)
+        public  void SendMail(string email, string subject, string body)
         { 
         
             var mailMessage = new MailMessage();
-            var smtp = new SmtpClient();
+            var smtp = new SmtpClient(setAdress,setPortNumber);
 
             mailMessage.From = new MailAddress(mailName);
 
@@ -27,7 +27,7 @@ namespace IndigoErp.Services
 
             mailMessage.Body = body;
 
-            mailMessage.IsBodyHtml = false;
+            mailMessage.IsBodyHtml = false;;
 
             smtp.EnableSsl= true;
 

@@ -2,6 +2,6 @@
 {
     public interface IMailService 
     {
-        public void SendRecoveryCode(string email, string subject, string body);
+        public static void SendMail(string email, string subject, string body) { }
     }
 }
