@@ -9,6 +9,11 @@ namespace IndigoErp.Controllers
             return View();
         }
 
+        public IActionResult RequestEmail()
+        { 
+         
+        }
+
         public IActionResult ForgetPassword() 
         {
             return View("recuperacao");
