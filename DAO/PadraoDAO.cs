@@ -9,7 +9,7 @@ namespace F.E.R.A_1._0.DAO
     {
     public class PadraoDAO
         {
-            
+            internal static List<T> 
 
 
 

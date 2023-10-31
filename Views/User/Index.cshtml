@@ -1,4 +1,5 @@
-﻿@{
+﻿@model LoginModel
+@{
 
     Layout = "_LayoutHome";
 
@@ -19,8 +20,8 @@
             <form class=" h-50 w-50" asp-action="Login" asp-controller="User" method="post">
                 <div class="d-flex h-50 flex-column justify-content-between align-items-center">
                     <div class="w-100">
-                        <input type="text" class="form-control  border-2 fw-bold " style="margin-bottom:5%;" name="username" placeholder="Usuário">
-                        <input type="password" class="form-control  border-2 fw-bold " name="password" placeholder="Senha">
+                        <input asp-for=Email type="text" class="form-control  border-2 fw-bold " style="margin-bottom:5%;" name="username" placeholder="Usuário">
+                        <input asp-for=Password type="password" class="form-control  border-2 fw-bold " name="password" placeholder="Senha">
                     </div>
                     <div class="w-100">
                         <input type="submit" class="btn btn-outline-primary border-2 fw-bold w-100 " value="Entrar"><br>
