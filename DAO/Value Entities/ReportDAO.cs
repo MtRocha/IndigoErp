@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace F.E.R.A_1._0.DAO
     {
-    public class ReportDAO
+    public class ReportDAO : PadraoDAO
         {
         private SqlParameter[] CriaParametros(ReportViewModel report)
             {
@@ -58,9 +58,10 @@ namespace F.E.R.A_1._0.DAO
             return parametros;
             }
 
-        private ReportViewModel MontaSelect(DataRow report)
-            {
-            ReportViewModel r = new ReportViewModel();
+        internal new ReportViewModel MontaObjeto<T>(DataRow report)
+        {
+
+            var r = new ReportViewModel();
 
             r.Id = Convert.ToInt32(report["ID"]);
             r.NumeroTeste = report["NUMERO_TESTE"].ToString();
@@ -75,6 +76,7 @@ namespace F.E.R.A_1._0.DAO
             r.Final = Convert.ToDateTime(report["FINAL"].ToString());
             r.DataFinal = Convert.ToDateTime(report["DATA_FINAL"]);
             r.Status = (report["STATUS"]).ToString();
+
             return r;
             }
 
@@ -88,7 +90,7 @@ namespace F.E.R.A_1._0.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaSelect(falha));
+                list.Add(MontaObjeto<ReportViewModel>(falha));
                 }
 
             return list;
@@ -104,7 +106,7 @@ namespace F.E.R.A_1._0.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaSelect(falha));
+                list.Add(MontaObjeto<ReportViewModel>(falha));
                 }
 
             return list;
@@ -134,7 +136,7 @@ namespace F.E.R.A_1._0.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaSelect(falha));
+                list.Add(MontaObjeto<ReportViewModel>(falha));
                 }
 
             return list;
@@ -152,7 +154,7 @@ namespace F.E.R.A_1._0.DAO
                 }
             else
                 {
-                return MontaSelect(tabela.Rows[0]);
+                return MontaObjeto<ReportViewModel>(tabela.Rows[0]);
                 }
             }
 
@@ -172,7 +174,7 @@ namespace F.E.R.A_1._0.DAO
                 {
                 foreach (DataRow item in table.Rows)
                     {
-                    list.Add(MontaSelect(item));
+                    list.Add(MontaObjeto<ReportViewModel>(item));
                     }
                 return list;
                 }
