@@ -1,10 +1,8 @@
-﻿namespace IndigoErp.Models
+﻿using IndigoErp.Models;
+namespace IndigoErp.Models
 {
-    public class LoginModel
+    public class LoginModel : UserModel
     {
-        public string Email { get; set; }
-        public string Password { get; set; }
-
 
         public LoginModel(string Email,string Password) 
         {

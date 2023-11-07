@@ -4,7 +4,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 
-namespace F.E.R.A_1._0.DAO
+namespace IndigoErp.DAO
     {
     public class FalhaDAO
         {

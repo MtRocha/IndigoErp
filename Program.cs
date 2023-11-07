@@ -1,3 +1,5 @@
+using IndigoErp.Services;
+
 namespace IndigoErp
 {
     public class Program
@@ -7,6 +9,7 @@ namespace IndigoErp
             var builder = WebApplication.CreateBuilder(args);
 
             // Add services to the container.
+            builder.Services.AddScoped<IMailService, MailService>();
             builder.Services.AddControllersWithViews();
 
             var app = builder.Build();
