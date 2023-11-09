@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace IndigoErp.Controllers
 {
-    public class UserController : Controller
+    public class UserController : GeneralController
     {
         public IActionResult Index()
         {
@@ -24,7 +24,7 @@ namespace IndigoErp.Controllers
 
             if (dao.VerifyUser(login) != null)
             {
-
+                HttpContext.Session.SetString("Logged", "true");
                 return RedirectToAction("Index", "Home");
 
             }
