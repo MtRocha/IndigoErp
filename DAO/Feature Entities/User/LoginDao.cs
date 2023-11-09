@@ -25,11 +25,11 @@ namespace IndigoErp.DAO
                 DataRow row = table.Rows[0];
                 if (row["SENHA"].ToString() == login.Password)
                 {
-                    return null;
+                    return CreateObject(row);
                 }
                 else 
                 {
-                    return CreateObject(row); ; 
+                    return null;
                 }
             }
         }

@@ -1,4 +1,6 @@
-﻿using IndigoErp.Services;
+﻿using IndigoErp.DAO;
+using IndigoErp.Models;
+using IndigoErp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IndigoErp.Controllers
@@ -16,6 +18,23 @@ namespace IndigoErp.Controllers
 
         }
 
+        public IActionResult Login(LoginModel login)
+        {
+            LoginDAO dao = new LoginDAO();
+
+            if (dao.VerifyUser(login) != null)
+            {
+
+                return RedirectToAction("Index", "Home");
+
+            }
+            else
+            {
+                ModelState.Clear();
+                ModelState.AddModelError("Email", "E-Mail ou Senha Inválidos");
+                return View("Index",login);
+            }
+        }
         public IActionResult SendVerificationCode(string email)
         {
             string subject = "Código de Recuperação";
@@ -41,7 +60,7 @@ namespace IndigoErp.Controllers
 
             for (int i = 0; i < 6; i++)
             {
-                code += random.Next(1, 101).ToString();
+                code += random.Next(0, 9).ToString();
             }
         
             return code;
