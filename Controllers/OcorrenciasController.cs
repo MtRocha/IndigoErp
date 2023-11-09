@@ -2,7 +2,7 @@
 
 namespace IndigoErp.Controllers
 {
-    public class OcorrenciasControllercs : Controller
+    public class OcorrenciasController : Controller
     {
         public IActionResult Index()
         {
