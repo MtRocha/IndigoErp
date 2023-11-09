@@ -18,24 +18,30 @@
             </button>
             <div class="collapse navbar-collapse" id="HeaderNavBar">
                 <ul class="navbar-nav w-100 align-items-center">
+
+
+                    <div class="d-flex flex-column justify-content-center">
+                        <img src="~/images/consulta.png" style="width:10%; height:10%; margin-left:50%" /> <a class="nav-link" asp-action="Index" asp-controller="Ocorrencias">Consulta de Ocorrências</a>
+                    </div>
+
+
                     <li class="nav-item">
-                        <a class="nav-link" asp-action="Index" asp-controller="Ocorrencias">Ocorrências</a>
+                       <img src="~/images/solicitacao.png" style="width:10%; height:10%; margin-left:10%" /> <a class="nav-link" asp-action="Index" asp-controller="Solicitacao">Solicitação de serviços</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="produtos.html">Produtos</a>
+                        <img src="~/images/indicadores.png" style="width:10%; height:10%; margin-left:15%" /><a class="nav-link" asp-action="Index" asp-controller="Indicadores">Indicadores</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="financeiro.html">Financeiro</a>
+                        <img src="~/images/equipamentos.png" style="width:10%; height:10%; margin-left:15%" /><a class="nav-link" asp-action="Index" asp-controller="Equipamentos">Equipamentos</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="manutencao.html">Manutenção</a>
+                        <img src="~/images/financeiro.png" style="width:10%; height:10%; margin-left:15%" /><a class="nav-link" asp-action="Index" asp-controller="Financeiro">Financeiro</a>
                     </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="clientes.html">Clientes</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="perfil.html">Perfil</a>
-                    </li>
+                        <div class="ml-auto" style="margin-right:10px" id="perfil">
+                            <li class="nav-item">
+                                <a class="nav-link" href="perfil.html">Perfil</a>
+                            </li>
+                        </div>
                     </li>
                 </ul>
                  <div class="navbar-nav ml-auto">
