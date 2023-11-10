@@ -10,6 +10,9 @@ namespace IndigoErp.Controllers
 
         public IActionResult Index()
         {
+            if (!VerifyCredentials())
+                return RedirectToAction("Index","User");
+            else
                 return View();
         }
 

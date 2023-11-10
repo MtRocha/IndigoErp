@@ -7,6 +7,24 @@
 <head>
     <meta charset="UTF-8">
     <title>Recuperação de senha</title>
+
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <img class="logo" src="assets/logo.png" alt="Logo">
+        </div>
+        <div class="message">
+            Olá <b>{{ nome_usuario }}</b>, um código de verificação foi enviado para o e-mail <b>{{ email_usuario }}</b>.
+        </div>
+        <div class="code-input">
+            <input type="text" name="codigo" placeholder="Código de verificação">
+        </div>
+        <div class="submit-button">
+            <input type="submit" value="Confirmar">
+        </div>
+    </div>
+</body>
     <style>
         :root {
             --primary-color: #667eea;
@@ -54,20 +72,3 @@
             cursor: pointer;
         }
     </style>
-</head>
-<body>
-    <div class="container">
-        <div class="header">
-            <img class="logo" src="assets/logo.png" alt="Logo">
-        </div>
-        <div class="message">
-            Olá <b>{{ nome_usuario }}</b>, um código de verificação foi enviado para o e-mail <b>{{ email_usuario }}</b>.
-        </div>
-        <div class="code-input">
-            <input type="text" name="codigo" placeholder="Código de verificação">
-        </div>
-        <div class="submit-button">
-            <input type="submit" value="Confirmar">
-        </div>
-    </div>
-</body>
