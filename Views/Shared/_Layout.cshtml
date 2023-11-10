@@ -9,48 +9,35 @@
 </head>
 <body>
     <header>
-        <nav class="navbar navbar-expand-md navbar-light bg-light" m>
+        <nav class="navbar navbar-expand-md navbar-light d-flex justify-content-between align-items-center">
             <a class="navbar-brand" asp-action="Index" asp-controller="Home" >
-                <img src="placeholder.png" width="100" height="100" alt="Logo">
+                <img src="/images/logo.jpg" style="width:100%;animation:slide-in;animation-duration:1s;" alt="Logo">
             </a>
-            <button class="navbar-toggler menu-i" type="button" data-toggle="collapse" data-target="#HeaderNavBar" onclick="this.classList.toggle('active')" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-                <span class="navbar-toggler-icon"></span>
-            </button>
-            <div class="collapse navbar-collapse" id="HeaderNavBar">
-                <ul class="navbar-nav w-100 align-items-center">
-
-
-                    <div class="d-flex flex-column justify-content-center">
-                        <img src="~/images/consulta.png" style="width:10%; height:10%; margin-left:50%" /> <a class="nav-link" asp-action="Index" asp-controller="Ocorrencias">Consulta de Ocorrências</a>
-                    </div>
-
-
-                    <li class="nav-item">
-                       <img src="~/images/solicitacao.png" style="width:10%; height:10%; margin-left:10%" /> <a class="nav-link" asp-action="Index" asp-controller="Solicitacao">Solicitação de serviços</a>
+            <div class="collapse navbar-collapse d-flex justify-content-between" id="HeaderNavBar">
+                <ul class="navbar-nav w-75">
+                    <li class=" nav-item d-flex flex-column align-items-center">
+                        <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/indicadores.png"/></a><label class="nav-tëxt">Indicadores</label>
                     </li>
-                    <li class="nav-item">
-                        <img src="~/images/indicadores.png" style="width:10%; height:10%; margin-left:15%" /><a class="nav-link" asp-action="Index" asp-controller="Indicadores">Indicadores</a>
+                    <li class=" nav-item d-flex flex-column align-items-center">
+                         <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/equipamentos.png"/></a><label class="nav-tëxt">Equipamentos</label>
                     </li>
-                    <li class="nav-item">
-                        <img src="~/images/equipamentos.png" style="width:10%; height:10%; margin-left:15%" /><a class="nav-link" asp-action="Index" asp-controller="Equipamentos">Equipamentos</a>
+                    <li class=" nav-item d-flex flex-column align-items-center">
+                        <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/solicitacao.png" /></a><label class="nav-tëxt">Solicitação de serviços</label>
                     </li>
-                    <li class="nav-item">
-                        <img src="~/images/financeiro.png" style="width:10%; height:10%; margin-left:15%" /><a class="nav-link" asp-action="Index" asp-controller="Financeiro">Financeiro</a>
+                    <li class=" nav-item d-flex flex-column align-items-center">
+                        <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/consulta.png" /></a><label class="nav-tëxt">Consulta</label>
                     </li>
-                        <div class="ml-auto" style="margin-right:10px" id="perfil">
-                            <li class="nav-item">
-                                <a class="nav-link" href="perfil.html">Perfil</a>
-                            </li>
-                        </div>
+                    <li class=" nav-item d-flex flex-column align-items-center">
+                        <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/financeiro.png" /></a><label class="nav-tëxt">Financeiro</label>
                     </li>
                 </ul>
-                 <div class="navbar-nav ml-auto">
-                        <a href="#" id="user-dropdown" role="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class='user-avatar' src="placeholder.png" width="50" height="50"> {{ user["username"] }}</a>
+                 <div class="navbar-nav w-25 d-flex justify-content-center" style="animation:slide-in;animation-duration:1s;animation-delay:1s;animation-fill-mode:forwards ; opacity:0;">
+                        <a href="#" id="user-dropdown" role="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class='user-avatar' src="~/images/user.png" width="50" height="50">    Usuário</a>
                         <div class="dropdown-menu dropdown-menu-right mr-4 bg-lightblue" aria-labelledby="user_dropdown">
                             <a class="nav-link pl-1" class="dropdown-item" asp-action="Index" asp-controller="User"><i class="fas fa-sign-out-alt"></i> Deslogar</a>
                         <a class="nav-link pl-1 dropdown-item"><i class="fas fa-profile-alt"></i> Perfil</a>
                         </div>
-                    </div>
+                 </div>
             </div>
         </nav>
         
@@ -58,26 +45,7 @@
 <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
-<style>
-body{
-   background: white !important;
-}
-   
-   #HeaderNavbar > ul{
-      align-items: flex-start !important;
-	padding-left: 100px;
-   }
 
-   #HeaderNavbar > ul li.ml-auto{
-      margin-left: 1000px !important;
-   }
-
-   #HeaderNavbar > ul li.ml-auto .mr-4{
-      margin-right: 1000px !important;
-   }
-   
-}
-</style>
     </header>
     <div class="container-fluid " style="height:86%;">
 
@@ -90,9 +58,49 @@ body{
             &copy; 2023 - IndigoErp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
     </footer>
+
+    <style>
+        body 
+        {
+            background: white !important;
+        }
+
+        ul img
+        {
+            width: 100%;
+            height: 100%;
+        }
+
+        ul a {
+            width: 20%;
+            height: 50%;
+            opacity:0;
+            animation:slide-in;
+            animation-duration:1s;
+            animation-delay:1s;
+            animation-fill-mode:forwards;
+
+        }
+
+        ul label {
+            opacity:0;
+            animation:slide-in;
+            animation-duration:1s;
+            animation-delay:1s;
+            animation-fill-mode:forwards;
+
+        }
+
+
+        
+    </style>
+
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
 </body>
+
+
+
 </html>

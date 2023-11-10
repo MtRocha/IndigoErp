@@ -6,7 +6,7 @@ using System.Data.SqlClient;
 
 namespace IndigoErp.DAO
     {
-    public class ReportDAO : PadraoDAO
+    public class ReportDAO : GeneralDAO
         {
         private SqlParameter[] CriaParametros(ReportViewModel report)
             {

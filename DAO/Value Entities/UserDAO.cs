@@ -5,7 +5,7 @@ using System.Data.SqlClient;
 
 namespace IndigoErp.DAO
 {
-    public class UserDAO : PadraoDAO
+    public class UserDAO : GeneralDAO
     {
         protected UserModel CreateObject(DataRow row)
         { 

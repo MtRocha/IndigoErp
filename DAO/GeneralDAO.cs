@@ -5,12 +5,39 @@ namespace IndigoErp.DAO
 {
     public class GeneralDAO
         {
-        private GeneralDAO()
-            { }
 
-        public static void ExecutaSql(string comando, SqlParameter[] parametro)
+        internal SqlParameter[] CreateQuery(string tabela, string coluna, string id)
+        {
+            SqlParameter[] parametros = new SqlParameter[3];
+
+            parametros[0] = new SqlParameter("@tabela", tabela);
+            parametros[1] = new SqlParameter("@coluna", tabela);
+            parametros[2] = new SqlParameter("@id", tabela);
+
+            return parametros;
+        }
+
+
+        internal DataTable Listing<T>(string tabela, string coluna)
+        {
+            string sql = $"EXEC spQuery '{tabela}' , '{coluna}'  ";
+            DataTable table = GeneralDAO.SelectSql(sql, CreateQuery(tabela, coluna, ""));
+
+            if (table.Rows.Count != 0)
             {
-            using (SqlConnection conexao = ConectarDAO.ConexaoDB())
+                return table;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+    
+    public static void ExecutaSql(string comando, SqlParameter[] parametro)
+            {
+            using (SqlConnection conexao = ConectDAO.ConexaoDB())
                 {
                 using (SqlCommand cmd = new SqlCommand(comando, conexao))
                     {
@@ -27,7 +54,7 @@ namespace IndigoErp.DAO
 
         public static DataTable SelectSql(string sql, SqlParameter[] parametro)
             {
-            using (SqlConnection conexao = ConectarDAO.ConexaoDB())
+            using (SqlConnection conexao = ConectDAO.ConexaoDB())
                 {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(sql, conexao))
                     {
