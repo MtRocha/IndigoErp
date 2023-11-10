@@ -19,7 +19,7 @@
                         <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/indicadores.png"/></a><label class="nav-tëxt">Indicadores</label>
                     </li>
                     <li class=" nav-item d-flex flex-column align-items-center">
-                         <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/equipamentos.png"/></a><label class="nav-tëxt">Equipamentos</label>
+                         <a asp-action="Index" asp-controller="Equip"><img src="~/images/equipamentos.png"/></a><label class="nav-tëxt">Equipamentos</label>
                     </li>
                     <li class=" nav-item d-flex flex-column align-items-center">
                         <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/solicitacao.png" /></a><label class="nav-tëxt">Solicitação de serviços</label>
@@ -47,6 +47,38 @@
 
 
     </header>
+
+    <style>
+        body {
+            background: white !important;
+        }
+
+        ul img {
+            width: 100%;
+            height: 100%;
+        }
+
+        ul a {
+            width: 20%;
+            height: 50%;
+            opacity: 0;
+            animation: slide-in;
+            animation-duration: 1s;
+            animation-delay: 1s;
+            animation-fill-mode: forwards;
+        }
+
+        ul label {
+            opacity: 0;
+            animation: slide-in;
+            animation-duration: 1s;
+            animation-delay: 1s;
+            animation-fill-mode: forwards;
+        }
+
+    </style>
+
+
     <div class="container-fluid " style="height:86%;">
 
             @RenderBody()
@@ -59,42 +91,7 @@
         </div>
     </footer>
 
-    <style>
-        body 
-        {
-            background: white !important;
-        }
-
-        ul img
-        {
-            width: 100%;
-            height: 100%;
-        }
-
-        ul a {
-            width: 20%;
-            height: 50%;
-            opacity:0;
-            animation:slide-in;
-            animation-duration:1s;
-            animation-delay:1s;
-            animation-fill-mode:forwards;
-
-        }
-
-        ul label {
-            opacity:0;
-            animation:slide-in;
-            animation-duration:1s;
-            animation-delay:1s;
-            animation-fill-mode:forwards;
-
-        }
-
-
-        
-    </style>
-
+  
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
