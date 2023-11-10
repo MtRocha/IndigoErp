@@ -14,7 +14,10 @@ namespace IndigoErp.Controllers
 
         public IActionResult RequestEmail()
         {
-            return View("FrmRequestEmail");
+            ViewBag.Title = "Recuperação de Senha";
+            ViewBag.Message = "Insira seu E-mail para que possamos Enviar um Código de recuperação";
+            ViewBag.Placeholder = "E-mail";
+            return View("FrmAnyService");
 
         }
 
