@@ -57,11 +57,12 @@ span {
     animation-duration:1s;
 }
 
-.btn-navigation{
+.btn-navigation {
     position: relative;
     padding: 1rem 2rem 0.5rem 2.5rem;
     color: #000000;
-    border: 3px solid #776e62;
+    border: 3px solid gray;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     -webkit-transition: padding 0.3s ease-in-out;
     transition: padding 0.3s ease-in-out;
 }
@@ -69,14 +70,15 @@ span {
     .btn-navigation:before {
         content: "";
         position: absolute;
-        top: 0.5rem;
-        left: 0.5rem;
+        top: 2rem;
+        left: 2rem;
         z-index: -1;
         height: 100%;
         width: 100%;
-        background-color: #ffffff;
-        border-right: 3px solid #ffffff;
-        border-bottom: 3px solid #ffffff;
+        box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+        background-color: #7cb4e8;
+        border-right: solid 0px;
+        border-bottom: solid 0px;
         -webkit-transition: all 0.3s ease-in-out;
         transition: all 0.3s ease-in-out;
     }

@@ -1,12 +1,69 @@
 ﻿
 
-<section class="col-12 d-flex justify-content-evenly align-items-center ">
+<section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
 
-    <a class="btn-navigation" >a</a>
-    <a class="btn-navigation">a</a>
-    <a class="btn-navigation" >a</a>
-    <a class="btn-navigation" >a</a>
-    <a class="btn-navigation" >a</a>
-    <a class="btn-navigation" >a</a>    
-    <a class="btn-navigation" >a</a>
+    <div class="col-md-3" style="animation-delay:1s;">
+        <a class="btn-navigation" id="pgAddEquip"><img src="~/images/addEquip.png"></a>
+        <label for="pgAddEquip" class="fw-bold">Adicionar Equipamento</label>
+    </div>
+
+    <div class="col-md-3" style="animation-delay:1.4s;">
+        <a class="btn-navigation" id="pgConsultaEquip" ><img src="~/images/consultEquip.png"></a>
+        <label for="pgConsultaEquip" class="fw-bold">Consultar Equipamento</label>
+    </div>
+
+    <div class="col-md-3" style="animation-delay:1.8s;">
+        <a class="btn-navigation" id="pgCompararEquip"><img src="~/images/compareEquip.png"></a>
+        <label for="pgCompararEquip" class="fw-bold">Comparar Equipamentos</label>
+    </div>
+     
+
 </section>
+
+<style>
+
+    section label {
+    
+        font-size:25px;
+        margin-top:10%;
+    }
+
+    .col-md-3{
+    
+        height:100%;
+        display:flex;
+        opacity:0;
+        animation:fade-in;
+        animation-duration:1s;
+        animation-fill-mode:forwards;
+        flex-direction:column;
+        justify-content:center;
+        align-items:center;
+    
+    }
+
+    .btn-navigation{
+
+        height:40%;
+        width:70%;
+    
+    }
+
+        .btn-navigation img{
+        
+            height:80%;
+            width:80%;
+            position:absolute;
+            top:3rem;
+            left: 4rem;
+        }
+
+        .btn-navigation:hover img{
+            top: 2rem;
+            left: 1.8rem;
+            transition: all 0.3s ease-in-out;
+            -webkit-transition: all 0.3s ease-in-out;
+        }
+        
+
+</style>
