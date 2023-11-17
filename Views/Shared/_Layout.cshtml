@@ -8,10 +8,10 @@
     <link rel="stylesheet" href="~/IndigoErp.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
-        <nav class="navbar navbar-expand-md navbar-light d-flex justify-content-between align-items-center">
+    <header style="height:60%;">
+        <nav class="navbar navbar-expand-md navbar-light d-flex justify-content-between align-items-center border-bottom bg-white" style="height:20%;z-index:1000;">
             <a class="navbar-brand" asp-action="Index" asp-controller="Home" >
-                <img src="/images/logo.jpg" style="width:100%;animation:slide-in;animation-duration:1s;" alt="Logo">
+                <img src="/images/logo.jpg" style="width:100%;animation:slide-in;animation-duration:0.3s;" alt="Logo">
             </a>
             <div class="collapse navbar-collapse d-flex justify-content-between" id="HeaderNavBar">
                 <ul class="navbar-nav w-75">
@@ -22,7 +22,7 @@
                          <a asp-action="Index" asp-controller="Equip"><img src="~/images/equipamentos.png"/></a><label class="nav-tëxt">Equipamentos</label>
                     </li>
                     <li class=" nav-item d-flex flex-column align-items-center">
-                        <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/solicitacao.png" /></a><label class="nav-tëxt">Solicitação de serviços</label>
+                        <a asp-action="Index" asp-controller="Ocorrencias"><img src="~/images/solicitacao.png" /></a><label class="nav-tëxt">Ocorrências</label>
                     </li>
                     <li class=" nav-item d-flex flex-column align-items-center">
                         <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/consulta.png" /></a><label class="nav-tëxt">Consulta</label>
@@ -31,7 +31,7 @@
                         <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/financeiro.png" /></a><label class="nav-tëxt">Financeiro</label>
                     </li>
                 </ul>
-                 <div class="navbar-nav w-25 d-flex justify-content-center" style="animation:slide-in;animation-duration:1s;animation-delay:1s;animation-fill-mode:forwards ; opacity:0;">
+                 <div class="navbar-nav w-25 d-flex justify-content-center" style="animation:slide-in;animation-duration:0.4s;animation-delay:0.2s;animation-fill-mode:forwards ; opacity:0;">
                         <a href="#" id="user-dropdown" role="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class='user-avatar' src="~/images/user.png" width="50" height="50">    Usuário</a>
                         <div class="dropdown-menu dropdown-menu-right mr-4 bg-lightblue" aria-labelledby="user_dropdown">
                             <a class="nav-link pl-1" class="dropdown-item" asp-action="Index" asp-controller="User"><i class="fas fa-sign-out-alt"></i> Deslogar</a>
@@ -63,29 +63,29 @@
             height: 60%;
             opacity: 0;
             animation: slide-in;
-            animation-duration: 1s;
-            animation-delay: 1s;
+            animation-duration: 0.4s;
+            animation-delay: 0.2s;
             animation-fill-mode: forwards;
         }
 
         ul label {
             opacity: 0;
             animation: slide-in;
-            animation-duration: 1s;
-            animation-delay: 1s;
+            animation-duration: 0.4s;
+            animation-delay: 0.3s;
             animation-fill-mode: forwards;
         }
 
     </style>
 
 
-    <div class="container-fluid " style="height:86%;">
+    <div class="container-fluid " style="height:40%;">
 
             @RenderBody()
 
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted bg-white">
         <div class="container">
             &copy; 2023 - IndigoErp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
         </div>
