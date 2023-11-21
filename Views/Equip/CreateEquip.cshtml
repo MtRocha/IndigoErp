@@ -1,5 +1,51 @@
-﻿@*
-    For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
-*@
-@{
-}
+﻿
+
+<section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
+
+    <aside>
+        <!-- Sidebar -->
+        <nav id="sidebarMenu" class="sidebar bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4 fw-bold" style="font-size:120%;">
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-tachometer-alt fa-fw me-3"></i><span class="list-text">Equipamentos Cadastrados</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </aside>
+
+    <main class="col-md-6">
+
+
+    </main>
+
+</section>
+
+<style>
+
+    section label {
+        font-size: 25px;
+        margin-top: 10%;
+    }
+
+
+    .col-md-3 {
+        height: 100%;
+        display: flex;
+        opacity: 0;
+        animation: fade-in;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>

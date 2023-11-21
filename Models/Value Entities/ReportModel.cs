@@ -2,7 +2,7 @@
 
 namespace F.E.R.A_1._0.Models
     {
-    public class ReportViewModel : PadraoViewModel
+    public class ReportModel : PadraoViewModel
         {
         public int IdFuncionario { get; set; }
         public string Celula { get; set; }
