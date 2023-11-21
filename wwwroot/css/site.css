@@ -123,7 +123,7 @@ span {
     left: 0;
     padding: 5% 0 0; /* Height of navbar */
     box-shadow: 20px 0px 25px -8px rgba(0, 0, 0, 0.21);
-    width: 15%;
+    width: 18%;
     z-index: 0;
 }
 
@@ -145,6 +145,14 @@ height: calc(100vh - 48px);
 padding-top: 0.5rem;
 overflow-x: hidden;
 overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
+}
+
+
+.list-text {
+    text-overflow: ellipsis;
+    word-wrap: anywhere;
+    white-space: nowrap;
+    text-overflow: ellipsis;
 }
 
 

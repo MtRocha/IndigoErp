@@ -8,5 +8,13 @@ namespace IndigoErp.Controllers
         {
             return View();
         }
+
+        public IActionResult CreateEquip()
+        {
+
+
+
+            return View();
+        }
     }
 }

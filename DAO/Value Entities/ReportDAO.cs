@@ -8,7 +8,7 @@ namespace IndigoErp.DAO
     {
     public class ReportDAO : GeneralDAO
         {
-        private SqlParameter[] CriaParametros(ReportViewModel report)
+        private SqlParameter[] CriaParametros(ReportModel report)
             {
             SqlParameter[] parametros = new SqlParameter[12];
             if (report.NumeroTeste == null)
@@ -58,10 +58,10 @@ namespace IndigoErp.DAO
             return parametros;
             }
 
-         new ReportViewModel MontaObjeto<T>(DataRow report)
+         new ReportModel MontaObjeto<T>(DataRow report)
         {
 
-            var r = new ReportViewModel();
+            var r = new ReportModel();
 
             r.Id = Convert.ToInt32(report["ID"]);
             r.NumeroTeste = report["NUMERO_TESTE"].ToString();
@@ -80,9 +80,9 @@ namespace IndigoErp.DAO
             return r;
             }
 
-        public List<ReportViewModel> Consulta()
+        public List<ReportModel> Consulta()
             {
-            List<ReportViewModel> list = new List<ReportViewModel>();
+            List<ReportModel> list = new List<ReportModel>();
 
             string consulta = "SELECT * FROM REPORTS WHERE STATUS = 'FINALIZADO' AND DATA_DA_OCORRENCIA >= DATEADD(DAY,-7,GETDATE()) ORDER BY DATA_DA_OCORRENCIA DESC";
 
@@ -90,15 +90,15 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaObjeto<ReportViewModel>(falha));
+                list.Add(MontaObjeto<ReportModel>(falha));
                 }
 
             return list;
             }
 
-        public List<ReportViewModel> ConsultaGeral()
+        public List<ReportModel> ConsultaGeral()
             {
-            List<ReportViewModel> list = new List<ReportViewModel>();
+            List<ReportModel> list = new List<ReportModel>();
 
             string consulta = "SELECT * FROM REPORTS WHERE DATA_DA_OCORRENCIA >= DATEADD(DAY,-7,GETDATE()) ORDER BY DATA_DA_OCORRENCIA DESC";
 
@@ -106,14 +106,14 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaObjeto<ReportViewModel>(falha));
+                list.Add(MontaObjeto<ReportModel>(falha));
                 }
 
             return list;
             }
 
 
-        public void Inserir(ReportViewModel report)
+        public void Inserir(ReportModel report)
             {
             string insercao = "INSERT INTO REPORTS (NUMERO_TESTE,CELULA_DE_REPORT,ID_FUNCIONARIO,ORIGEM_REPORT,COMPONENTE_DE_FALHA,TIPO_DE_FALHA,DESCRICAO,DATA_DA_OCORRENCIA,INICIO,FINAL,STATUS,DATA_FINAL)" +
             "VALUES (@numeroTeste,@celula,@idFuncionario,@origem,@componente,@tipo,@descricao,@data,@inicio,@final,@status,@dataFinal)";
@@ -126,9 +126,9 @@ namespace IndigoErp.DAO
             GeneralDAO.ExecutaSql(remocao, null);
             }
 
-        public List<ReportViewModel> ConsultaPendente()
+        public List<ReportModel> ConsultaPendente()
             {
-            List<ReportViewModel> list = new List<ReportViewModel>();
+            List<ReportModel> list = new List<ReportModel>();
 
             string consulta = "SELECT * FROM REPORTS WHERE STATUS = 'PENDENTE' ";
 
@@ -136,13 +136,13 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaObjeto<ReportViewModel>(falha));
+                list.Add(MontaObjeto<ReportModel>(falha));
                 }
 
             return list;
             }
 
-        public ReportViewModel ConsultaPorId(int id)
+        public ReportModel ConsultaPorId(int id)
             {
             string consulta = "SELECT * FROM REPORTS WHERE ID = " + id;
 
@@ -154,13 +154,13 @@ namespace IndigoErp.DAO
                 }
             else
                 {
-                return MontaObjeto<ReportViewModel>(tabela.Rows[0]);
+                return MontaObjeto<ReportModel>(tabela.Rows[0]);
                 }
             }
 
-        public List<ReportViewModel> ListagemPorNumTeste(string teste)
+        public List<ReportModel> ListagemPorNumTeste(string teste)
             {
-            var list = new List<ReportViewModel>();
+            var list = new List<ReportModel>();
 
             string consulta = $"SELECT * FROM REPORTS WHERE NUMERO_TESTE = '{teste}'";
 
@@ -174,7 +174,7 @@ namespace IndigoErp.DAO
                 {
                 foreach (DataRow item in table.Rows)
                     {
-                    list.Add(MontaObjeto<ReportViewModel>(item));
+                    list.Add(MontaObjeto<ReportModel>(item));
                     }
                 return list;
                 }
@@ -184,7 +184,7 @@ namespace IndigoErp.DAO
         
 
 
-    public void AlterarReport(ReportViewModel report, int id)
+    public void AlterarReport(ReportModel report, int id)
             {
             string alteracao = "UPDATE[REPORTS]" +
                                "SET FINAL = @final , " +

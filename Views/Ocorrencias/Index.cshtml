@@ -3,15 +3,15 @@
         <!-- Sidebar -->
         <nav id="sidebarMenu" class="sidebar bg-white">
             <div class="position-sticky">
-                <div class="list-group list-group-flush mx-3 mt-4 fw-bold" style="font-size:30px">
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple" aria-current="true">
-                        <i class="fas fa-tachometer-alt fa-fw me-3"></i><span>Main dashboard</span>
+                <div class="list-group list-group-flush mx-3 mt-4 fw-bold" style="font-size:120%;">
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-tachometer-alt fa-fw me-3"></i><span class="list-text">Ocorrências pendentes</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-chart-area fa-fw me-3"></i><span>Webiste traffic</span>
+                        <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Nova Ocorrência</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-lock fa-fw me-3"></i><span>Password</span>
+                        <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Histórico de Ocorrrencias</span>
                     </a>
                 </div>
             </div>
@@ -19,7 +19,27 @@
     </aside>
 
 
+    <style>
 
+        section label {
+            font-size: 25px;
+            margin-top: 10%;
+        }
+
+
+        .col-md-3 {
+            height: 100%;
+            display: flex;
+            opacity: 0;
+            animation: fade-in;
+            animation-duration: 0.8s;
+            animation-fill-mode: forwards;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+    </style>
 
 
 </section>

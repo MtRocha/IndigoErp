@@ -2,20 +2,24 @@
 
 <section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
 
-    <div class="col-md-3" style="animation-delay:0.1s;">
-        <a class="btn-navigation" id="pgAddEquip"><img src="~/images/addEquip.png"></a>
-        <label for="pgAddEquip" class="fw-bold">Adicionar Equipamento</label>
-    </div>
-
-    <div class="col-md-3" style="animation-delay:0.2s;">
-        <a class="btn-navigation" id="pgConsultaEquip" ><img src="~/images/consultEquip.png"></a>
-        <label for="pgConsultaEquip" class="fw-bold">Consultar Equipamento</label>
-    </div>
-
-    <div class="col-md-3" style="animation-delay:0.3s;">
-        <a class="btn-navigation" id="pgCompararEquip"><img src="~/images/compareEquip.png"></a>
-        <label for="pgCompararEquip" class="fw-bold">Comparar Equipamentos</label>
-    </div>
+<aside>
+        <!-- Sidebar -->
+        <nav id="sidebarMenu" class="sidebar bg-white">
+            <div class="position-sticky">
+                <div class="list-group list-group-flush mx-3 mt-4 fw-bold" style="font-size:120%;">
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-tachometer-alt fa-fw me-3"></i><span class="list-text">Equipamentos Cadastrados</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
+                    </a>
+                </div>
+            </div>
+        </nav>
+    </aside>
      
 </section>
 
@@ -26,6 +30,7 @@
         font-size:25px;
         margin-top:10%;
     }
+
 
     .col-md-3{
     
@@ -41,14 +46,6 @@
     
     }
 
-    .btn-navigation{
-
-        height:40%;
-        width:70%;
-    
-    }
-
-      
         
 
 </style>
