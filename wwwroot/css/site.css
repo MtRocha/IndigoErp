@@ -61,6 +61,26 @@ span {
     animation-duration:1s;
 }
 
+.form-title {
+    font-size:3rem;
+    position:relative;
+    top:28%;
+    left:16%;
+    animation:slide-in;
+    animation-duration:0.4s;
+    animation-fill-mode:forwards;
+    animation-delay:0.3s;
+    
+
+}
+
+.col-form-label {
+
+    padding:0;
+    margin:0;
+
+}
+
 /*Botao de Navegação*/
 
 .btn-navigation {
@@ -118,7 +138,7 @@ span {
 
 .sidebar {
     position: fixed;
-    top: 0;
+    top: 2%;
     bottom: 0;
     left: 0;
     padding: 5% 0 0; /* Height of navbar */
@@ -149,10 +169,41 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 
 
 .list-text {
+    text-align:center;
     text-overflow: ellipsis;
     word-wrap: anywhere;
     white-space: nowrap;
-    text-overflow: ellipsis;
+}
+
+.list-group a {
+    margin-bottom:5%;
+}
+
+@media screen and (max-width:800px) {
+
+    ul a,img {
+
+        width:10%;
+        height:10%;
+
+    }
+
+    .list-text {
+        font-size: 60%;
+        
+    }
+
+}
+
+@media screen and (max-width:1500px) {
+
+    .list-text {
+        font-size: 80%;
+        text-align: center;
+        text-overflow: clip;
+        word-wrap: break-word;
+        white-space: break-spaces;
+    }
 }
 
 

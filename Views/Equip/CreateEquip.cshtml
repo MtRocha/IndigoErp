@@ -1,16 +1,16 @@
-﻿
+﻿@model EquipModel
 
-<section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
+<section class="col-12 h-100 d-flex justify-content-evenly align-items-center ">
 
     <aside>
         <!-- Sidebar -->
         <nav id="sidebarMenu" class="sidebar bg-white">
             <div class="position-sticky">
                 <div class="list-group list-group-flush mx-3 mt-4 fw-bold" style="font-size:120%;">
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-tachometer-alt fa-fw me-3"></i><span class="list-text">Equipamentos Cadastrados</span>
+                    <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class=""></i><span class="list-text">Equipamentos Cadastrados</span>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
                         <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
                     </a>
                     <a href="#" class="list-group-item list-group-item-action py-2 ripple">
@@ -21,9 +21,41 @@
         </nav>
     </aside>
 
-    <main class="col-md-6">
+    <main class="col-8" >
+
+        <h1 class="form-title">Insira as Informações do Equipamento</h1>
 
 
+        <form class="col-sm-12 d-flex flex-column justify-content-center align-items-center" asp-action="InsertEquip" asp-controller="Equip">
+           
+           <div class="col-6">
+               <label for="nome" class="col-form-label">Nome do Equipamento</label>
+               <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Nome"/>
+           </div>
+            <div class="col-6">
+                <label for="numeroSerie" class="col-form-label">Número de Série</label>
+                <input type="number" asp-for="NumeroSerie" class="form-control" id="numeroSerie" placeholder="Número de Série" />
+            </div>
+            <div class="col-6">
+                <label for="marca" class="col-form-label">Marca do Equipamento</label>
+                <input type="text" asp-for="Marca" class="form-control" id="marca" placeholder="Marca" />
+            </div>
+            <div class="col-6">
+                <label for="modelo" class="col-form-label">Modelo do Equipamento</label>
+                <input type="text" asp-for="Modelo" class="form-control" id="modelo" placeholder="Modelo" />
+            </div>
+
+            <div class="col-6">
+                <label for="setor" class="col-form-label">Setor</label>
+                <select asp-for="Setor" class="form-control" id="setor"/>
+            </div>
+
+
+           
+
+        </form>
+        <br>
+         <button type="submit" class="btn btn-primary" >Adicionar Equipamento</button>
     </main>
 
 </section>
@@ -35,6 +67,21 @@
         margin-top: 10%;
     }
 
+    .col-form-label{
+    
+        font-weight:bold
+    
+    }
+
+    .col-6{
+     
+        display:flex;
+        flex-direction:column;
+        justify-content:start;
+        align-items:start;
+        padding:20px;
+    
+    }
 
     .col-md-3 {
         height: 100%;
