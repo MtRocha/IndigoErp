@@ -8,30 +8,55 @@
     <link rel="stylesheet" href="~/IndigoErp.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header style="height:fit-content">
-        <nav class="navbar navbar-expand-md navbar-light d-flex justify-content-between align-items-center border-bottom bg-white" style="height:20%;z-index:1000;">
-            <a class="navbar-brand" asp-action="Index" asp-controller="Home" >
-                <img src="/images/logo.jpg" style="width:65%;animation:slide-in;animation-duration:0.3s;" alt="Logo">
+    <header>
+        <nav class="navbar navbar-expand-lg bg-white" style="z-index:1000;" >
+            <a class="navbar-brand" href="#">
+                <img src="~/images/logo.jpg" style="opacity:0; animation:slide-in;animation-duration:0.2S;animation-fill-mode:forwards;" height="50" width="200">
             </a>
-            <div class="collapse navbar-collapse d-flex justify-content-between" id="HeaderNavBar" >
-                <ul class="navbar-nav w-75" style="padding-top:1%">
-                    <li class=" nav-item d-flex flex-column align-items-center" >
-                        <a asp-action="Index" asp-controller="Solicitacao"><img src="~/images/indicadores.png"/></a><label class="nav-tëxt">Indicadores</label>
-                    </li>
-                    <li class=" nav-item d-flex flex-column align-items-center">
-                         <a asp-action="Index" asp-controller="Equip"><img src="~/images/equipamentos.png"/></a><label class="nav-tëxt">Equipamentos</label>
-                    </li>
-                    <li class=" nav-item d-flex flex-column align-items-center">
-                        <a asp-action="Index" asp-controller="Ocorrencias"><img src="~/images/solicitacao.png" /></a><label class="nav-tëxt">Ocorrências</label>
-                    </li>
-                </ul>
-                 <div class="navbar-nav w-25 d-flex justify-content-center align-items-start" style="animation:slide-in;animation-duration:0.4s;animation-delay:0.2s;animation-fill-mode:forwards ; opacity:0;">
-                        <a href="#" id="user-dropdown" role="button" class="nav-link dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><img class='user-avatar' src="~/images/user.png" width="50" height="50"> Usuário</a>
-                        <div class="dropdown-menu dropdown-menu-right mr-4 bg-lightblue" aria-labelledby="user_dropdown">
-                            <a class="nav-link pl-1" class="dropdown-item" asp-action="Index" asp-controller="User"><i class="fas fa-sign-out-alt"></i> Deslogar</a>
-                        <a class="nav-link pl-1 dropdown-item"><i class="fas fa-profile-alt"></i> Perfil</a>
-                        </div>
-                 </div>
+            <div class="container">
+                
+                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                    <span class="navbar-toggler-icon"></span>
+                </button>
+                <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                    <ul class="navbar-nav w-25 d-flex justify-content-between me-auto mb-2 mb-lg-0">
+
+                        <li class="nav-item">
+                            <a class="navbar-brand" href="#">
+                                <img src="~/images/indicadores.png" height="35" >
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-action="Index" asp-controller="Equip">
+                                <img src="~/images/equipamentos.png" height="35">
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="navbar-brand" asp-action="Index" asp-controller="Ocorrencias">
+                                <img src="~/images/ocorrencias.png" height="35">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><hr class="dropdown-divider"></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </div>
+
+                    <div class="nav-item dropdown" id="sm-screen">
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Indicadores">Action</a></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Equip">Equipamentos</a></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="Ocorrencias">Ocorrência</a></li>
+                        </ul>
+                    </div>
+                </div>
             </div>
         </nav>
         
@@ -46,45 +71,44 @@
         body {
             background: white !important;
         }
-
-        ul img {
-            width: 100%;
-            height: 100%;
+        
+        nav{
+            -webkit-box-shadow: 0px 3px 25px -16px rgba(0,0,0,0.81);
+            -moz-box-shadow: 0px 3px 25px -16px rgba(0,0,0,0.81);
+            box-shadow: 0px 3px 25px -16px rgba(0,0,0,0.81);
         }
 
-        ul a {
-            width: 20%;
-            height: 50%;
+        .nav-item{
+        
+            border-radius:10px;
+            padding:10px;
             opacity: 0;
-            animation: slide-in;
-            animation-duration: 0.4s;
-            animation-delay: 0.2s;
-            animation-fill-mode: forwards;
+            animation:slide-in;
+            animation-delay:0.2s;
+            animation-duration:0.2S;
+            animation-fill-mode:forwards;
+
+
+
         }
 
-        ul label {
-            opacity: 0;
-            animation: slide-in;
-            animation-duration: 0.4s;
-            animation-delay: 0.3s;
-            animation-fill-mode: forwards;
+
+        .nav-item:hover{
+                background-color: aliceblue;
+                border:solid 0.1px aliceblue;
+                transition:0.4s;
+               
         }
 
     </style>
 
+    
 
     <div class="container-fluid " style="height:80%">
 
             @RenderBody()
 
     </div>
-
-    <footer class="border-top footer text-muted bg-white">
-        <div class="container">
-            &copy; 2023 - IndigoErp - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
-        </div>
-    </footer>
-
   
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>

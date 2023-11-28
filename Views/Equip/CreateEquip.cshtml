@@ -1,29 +1,27 @@
 ﻿@model EquipModel
 
-<section class="col-12 h-100 d-flex justify-content-evenly align-items-center ">
+<section class="col-12 h-100 d-flex justify-content-between align-items-center ">
 
-    <aside>
+    <aside class="col-md-2">
         <!-- Sidebar -->
         <nav id="sidebarMenu" class="sidebar bg-white">
             <div class="position-sticky">
-                <div class="list-group list-group-flush mx-3 mt-4 fw-bold" style="font-size:120%;">
-                    <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class=""></i><span class="list-text">Equipamentos Cadastrados</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
-                        <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
-                    </a>
-                </div>
+                <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class=""></i><span class="list-text">Equipamentos Cadastrados</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
+                    <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
+                </a>
             </div>
         </nav>
     </aside>
 
-    <main class="col-8" >
+    <main class="col-md-10 d-flex flex-column justify-content-end" >
 
-        <h1 class="form-title">Insira as Informações do Equipamento</h1>
+        <h1 class="form-title">Cadastro de Equipamento</h1>
 
 
         <form class="col-sm-12 d-flex flex-column justify-content-center align-items-center" asp-action="InsertEquip" asp-controller="Equip">

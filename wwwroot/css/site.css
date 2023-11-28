@@ -62,11 +62,6 @@ span {
 }
 
 .form-title {
-    font-size:3rem;
-    position:relative;
-    top:28%;
-    left:16%;
-    animation:slide-in;
     animation-duration:0.4s;
     animation-fill-mode:forwards;
     animation-delay:0.3s;
@@ -80,6 +75,30 @@ span {
     margin:0;
 
 }
+
+/*Nav-Bar Principal */
+
+
+li img {
+
+    width:100%;
+    
+
+}
+
+.nav-link {
+
+    width:20%;
+
+
+}
+
+
+
+
+
+/*--------------------*/
+
 
 /*Botao de Navegação*/
 
@@ -147,11 +166,6 @@ span {
     z-index: 0;
 }
 
-@media (max-width: 991.98px) {
-    .sidebar {
-        width: 20%;
-    }
-}
 
 .sidebar .active {
     border-radius: 5px;
@@ -171,7 +185,7 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 .list-text {
     text-align:center;
     text-overflow: ellipsis;
-    word-wrap: anywhere;
+    word-wrap: break-word;
     white-space: nowrap;
 }
 
@@ -179,23 +193,14 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     margin-bottom:5%;
 }
 
-@media screen and (max-width:800px) {
+@media screen and (width < 900px) {
 
-    ul a,img {
+    header {
 
-        width:10%;
-        height:10%;
+        margin-bottom:60px;
 
     }
 
-    .list-text {
-        font-size: 60%;
-        
-    }
-
-}
-
-@media screen and (max-width:1500px) {
 
     .list-text {
         font-size: 80%;
@@ -203,6 +208,12 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
         text-overflow: clip;
         word-wrap: break-word;
         white-space: break-spaces;
+    }
+
+    .sidebar {
+
+        top:11%;
+
     }
 }
 
