@@ -193,7 +193,7 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     margin-bottom:5%;
 }
 
-@media screen and (width < 900px) {
+@media screen and (max-width: 995px) {
 
     header {
 
@@ -205,8 +205,6 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     .list-text {
         font-size: 80%;
         text-align: center;
-        text-overflow: clip;
-        word-wrap: break-word;
         white-space: break-spaces;
     }
 

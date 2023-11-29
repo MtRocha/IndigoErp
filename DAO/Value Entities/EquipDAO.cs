@@ -1,10 +1,10 @@
-﻿using IndigoErp.DAO;
-using IndigoErp.Models;
+﻿using IndigoErp.Models;
+using System.Data;
 using System.Data.SqlClient;
 
-namespace IndigoErp.Models.Resource_Entities.Equip
+namespace IndigoErp.DAO.Value_Entities
 {
-    public class SetorModel : GeneralDAO
+    public class EquipDAO : GeneralDAO
     {
         public SqlParameter[] CriaParametros(EquipModel model)
         {
@@ -34,7 +34,7 @@ namespace IndigoErp.Models.Resource_Entities.Equip
                          "@setor";
 
             GeneralDAO.ExecutaSql(sql, CriaParametros(model));
-                         
+
         }
 
         public void Update(EquipModel model)
@@ -47,6 +47,14 @@ namespace IndigoErp.Models.Resource_Entities.Equip
 
             GeneralDAO.ExecutaSql(sql, CriaParametros(model));
 
+        }
+
+        public bool SearchSimilar(string serialNumber)
+        {
+
+            DataTable table = Query("EQUIPAMENTOS", "NUMERO_DE_SERIE", serialNumber);
+
+            return table.Rows.Count > 0 ? true : false;
         }
 
     }

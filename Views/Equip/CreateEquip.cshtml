@@ -9,7 +9,7 @@
                 <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
                     <i class=""></i><span class="list-text">Equipamentos Cadastrados</span>
                 </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple active">
+                <a asp-action="CreateEquip" class="list-group-item list-group-item-action py-2 ripple active">
                     <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple">
@@ -19,12 +19,13 @@
         </nav>
     </aside>
 
-    <main class="col-md-10 d-flex flex-column justify-content-end" >
+    <main class="col-md-10 d-flex flex-column justify-content-end align-items-center" >
 
-        <h1 class="form-title">Cadastro de Equipamento</h1>
+        <h1 style="padding-top:50px;">Cadastro de Equipamento</h1>
 
+        <span class="text-danger" asp-validation-for="Id"></span>
 
-        <form class="col-sm-12 d-flex flex-column justify-content-center align-items-center" asp-action="InsertEquip" asp-controller="Equip">
+        <form class="w-100 d-flex flex-column justify-content-center align-items-center" asp-action="InsertEquip" asp-controller="Equip">
            
            <div class="col-6">
                <label for="nome" class="col-form-label">Nome do Equipamento</label>
@@ -45,7 +46,7 @@
 
             <div class="col-6">
                 <label for="setor" class="col-form-label">Setor</label>
-                <select asp-for="Setor" class="form-control" id="setor"/>
+                <select asp-for="Setor" asp-items=ViewBag.Sections class="form-control" id="setor"/>
             </div>
 
 

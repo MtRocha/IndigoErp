@@ -2,7 +2,7 @@
 
 namespace IndigoErp.Models
 {
-    public class SetorModel : PadraoViewModel
+    public class SetorDAO : PadraoViewModel
     {
         public string Nome { get; set; }
 

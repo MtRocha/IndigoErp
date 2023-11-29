@@ -18,14 +18,14 @@ namespace IndigoErp.DAO
         }
 
 
-        internal DataTable Listing<T>(string tabela, string coluna)
+        internal DataTable Query(string table, string column,string id)
         {
-            string sql = $"EXEC spQuery '{tabela}' , '{coluna}'  ";
-            DataTable table = GeneralDAO.SelectSql(sql, CreateQuery(tabela, coluna, ""));
+            string sql = $"EXEC SPCONSULTA '{table}' , '{column}','{id}'  ";
+            DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(table, column, ""));
 
-            if (table.Rows.Count != 0)
+            if (result.Rows.Count != 0)
             {
-                return table;
+                return result;
             }
             else
             {

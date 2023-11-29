@@ -2,21 +2,19 @@
 
 <section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
 
-<aside>
+    <aside class="col-md-2">
         <!-- Sidebar -->
         <nav id="sidebarMenu" class="sidebar bg-white">
             <div class="position-sticky">
-                <div class="list-group list-group-flush mx-3 mt-4 fw-bold" style="font-size:120%;">
-                    <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple active">
-                        <i class="fas fa-tachometer-alt fa-fw me-3"></i><span class="list-text">Equipamentos Cadastrados</span>
-                    </a>
-                    <a asp-action="CreateEquip" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
-                    </a>
-                </div>
+                <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple active">
+                    <i class=""></i><span class="list-text">Equipamentos Cadastrados</span>
+                </a>
+                <a asp-action="CreateEquip" class="list-group-item list-group-item-action py-2 ripple ">
+                    <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
+                </a>
             </div>
         </nav>
     </aside>
@@ -26,26 +24,32 @@
 <style>
 
     section label {
-    
-        font-size:25px;
-        margin-top:10%;
+        font-size: 25px;
+        margin-top: 10%;
     }
 
-
-    .col-md-3{
-    
-        height:100%;
-        display:flex;
-        opacity:0;
-        animation:fade-in;
-        animation-duration:0.8s;
-        animation-fill-mode:forwards;
-        flex-direction:column;
-        justify-content:center;
-        align-items:center;
-    
+    .col-form-label {
+        font-weight: bold
     }
 
-        
+    .col-6 {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding: 20px;
+    }
+
+    .col-md-3 {
+        height: 100%;
+        display: flex;
+        opacity: 0;
+        animation: fade-in;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
 
 </style>

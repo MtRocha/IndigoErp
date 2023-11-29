@@ -24,10 +24,11 @@ namespace IndigoErp.Controllers
         public IActionResult Login(LoginModel login)
         {
             LoginDAO dao = new LoginDAO();
-
-            if (dao.VerifyUser(login) != null)
+            UserModel model = dao.VerifyUser(login);
+            if ( model != null)
             {
                 HttpContext.Session.SetString("Logged", "true");
+                HttpContext.Session.SetString("cnpj", model.Cnpj);
                 return RedirectToAction("Index", "Home");
 
             }
