@@ -23,38 +23,39 @@
 
         <h1 style="padding-top:50px;">Cadastro de Equipamento</h1>
 
-        <span class="text-danger" asp-validation-for="Id"></span>
+       
 
         <form class="w-100 d-flex flex-column justify-content-center align-items-center" asp-action="InsertEquip" asp-controller="Equip">
            
            <div class="col-6">
+                <span class="text-danger" asp-validation-for="Id"></span>
                <label for="nome" class="col-form-label">Nome do Equipamento</label>
-               <input type="text" asp-for="Nome" class="form-control" id="nome" placeholder="Nome"/>
+               <input type="text" asp-for="Nome" class="form-control" id="nome" required placeholder="Nome"/>
            </div>
             <div class="col-6">
                 <label for="numeroSerie" class="col-form-label">Número de Série</label>
-                <input type="number" asp-for="NumeroSerie" class="form-control" id="numeroSerie" placeholder="Número de Série" />
+                <input type="number" asp-for="NumeroSerie" class="form-control" id="numeroSerie" required placeholder="Número de Série" />
             </div>
             <div class="col-6">
                 <label for="marca" class="col-form-label">Marca do Equipamento</label>
-                <input type="text" asp-for="Marca" class="form-control" id="marca" placeholder="Marca" />
+                <input type="text" asp-for="Marca" class="form-control" id="marca" required placeholder="Marca" />
             </div>
             <div class="col-6">
                 <label for="modelo" class="col-form-label">Modelo do Equipamento</label>
-                <input type="text" asp-for="Modelo" class="form-control" id="modelo" placeholder="Modelo" />
+                <input type="text" asp-for="Modelo" class="form-control" id="modelo" required placeholder="Modelo" />
             </div>
 
             <div class="col-6">
                 <label for="setor" class="col-form-label">Setor</label>
-                <select asp-for="Setor" asp-items=ViewBag.Sections class="form-control" id="setor"/>
+                <select asp-for="Setor" asp-items="ViewBag.Sections" class="form-control" id="setor"></select>
             </div>
 
 
-           
+            <br>
+            <button type="submit" class="btn btn-primary">Adicionar Equipamento</button>
 
         </form>
-        <br>
-         <button type="submit" class="btn btn-primary" >Adicionar Equipamento</button>
+        
     </main>
 
 </section>

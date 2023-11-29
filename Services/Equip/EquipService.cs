@@ -13,11 +13,13 @@ namespace IndigoErp.Services
             if (!val.ValidateString(model.Marca) || 
                 !val.ValidateString(model.Modelo) ||
                 !val.ValidateString(model.Nome) ||
-                !val.ValidateString(model.NumeroSerie) || 
-                !val.ValidateString(model.Setor) || 
-                !val.ValidateString(model.Cnpj)) 
+                !val.ValidateString(model.NumeroSerie)) 
             {
                 return "stringError";
+            }
+            else if ( model.Setor == "Setor")
+            {
+                return "sectionNotChosed";
             }
             else if (dao.SearchSimilar(model.NumeroSerie))
             {

@@ -12,6 +12,7 @@ namespace IndigoErp.Services
         {
             List<string> sections = dao.ListSections(cnpj);
             List<SelectListItem> listItems = new List<SelectListItem>();
+            listItems.Add(new SelectListItem("Setor", "Setor"));
 
             foreach (string section in sections){
 

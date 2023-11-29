@@ -9,20 +9,20 @@ namespace IndigoErp.DAO.Value_Entities
         public SqlParameter[] CriaParametros(EquipModel model)
         {
 
-            SqlParameter[] parametros = new SqlParameter[6];
+            SqlParameter[] parametros = new SqlParameter[5];
 
             parametros[0] = new SqlParameter("id", model.Id);
             parametros[1] = new SqlParameter("numeroSerie", model.NumeroSerie);
-            parametros[3] = new SqlParameter("nome", model.Nome);
-            parametros[4] = new SqlParameter("setor", model.Setor);
-            parametros[5] = new SqlParameter("cnpj", model.Cnpj);
+            parametros[2] = new SqlParameter("nome", model.Nome);
+            parametros[3] = new SqlParameter("setor", model.Setor);
+            parametros[4] = new SqlParameter("cnpj", model.Cnpj);
 
             return parametros;
         }
 
         public void Insert(EquipModel model)
         {
-            string sql = "INSERT INTO EQUIPAMENTOS( " +
+            string sql = "INSERT INTO EQUIPAMENTO( " +
                          "NOME, " +
                          "NUMERO_DE_SERIE, " +
                          "CNPJ_DOMINIO, " +
@@ -31,7 +31,7 @@ namespace IndigoErp.DAO.Value_Entities
                          "@nome, " +
                          "@numeroSerie, " +
                          "@cnpj, " +
-                         "@setor";
+                         "@setor )";
 
             GeneralDAO.ExecutaSql(sql, CriaParametros(model));
 
@@ -39,7 +39,7 @@ namespace IndigoErp.DAO.Value_Entities
 
         public void Update(EquipModel model)
         {
-            string sql = "UPDATE EQUIPAMENTOS " +
+            string sql = "UPDATE EQUIPAMENTO" +
                          "SET NOME = @nome, " +
                          "NUMERO_DE_SERIE = @numeroSerie, " +
                          "CNPJ_DOMINIO = @cnpj, " +
@@ -52,9 +52,9 @@ namespace IndigoErp.DAO.Value_Entities
         public bool SearchSimilar(string serialNumber)
         {
 
-            DataTable table = Query("EQUIPAMENTOS", "NUMERO_DE_SERIE", serialNumber);
+            DataTable table = Query("EQUIPAMENTO", "NUMERO_DE_SERIE", serialNumber);
 
-            return table.Rows.Count > 0 ? true : false;
+            return table != null ? true : false;
         }
 
     }

@@ -6,9 +6,9 @@ namespace IndigoErp.Services
     {
         public bool ValidateString(string value)
         {
-            Regex regex = new Regex("^[^~\"\';:]$");
+            Regex regex = new Regex("^[~\"\';:]$");
 
-            if (regex.IsMatch(value) && !string.IsNullOrEmpty(value))
+            if (!regex.IsMatch(value) && !string.IsNullOrEmpty(value))
             { 
                 return true;
             }

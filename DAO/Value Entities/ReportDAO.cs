@@ -58,7 +58,7 @@ namespace IndigoErp.DAO
             return parametros;
             }
 
-         new ReportModel MontaObjeto<T>(DataRow report)
+         private ReportModel MontaObjeto(DataRow report)
         {
 
             var r = new ReportModel();
@@ -90,7 +90,7 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaObjeto<ReportModel>(falha));
+                list.Add(MontaObjeto(falha));
                 }
 
             return list;
@@ -106,7 +106,7 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaObjeto<ReportModel>(falha));
+                list.Add(MontaObjeto(falha));
                 }
 
             return list;
@@ -136,7 +136,7 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
                 {
-                list.Add(MontaObjeto<ReportModel>(falha));
+                list.Add(MontaObjeto(falha));
                 }
 
             return list;
@@ -154,7 +154,7 @@ namespace IndigoErp.DAO
                 }
             else
                 {
-                return MontaObjeto<ReportModel>(tabela.Rows[0]);
+                return  MontaObjeto(tabela.Rows[0]);
                 }
             }
 
@@ -174,7 +174,7 @@ namespace IndigoErp.DAO
                 {
                 foreach (DataRow item in table.Rows)
                     {
-                    list.Add(MontaObjeto<ReportModel>(item));
+                    list.Add(MontaObjeto(item));
                     }
                 return list;
                 }

@@ -23,29 +23,33 @@ namespace IndigoErp.Controllers
         {
             try
             {
-              
-                if (equipService.ValidateEquip(model) == "stringError")
+                switch (equipService.ValidateEquip(model))
                 {
-                    ModelState.AddModelError("Id", "Caracteres Inválidos nos Campos Abaixo");
-                    ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
-                    return View("CreateEquip", model);
+                    case "stringError":
+                        ModelState.AddModelError("Id", "Caracteres Inválidos nos Campos Abaixo");
+                        ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
+                        return View("CreateEquip", model);
+                    break;
+
+                    case "similarFound":
+                        ModelState.AddModelError("Id", "Equipamento Já Existe");
+                        ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
+                        return View("CreateEquip", model);
+                    break;
+                    case "sectionNotChosed":
+                        ModelState.AddModelError("Id", "Escolha um Setor Para o Equipamento");
+                        ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
+                        return View("CreateEquip", model);
+                    break;
                 }
-                else if (equipService.ValidateEquip(model) == "similarFound")
-                {
-                    ModelState.AddModelError("Id", "Caracteres Inválidos nos Campos Abaixo");
-                    ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
-                    return View("CreateEquip",model);
-                }
-                else
-                {
                     ViewBag.Ok = "ok";
+                    model.Cnpj = HttpContext.Session.GetString("cnpj");
                     equipService.Insert(model);
-                    return View();
+                    return View("Index");
                 }
-            }
             catch (Exception ex) 
             {
-                return View("Error", ex.ToString());
+                return View("Error", new ErrorViewModel());
             }
         }
 
