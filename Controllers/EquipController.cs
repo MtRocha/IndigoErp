@@ -10,7 +10,8 @@ namespace IndigoErp.Controllers
         private SetorService setorService = new SetorService();
         public IActionResult Index()
         {
-            return View();
+            List<EquipModel> list = equipService.EquipQueryService("*");
+            return View(list);
         }
 
         public IActionResult CreateEquip()

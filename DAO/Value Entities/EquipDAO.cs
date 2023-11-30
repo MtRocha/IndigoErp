@@ -6,18 +6,35 @@ namespace IndigoErp.DAO.Value_Entities
 {
     public class EquipDAO : GeneralDAO
     {
-        public SqlParameter[] CriaParametros(EquipModel model)
+        private SqlParameter[] CreateParameters(EquipModel model)
         {
 
-            SqlParameter[] parametros = new SqlParameter[5];
+            SqlParameter[] parametros = new SqlParameter[7];
 
             parametros[0] = new SqlParameter("id", model.Id);
             parametros[1] = new SqlParameter("numeroSerie", model.NumeroSerie);
             parametros[2] = new SqlParameter("nome", model.Nome);
             parametros[3] = new SqlParameter("setor", model.Setor);
             parametros[4] = new SqlParameter("cnpj", model.Cnpj);
+            parametros[5] = new SqlParameter("modelo", model.Modelo);
+            parametros[6] = new SqlParameter("marca", model.Marca);
 
             return parametros;
+        }
+
+        private EquipModel CreateObject(DataRow row)
+        { 
+        
+            EquipModel model = new EquipModel();
+
+            model.Nome = row["NOME"].ToString();
+            model.Setor = row["SETOR"].ToString();
+            model.Cnpj = row["CNPJ_DOMINIO"].ToString();
+            model.NumeroSerie = row["NUMERO_DE_SERIE"].ToString();
+            model.Modelo = row["MODELO"].ToString();
+            model.Marca = row["MARCA"].ToString();
+
+            return model;
         }
 
         public void Insert(EquipModel model)
@@ -26,15 +43,41 @@ namespace IndigoErp.DAO.Value_Entities
                          "NOME, " +
                          "NUMERO_DE_SERIE, " +
                          "CNPJ_DOMINIO, " +
-                         "SETOR )" +
+                         "SETOR," +
+                         "MODELO," +
+                         "MARCA)" +
                          "VALUES (" +
                          "@nome, " +
                          "@numeroSerie, " +
                          "@cnpj, " +
-                         "@setor )";
+                         "@setor," +
+                         "@marca," +
+                         "@modelo )";
 
-            GeneralDAO.ExecutaSql(sql, CriaParametros(model));
+            GeneralDAO.ExecutaSql(sql, CreateParameters(model));
 
+        }
+
+        public List<EquipModel> EquipQuery(string query)
+        {
+
+            DataTable table = Listing("EQUIPAMENTO", query);
+            List<EquipModel> list = new List<EquipModel>();
+
+            if(table != null)
+            {
+                foreach (DataRow item in table.Rows)
+                {
+                    list.Add(CreateObject(item));
+                }
+
+                return list;
+            }
+            else
+            {
+                return null;
+            }
+            
         }
 
         public void Update(EquipModel model)
@@ -45,7 +88,7 @@ namespace IndigoErp.DAO.Value_Entities
                          "CNPJ_DOMINIO = @cnpj, " +
                          "SETOR = @setor";
 
-            GeneralDAO.ExecutaSql(sql, CriaParametros(model));
+            GeneralDAO.ExecutaSql(sql, CreateParameters(model));
 
         }
 

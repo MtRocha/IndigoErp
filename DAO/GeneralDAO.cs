@@ -21,6 +21,22 @@ namespace IndigoErp.DAO
         internal DataTable Query(string table, string column,string id)
         {
             string sql = $"EXEC SPCONSULTA '{table}' , '{column}','{id}'  ";
+            DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(table, column, id));
+
+            if (result.Rows.Count != 0)
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        internal DataTable Listing(string table, string column)
+        {
+            string sql = $"EXEC SPLISTAGEM '{table}' , '{column}'";
             DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(table, column, ""));
 
             if (result.Rows.Count != 0)
@@ -34,8 +50,8 @@ namespace IndigoErp.DAO
 
         }
 
-    
-    public static void ExecutaSql(string comando, SqlParameter[] parametro)
+
+        public static void ExecutaSql(string comando, SqlParameter[] parametro)
             {
             using (SqlConnection conexao = ConectDAO.ConexaoDB())
                 {

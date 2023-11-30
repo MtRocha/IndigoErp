@@ -45,5 +45,12 @@ namespace IndigoErp.Services
             }
         }
 
+        public List<EquipModel> EquipQueryService(string filter)
+        { 
+        
+            List<EquipModel> list = dao.EquipQuery(filter);
+
+            return list;
+        }
     }
 }
