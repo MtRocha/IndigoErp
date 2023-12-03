@@ -46,7 +46,7 @@ namespace IndigoErp.Controllers
                     ViewBag.Ok = "ok";
                     model.Cnpj = HttpContext.Session.GetString("cnpj");
                     equipService.Insert(model);
-                    return View("Index");
+                    return RedirectToAction("Index");
                 }
             catch (Exception ex) 
             {

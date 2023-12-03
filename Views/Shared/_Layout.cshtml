@@ -15,24 +15,24 @@
             </a>
                 
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
+                    <img class="img-fluid"width="23" src="~/images/menu.png">
                 </button>
                 <div class="collapse navbar-collapse" id="navbarSupportedContent">
                     <ul class="navbar-nav w-25 d-flex justify-content-between me-auto mb-2 mb-lg-0">
 
                         <li class="nav-item">
-                            <a class="navbar-brand" href="#">
-                                <img src="~/images/indicadores.png" height="35" >
+                            <a class="navbar-brand">
+                            <img src="~/images/indicadores.png" height="35">  <span class="navbar-text">KPIs</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="navbar-brand" asp-action="Index" asp-controller="Equip">
-                                <img src="~/images/equipamentos.png" height="35">
+                                <img src="~/images/equipamentos.png" height="35">  <span class="navbar-text">Equipamentos</span>
                             </a>
                         </li>
                         <li class="nav-item">
                             <a class="navbar-brand" asp-action="Index" asp-controller="Ocorrencias">
-                                <img src="~/images/ocorrencias.png" height="35">
+                            <img src="~/images/ocorrencias.png" height="35" />  <span class="navbar-text">Ocorrências</span>
                             </a>
                         </li>
                     </ul>
@@ -97,12 +97,23 @@
                
         }
 
+       
+
         @@media screen and (max-width:995px){
         
             li img{
             
                 width:50px;
             
+            }
+
+            .navbar-text {
+                display: initial
+            }
+
+            .nav-item {
+                padding: 10px;
+                margin:1%;
             }
         
         }

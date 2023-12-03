@@ -19,7 +19,9 @@
     </aside>
     <main class="col-md-10 d-flex flex-column justify-content-end align-items-center">
 
-            @foreach (var item in Model)
+        @if (Model != null)
+        {
+             @foreach (var item in Model)
             {
                 <h1>@item.Nome</h1>
                 <h1>@item.NumeroSerie</h1>
@@ -28,8 +30,14 @@
                 <h1>@item.Cnpj</h1>
            
             }
-        
-      
+
+        }
+        else
+        {
+            <h1 class="display-4">Sem Dispositivos Cadastrados</h1>
+
+        }   
+
     </main>
 </section>
 

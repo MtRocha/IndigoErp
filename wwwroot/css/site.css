@@ -93,6 +93,12 @@ li img {
 
 }
 
+.navbar-text {
+    display: none;
+    color:black;
+    word-wrap:normal;
+}
+
 
 
 
@@ -157,15 +163,18 @@ li img {
 
 .sidebar {
     position: fixed;
-    top: 2%;
+    top: -8%;
     bottom: 0;
     left: 0;
-    padding: 5% 0 0; /* Height of navbar */
+    padding: 9% 0 0; /* Height of navbar */
     box-shadow: 20px 0px 25px -8px rgba(0, 0, 0, 0.21);
     width: 18%;
     z-index: 0;
 }
 
+.list-group-item {
+    border:none;
+}
 
 .sidebar .active {
     border-radius: 5px;
@@ -185,7 +194,7 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 .list-text {
     text-align:center;
     text-overflow: ellipsis;
-    word-wrap: break-word;
+    word-wrap:normal ;
     white-space: nowrap;
 }
 
@@ -210,7 +219,7 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
 
     .sidebar {
 
-        top:11%;
+        top:1%;
 
     }
 }
