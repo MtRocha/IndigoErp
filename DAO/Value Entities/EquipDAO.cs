@@ -27,6 +27,7 @@ namespace IndigoErp.DAO.Value_Entities
         
             EquipModel model = new EquipModel();
 
+            model.Id = (int) row["ID"];
             model.Nome = row["NOME"].ToString();
             model.Setor = row["SETOR"].ToString();
             model.Cnpj = row["CNPJ_DOMINIO"].ToString();

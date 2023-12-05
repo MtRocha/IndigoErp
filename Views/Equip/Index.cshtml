@@ -17,25 +17,55 @@
             </div>
         </nav>
     </aside>
-    <main class="col-md-10 d-flex flex-column justify-content-end align-items-center">
+    <main class="col-8 d-flex flex-column justify-content-center align-items-center">
 
         @if (Model != null)
         {
-             @foreach (var item in Model)
-            {
-                <h1>@item.Nome</h1>
-                <h1>@item.NumeroSerie</h1>
-                <h1>@item.Marca</h1>
-                <h1>@item.Modelo</H1>
-                <h1>@item.Cnpj</h1>
+            <h1 class="display-6">Equipamentos Cadastrados</h1>
            
-            }
+               
 
+                <table class="table table-hover table-responsive">
+                    <thead>
+                        <tr>
+                            <td>Nome</td>
+                            <td>Marca</td>
+                            <td>Modelo</td>
+                            <td>Número de Série</td>
+                            <td>Setor</td>
+                            <td>Ações</td>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    @foreach (var item in Model)
+                    {
+                         <tr>
+                            <td>@item.Nome</td>
+                            <td>@item.Marca</td>
+                            <td>@item.Modelo</td>
+                            <td>@item.NumeroSerie</td>
+                            <td>@item.Setor</td>
+                            <td class="btn-group dropright">
+                                <div class="dropdown">
+                                    <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="~/images/setting.png">
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="#">Editar</a></li>
+                                        <li><a class="dropdown-item" href="#">Excluir</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                    </tbody> 
+                </table>
+            
         }
         else
         {
             <h1 class="display-4">Sem Dispositivos Cadastrados</h1>
-
         }   
 
     </main>
@@ -71,5 +101,6 @@
         justify-content: center;
         align-items: center;
     }
+
 
 </style>

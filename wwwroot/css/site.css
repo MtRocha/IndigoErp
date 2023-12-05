@@ -48,7 +48,8 @@ html {
 }
 
 body {
-    font-family: Consolas;
+    font-family: 'Courier New';
+    font-weight:bold;
     height:inherit;
     width:inherit;
 }
@@ -211,6 +212,14 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     }
 
 
+
+    .table{
+
+        margin-left:10%;
+
+    }
+
+
     .list-text {
         font-size: 80%;
         text-align: center;
@@ -218,9 +227,8 @@ overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
     }
 
     .sidebar {
-
-        top:1%;
-
+        top: 6%;
+        width: 24%;
     }
 }
 
