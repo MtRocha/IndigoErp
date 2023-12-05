@@ -1,4 +1,5 @@
 ﻿using System.Data;
+using System.Data.Common;
 using System.Data.SqlClient;
 
 namespace IndigoErp.DAO
@@ -6,7 +7,7 @@ namespace IndigoErp.DAO
     public class GeneralDAO
         {
 
-        internal SqlParameter[] CreateQuery(string tabela, string coluna, string id)
+        internal static SqlParameter[] CreateQuery(string tabela, string coluna, string id)
         {
             SqlParameter[] parametros = new SqlParameter[3];
 
@@ -34,7 +35,7 @@ namespace IndigoErp.DAO
 
         }
 
-        internal DataTable Listing(string table, string column)
+        public DataTable Listing(string table, string column)
         {
             string sql = $"EXEC SPLISTAGEM '{table}' , '{column}'";
             DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(table, column, ""));
@@ -47,6 +48,31 @@ namespace IndigoErp.DAO
             {
                 return null;
             }
+
+        }
+
+        public DataTable Listing(string table, string column,string filter,string order)
+        {
+            string sql = $"EXEC SPLISTAGEM '{table}' , '{column}','{filter}','{order}'";
+            DataTable result = GeneralDAO.SelectSql(sql, null);
+
+            if (result.Rows.Count != 0)
+            {
+                return result;
+            }
+            else
+            {
+                return null;
+            }
+
+        }
+
+        public void Delete(string table, int id)
+        {
+        
+            string sql = $"EXEC SPDELETE '{table}' , '{id}'";
+
+            ExecutaSql(sql, null);
 
         }
 

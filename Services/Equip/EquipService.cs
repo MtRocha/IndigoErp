@@ -1,5 +1,6 @@
 ﻿using IndigoErp.DAO.Value_Entities;
 using IndigoErp.Models;
+using System.Data;
 
 namespace IndigoErp.Services
 {
@@ -45,12 +46,38 @@ namespace IndigoErp.Services
             }
         }
 
-        public List<EquipModel> EquipQueryService(string filter)
-        { 
-        
-            List<EquipModel> list = dao.EquipQuery(filter);
+        public List<EquipModel> EquipQuery(string column, string filter,string order)
+        {
 
-            return list;
+            DataTable table = new DataTable();
+
+            if (!string.IsNullOrEmpty(filter))
+            {
+
+                 table = dao.Listing("EQUIPAMENTO", column);
+
+            }
+            else
+            {
+
+                 table = dao.Listing("EQUIPAMENTO", column, filter, order);
+
+            }      
+            List<EquipModel> list = new List<EquipModel>();
+
+            if (table != null)
+            {
+                foreach (DataRow item in table.Rows)
+                {
+                    list.Add(dao.CreateObject(item));
+                }
+
+                return list;
+            }
+            else
+            {
+                return null;
+            }
         }
     }
 }
