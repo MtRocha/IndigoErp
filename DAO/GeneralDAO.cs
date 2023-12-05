@@ -45,7 +45,7 @@ namespace IndigoErp.DAO
 
         public DataTable Listing(QueryModel query)
         {
-            string sql = $"EXEC SPLISTAGEM '{query.Table}' , '{query.Column}' , '{query.Filter}' , '{query.Order}' ";
+            string sql = $"EXEC SPLISTAGEM '{query.Table}' , '{query.Column}' , '{query.Filter}' ,'{query.Order}' ";
             DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(query));
 
             if (result.Rows.Count != 0)

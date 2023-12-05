@@ -10,7 +10,7 @@ namespace IndigoErp.Controllers
         private SetorService setorService = new SetorService();
         public IActionResult Index()
         {
-            List<EquipModel> list = equipService.ListEquip("*","","");
+            List<EquipModel> list = equipService.ListEquip("*","NOME","ASC");
             return View(list);
         }
 
@@ -18,6 +18,18 @@ namespace IndigoErp.Controllers
         {
             ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
             return View();
+        }
+
+        public IActionResult EditEquip(int id) 
+        {
+
+            EquipModel model = equipService.GetEquip(id);
+
+            ViewBag.Mode = "U";
+
+            return View("CreateEquip" ,model);
+        
+        
         }
 
         public IActionResult InsertEquip(EquipModel model)

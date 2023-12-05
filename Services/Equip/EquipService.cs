@@ -32,6 +32,14 @@ namespace IndigoErp.Services
             }
         }
 
+        public EquipModel GetEquip(int id) 
+        {
+          
+            EquipModel model = dao.SearchEquip(id);
+        
+            return model;
+        }
+
         public string Insert(EquipModel model)
         {
             try

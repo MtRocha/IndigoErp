@@ -71,6 +71,19 @@ namespace IndigoErp.DAO.Value_Entities
 
         }
 
+        public EquipModel SearchEquip(int id)
+        {
+
+            QueryModel query = new QueryModel("EQUIPAMENTO", "ID", id.ToString());
+
+            DataTable table = Query(query);
+
+            EquipModel model = CreateObject(table.Rows[0]);
+
+            return model;
+
+        }
+
         public bool SearchSimilar(string serialNumber)
         {
             QueryModel query = new QueryModel("EQUIPAMENTO", "NUMERO_DE_SERIE", serialNumber);
