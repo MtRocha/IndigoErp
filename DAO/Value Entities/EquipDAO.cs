@@ -22,7 +22,7 @@ namespace IndigoErp.DAO.Value_Entities
             return parametros;
         }
 
-        private EquipModel CreateObject(DataRow row)
+        public EquipModel CreateObject(DataRow row)
         { 
         
             EquipModel model = new EquipModel();
@@ -56,28 +56,6 @@ namespace IndigoErp.DAO.Value_Entities
 
             GeneralDAO.ExecutaSql(sql, CreateParameters(model));
 
-        }
-
-        public List<EquipModel> EquipQuery(string query)
-        {
-
-            DataTable table = Listing("EQUIPAMENTO", query);
-            List<EquipModel> list = new List<EquipModel>();
-
-            if(table != null)
-            {
-                foreach (DataRow item in table.Rows)
-                {
-                    list.Add(CreateObject(item));
-                }
-
-                return list;
-            }
-            else
-            {
-                return null;
-            }
-            
         }
 
         public void Update(EquipModel model)
