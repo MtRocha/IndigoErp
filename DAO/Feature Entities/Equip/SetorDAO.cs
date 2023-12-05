@@ -11,7 +11,8 @@ namespace IndigoErp.DAO
         public List<string> ListSections(string cnpj)
         {
             List<string> list = new List<string>();
-            DataTable table = Query("SETORES", "CNPJ_DOMINIO", $"{cnpj}");
+            QueryModel query = new QueryModel("SETORES", "CNPJ_DOMINIO", cnpj);
+            DataTable table = Query(query);
         
             foreach (DataRow dr in table.Rows)
             {

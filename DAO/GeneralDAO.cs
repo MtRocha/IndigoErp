@@ -1,4 +1,5 @@
-﻿using System.Data;
+﻿using IndigoErp.Models;
+using System.Data;
 using System.Data.Common;
 using System.Data.SqlClient;
 
@@ -7,22 +8,29 @@ namespace IndigoErp.DAO
     public class GeneralDAO
         {
 
-        internal static SqlParameter[] CreateQuery(string tabela, string coluna, string id)
+        private static SqlParameter[] CreateQuery(QueryModel query)
         {
-            SqlParameter[] parametros = new SqlParameter[3];
+            SqlParameter[] parameters = new SqlParameter[5];
 
-            parametros[0] = new SqlParameter("@tabela", tabela);
-            parametros[1] = new SqlParameter("@coluna", tabela);
-            parametros[2] = new SqlParameter("@id", tabela);
+            parameters[0] = new SqlParameter("@table", query.Table);
+            parameters[1] = new SqlParameter("@column", query.Column);
+            parameters[2] = string.IsNullOrEmpty(query.Id) ? new SqlParameter("@id", DBNull.Value) : new SqlParameter("@id", query.Id);
+            parameters[3] = string.IsNullOrEmpty(query.Filter) ? new SqlParameter("@filter", DBNull.Value) : new SqlParameter("@filter", query.Filter);
+            parameters[4] = string.IsNullOrEmpty(query.Order) ? new SqlParameter("@order", DBNull.Value) : new SqlParameter("@order", query.Order);
 
-            return parametros;
+            foreach (var param in parameters)
+            {
+                Console.WriteLine($"{param.ParameterName}: {param.Value}");
+            }
+
+            return parameters;
         }
 
 
-        internal DataTable Query(string table, string column,string id)
+        public DataTable Query(QueryModel query)
         {
-            string sql = $"EXEC SPCONSULTA '{table}' , '{column}','{id}'  ";
-            DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(table, column, id));
+            string sql = $"EXEC SPCONSULTA @table , @column, @id ";
+            DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(query));
 
             if (result.Rows.Count != 0)
             {
@@ -35,26 +43,10 @@ namespace IndigoErp.DAO
 
         }
 
-        public DataTable Listing(string table, string column)
+        public DataTable Listing(QueryModel query)
         {
-            string sql = $"EXEC SPLISTAGEM '{table}' , '{column}'";
-            DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(table, column, ""));
-
-            if (result.Rows.Count != 0)
-            {
-                return result;
-            }
-            else
-            {
-                return null;
-            }
-
-        }
-
-        public DataTable Listing(string table, string column,string filter,string order)
-        {
-            string sql = $"EXEC SPLISTAGEM '{table}' , '{column}','{filter}','{order}'";
-            DataTable result = GeneralDAO.SelectSql(sql, null);
+            string sql = $"EXEC SPLISTAGEM '{query.Table}' , '{query.Column}' , '{query.Filter}' , '{query.Order}' ";
+            DataTable result = GeneralDAO.SelectSql(sql, CreateQuery(query));
 
             if (result.Rows.Count != 0)
             {

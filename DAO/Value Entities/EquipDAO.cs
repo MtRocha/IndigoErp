@@ -73,8 +73,9 @@ namespace IndigoErp.DAO.Value_Entities
 
         public bool SearchSimilar(string serialNumber)
         {
+            QueryModel query = new QueryModel("EQUIPAMENTO", "NUMERO_DE_SERIE", serialNumber);
 
-            DataTable table = Query("EQUIPAMENTO", "NUMERO_DE_SERIE", serialNumber);
+            DataTable table = Query(query);
 
             return table != null ? true : false;
         }

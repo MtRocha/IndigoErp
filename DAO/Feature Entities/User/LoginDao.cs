@@ -10,11 +10,11 @@ namespace IndigoErp.DAO
     {
         public UserModel VerifyUser(LoginModel login)
         {
-            string sql = $"EXECUTE SPCONSULTA 'USUARIOS','EMAIL',\"'{login.Email}'\"";
+            QueryModel query = new QueryModel("USUARIOS", "EMAIL", login.Email);
+            
+            DataTable table = Query(query);
 
-            DataTable table = GeneralDAO.SelectSql(sql,null);
-
-            if (table.Rows.Count == 0) 
+            if (table == null) 
             { 
               return null;
               

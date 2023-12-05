@@ -46,23 +46,15 @@ namespace IndigoErp.Services
             }
         }
 
-        public List<EquipModel> EquipQuery(string column, string filter,string order)
+        public List<EquipModel> ListEquip(string column, string filter,string order)
         {
 
             DataTable table = new DataTable();
 
-            if (!string.IsNullOrEmpty(filter))
-            {
+            QueryModel query = string.IsNullOrEmpty(filter) ? new QueryModel("EQUIPAMENTO", column) : new QueryModel("EQUIPAMENTO", column, filter, order);
 
-                 table = dao.Listing("EQUIPAMENTO", column);
-
-            }
-            else
-            {
-
-                 table = dao.Listing("EQUIPAMENTO", column, filter, order);
-
-            }      
+            table = dao.Listing(query);
+      
             List<EquipModel> list = new List<EquipModel>();
 
             if (table != null)
