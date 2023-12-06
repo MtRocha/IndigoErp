@@ -11,49 +11,49 @@ namespace IndigoErp.DAO
         private SqlParameter[] CriaParametros(ReportModel report)
             {
             SqlParameter[] parametros = new SqlParameter[12];
-            if (report.NumeroTeste == null)
+            if (report.MaintenceTYpe == null)
                 {
                 parametros[0] = new SqlParameter("numeroTeste", DBNull.Value);
                 }
             else
                 {
-                parametros[0] = new SqlParameter("numeroTeste", report.NumeroTeste);
+                parametros[0] = new SqlParameter("numeroTeste", report.MaintenceTYpe);
                 }
 
-            parametros[1] = new SqlParameter("celula", report.Celula);
+            parametros[1] = new SqlParameter("celula", report.Section);
 
-            parametros[2] = new SqlParameter("idFuncionario", report.IdFuncionario);
+            parametros[2] = new SqlParameter("idFuncionario", report.EmployeeId);
 
-            parametros[3] = new SqlParameter("origem", report.Origem.ToUpper());
+            parametros[3] = new SqlParameter("origem", report.Origin.ToUpper());
 
-            parametros[4] = new SqlParameter("componente", report.Componente.ToUpper());
+            parametros[4] = new SqlParameter("componente", report.FailType.ToUpper());
 
-            if (report.Tipo == "Causa" || report.Origem == "EXTERNA")
+            if (report.FailCause == "Causa" || report.Origin == "EXTERNA")
                 {
                 parametros[5] = new SqlParameter("tipo", DBNull.Value);
                 }
             else
                 {
-                parametros[5] = new SqlParameter("tipo", report.Tipo.ToUpper());
+                parametros[5] = new SqlParameter("tipo", report.FailCause.ToUpper());
                 }
-            parametros[6] = new SqlParameter("data", report.Data);
+            parametros[6] = new SqlParameter("data", report.InitialDate);
 
-            parametros[7] = new SqlParameter("inicio", report.Inicio);
+            parametros[7] = new SqlParameter("inicio", report.Begin);
 
-            if (report.Descricao == null)
+            if (report.Description == null)
                 {
                 parametros[8] = new SqlParameter("descricao", DBNull.Value);
                 }
             else
                 {
-                parametros[8] = new SqlParameter("descricao", report.Descricao);
+                parametros[8] = new SqlParameter("descricao", report.Description);
                 }
 
-            parametros[9] = new SqlParameter("final", report.Final);
+            parametros[9] = new SqlParameter("final", report.End);
 
             parametros[10] = new SqlParameter("status", report.Status);
 
-            parametros[11] = new SqlParameter("dataFinal", report.DataFinal);
+            parametros[11] = new SqlParameter("dataFinal", report.FinalDate);
 
             return parametros;
             }
@@ -64,17 +64,17 @@ namespace IndigoErp.DAO
             var r = new ReportModel();
 
             r.Id = Convert.ToInt32(report["ID"]);
-            r.NumeroTeste = report["NUMERO_TESTE"].ToString();
-            r.IdFuncionario = Convert.ToInt32(report["ID_FUNCIONARIO"]);
-            r.Celula = report["CELULA_DE_REPORT"].ToString();
-            r.Origem = Convert.ToString(report["ORIGEM_REPORT"]);
-            r.Componente = Convert.ToString(report["COMPONENTE_DE_FALHA"]);
-            r.Tipo = Convert.ToString(report["TIPO_DE_FALHA"]);
-            r.Descricao = Convert.ToString(report["DESCRICAO"]);
-            r.Data = Convert.ToDateTime(report["DATA_DA_OCORRENCIA"].ToString());
-            r.Inicio = Convert.ToDateTime(report["INICIO"].ToString());
-            r.Final = Convert.ToDateTime(report["FINAL"].ToString());
-            r.DataFinal = Convert.ToDateTime(report["DATA_FINAL"]);
+            r.MaintenceTYpe = report["NUMERO_TESTE"].ToString();
+            r.EmployeeId = Convert.ToInt32(report["ID_FUNCIONARIO"]);
+            r.Section = report["CELULA_DE_REPORT"].ToString();
+            r.Origin = Convert.ToString(report["ORIGEM_REPORT"]);
+            r.FailType = Convert.ToString(report["COMPONENTE_DE_FALHA"]);
+            r.FailCause = Convert.ToString(report["TIPO_DE_FALHA"]);
+            r.Description = Convert.ToString(report["DESCRICAO"]);
+            r.InitialDate = Convert.ToDateTime(report["DATA_DA_OCORRENCIA"].ToString());
+            r.Begin = Convert.ToDateTime(report["INICIO"].ToString());
+            r.End = Convert.ToDateTime(report["FINAL"].ToString());
+            r.FinalDate = Convert.ToDateTime(report["DATA_FINAL"]);
             r.Status = (report["STATUS"]).ToString();
 
             return r;

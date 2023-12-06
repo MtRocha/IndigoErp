@@ -60,10 +60,10 @@
 
                         </div>
 
-                        <select asp-for="Celula" asp-items="ViewBag.Celulas" class="form-control" id="celula">
+                        <select asp-for="Section" asp-items="ViewBag.Celulas" class="form-control" id="celula">
                         </select>
 
-                        <span asp-validation-for="Celula" class="text text-danger"></span>
+                        <span asp-validation-for="Section" class="text text-danger"></span>
 
                     </div>
 
@@ -84,12 +84,12 @@
 
                             <div class="flex-column w-50 " id="numTesteDiv" style="animation:fade-in;animation-duration:1s;">
                                 <label class="col-form-label" for="numeroTeste"><span>Número do Teste</span></label>
-                                <select asp-for="NumeroTeste" class="form-control" id="numeroTeste"></select>
+                                <select asp-for="MaintenceTYpe" class="form-control" id="numeroTeste"></select>
 
                             </div>
                         </div>
 
-                        <span asp-validation-for="NumeroTeste" class="text text-danger"></span>
+                        <span asp-validation-for="MaintenceTYpe" class="text text-danger"></span>
 
                     </div>
 
@@ -101,10 +101,10 @@
 
                         </div>
 
-                        <select asp-for="Origem" asp-items="ViewBag.Origens" id="origem" class="form-control">
+                        <select asp-for="Origin" asp-items="ViewBag.Origens" id="origem" class="form-control">
                         </select>
 
-                        <span asp-validation-for="Origem" class="text text-danger"></span>
+                        <span asp-validation-for="Origin" class="text text-danger"></span>
 
                     </div>
 
@@ -116,10 +116,10 @@
 
                         </div>
 
-                        <select asp-for="Componente" asp-items="ViewBag.Componentes" id="componente" class="form-control">
+                        <select asp-for="FailType" asp-items="ViewBag.Componentes" id="componente" class="form-control">
                         </select>
 
-                        <span asp-validation-for="Componente" class="text text-danger"></span>
+                        <span asp-validation-for="FailType" class="text text-danger"></span>
 
                     </div>
 
@@ -131,9 +131,9 @@
 
                         </div>
 
-                        <select asp-for="Tipo" asp-items="ViewBag.Causas" id="causa" class="form-control" required> </select>
+                        <select asp-for="FailCause" asp-items="ViewBag.Causas" id="causa" class="form-control" required> </select>
 
-                        <span asp-validation-for="Tipo" class="text text-danger"></span>
+                        <span asp-validation-for="FailCause" class="text text-danger"></span>
 
                     </div>
 
@@ -147,9 +147,9 @@
 
                             </div>
 
-                            <input type="date" asp-for="Data" class="form-control w-auto" id="data" value="@null" />
+                            <input type="date" asp-for="InitialDate" class="form-control w-auto" id="data" value="@null" />
 
-                            <span asp-validation-for="Data" class="text text-danger"></span>
+                            <span asp-validation-for="InitialDate" class="text text-danger"></span>
 
                             <div id="mensagemErro" style="color: red; display: none;">
 
@@ -168,9 +168,9 @@
 
                             </div>
 
-                            <input asp-for="Inicio" class="form-control" id="inicio" value="@null" type="time" />
+                            <input asp-for="Begin" class="form-control" id="inicio" value="@null" type="time" />
 
-                            <span asp-validation-for="Inicio" class="text text-danger"></span>
+                            <span asp-validation-for="Begin" class="text text-danger"></span>
 
                             <div id="Inicio" hidden class="text text-danger">Digite um Horário Válido!</div>
 
@@ -203,9 +203,9 @@
 
                             </div>
 
-                            <input type="date" asp-for="DataFinal" class="form-control w-auto" id="data" value="@null" />
+                            <input type="date" asp-for="FinalDate" class="form-control w-auto" id="data" value="@null" />
 
-                            <span asp-validation-for="DataFinal" class="text text-danger"></span>
+                            <span asp-validation-for="FinalDate" class="text text-danger"></span>
 
                         </div>
 
@@ -217,9 +217,9 @@
 
                             </div>
 
-                            <input asp-for="Final" class="form-control w-25" id="final" type="time" />
+                            <input asp-for="End" class="form-control w-25" id="final" type="time" />
 
-                            <span asp-validation-for="Final" class="text text-danger"></span>
+                            <span asp-validation-for="End" class="text text-danger"></span>
 
                             <div id="Final" hidden class="text text-danger">Digite um Horário Válido!</div>
 
@@ -237,9 +237,9 @@
 
                             </div>
 
-                            <textarea asp-for="Descricao " maxlength="144" id="descricaoText" class="form-control h-100 w-100"></textarea>
+                            <textarea asp-for="Description " maxlength="144" id="descricaoText" class="form-control h-100 w-100"></textarea>
 
-                            <span asp-validation-for="Descricao" class="text text-danger"></span>
+                            <span asp-validation-for="Description" class="text text-danger"></span>
 
                             <div id="erroDesc" class="text-danger"></div>
 

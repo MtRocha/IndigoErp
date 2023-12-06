@@ -8,29 +8,6 @@ namespace IndigoErp.Services
     {
         private ValidationService val = new ValidationService();
         private EquipDAO dao = new EquipDAO();
-        public string ValidateEquip(EquipModel model,string operation)
-        {
-
-            if (!val.ValidateString(model.Marca) || 
-                !val.ValidateString(model.Modelo) ||
-                !val.ValidateString(model.Nome) ||
-                !val.ValidateString(model.NumeroSerie)) 
-            {
-                return "stringError";
-            }
-            else if ( model.Setor == "Setor")
-            {
-                return "sectionNotChosed";
-            }
-            else if (dao.SearchSimilar(model.NumeroSerie) && operation != "U")
-            {
-                return "similarFound";
-            }
-            else
-            {
-                return "ok";
-            }
-        }
 
         public EquipModel GetEquip(int id) 
         {

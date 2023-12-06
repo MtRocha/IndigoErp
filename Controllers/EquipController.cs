@@ -8,6 +8,7 @@ namespace IndigoErp.Controllers
     {
         private EquipService equipService = new EquipService();
         private SetorService setorService = new SetorService();
+        private ValidationService validationService = new ValidationService();
         public IActionResult Index()
         {
             List<EquipModel> list = equipService.ListEquip("*","NOME","ASC");
@@ -46,38 +47,29 @@ namespace IndigoErp.Controllers
         {
             try
             {
-                switch (equipService.ValidateEquip(model,operation))
+                validationService.ValidateEquip(model,operation);
+                if (!ModelState.IsValid)
                 {
-                    case "stringError":
-                        ModelState.AddModelError("Id", "Caracteres Inválidos nos Campos Abaixo");
-                        ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
-                        return View("CreateEquip", model);
-                    break;
-
-                    case "similarFound":
-                        ModelState.AddModelError("Id", "Equipamento Já Existe");
-                        ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
-                        return View("CreateEquip", model);
-                    break;
-                    case "sectionNotChosed":
-                        ModelState.AddModelError("Id", "Escolha um Setor Para o Equipamento");
-                        ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
-                        return View("CreateEquip", model);
-                    break;
-                }
-                    ViewBag.Ok = "ok";
-                    model.Cnpj = HttpContext.Session.GetString("cnpj");
-                if (operation != "U")
-                {
-                    equipService.Insert(model);
+                    ViewBag.Mode = operation;
+                    setorService.ListSections(HttpContext.Session.GetString("cnpj"));
+                    return View("CreateEquip",model);
                 }
                 else
                 {
-                    equipService.Edit(model);
-                }
+                    ViewBag.Ok = "ok";
+                    model.Cnpj = HttpContext.Session.GetString("cnpj");
+                    if (operation != "U")
+                    {
+                        equipService.Insert(model);
+                    }
+                    else
+                    {
+                        equipService.Edit(model);
+                    }
                     return RedirectToAction("Index");
                 }
-            catch (Exception ex) 
+            }
+            catch (Exception ex)
             {
                 return View("Error", new ErrorViewModel());
             }
