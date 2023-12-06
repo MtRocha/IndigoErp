@@ -5,28 +5,52 @@
     <aside class="col-md-2">
         <!-- Sidebar -->
         <nav id="sidebarMenu" class="sidebar bg-white">
-            <div class="position-sticky">
-                <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class=""></i><span class="list-text">Equipamentos Cadastrados</span>
-                </a>
-                <a asp-action="CreateEquip" class="list-group-item list-group-item-action py-2 ripple active">
-                    <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
-                </a>
-                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
-                </a>
-            </div>
+            @if (ViewBag.Mode != "U")
+            {
+                <div class="position-sticky">
+                    <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class=""></i><span class="list-text">Equipamentos Cadastrados</span>
+                    </a>
+                    <a asp-action="CreateEquip" class="list-group-item list-group-item-action py-2 ripple active">
+                        <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="position-sticky">
+                    <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class=""></i><span class="list-text">Voltar</span>
+                    </a>
+                </div>
+
+            }
+
         </nav>
     </aside>
 
     <main class="col-md-10 d-flex flex-column justify-content-end align-items-center" >
 
-        <h1 style="padding-top:50px;">Cadastro de Equipamento</h1>
+        @if (ViewBag.Mode != "U")
+        {
+            <h1 style="padding-top:50px;">Cadastro de Equipamento</h1>
+        }
+        else
+        {
+            <h1 style="padding-top:50px;">Edição de Equipamento</h1>
+        }
+
 
        
 
         <form class="w-100 d-flex flex-column justify-content-center align-items-center" asp-action="InsertEquip" asp-controller="Equip">
            
+            <input type="hidden" name="operation" value="@ViewBag.Mode" />
+            <input type="hidden" asp-for="Id" />
+
            <div class="col-6">
                 <span class="text-danger" asp-validation-for="Id"></span>
                <label for="nome" class="col-form-label">Nome do Equipamento</label>
@@ -52,8 +76,15 @@
 
 
             <br>
-            <button type="submit" class="btn btn-primary">Adicionar Equipamento</button>
 
+            @if (ViewBag.Mode != "U")
+            {
+                <button type="submit" class="btn btn-primary">Adicionar Equipamento</button>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-primary">Editar Equipamento</button>
+            }
         </form>
         
     </main>

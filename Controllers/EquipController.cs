@@ -27,16 +27,26 @@ namespace IndigoErp.Controllers
 
             ViewBag.Mode = "U";
 
+            ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
+
             return View("CreateEquip" ,model);
         
         
         }
 
-        public IActionResult InsertEquip(EquipModel model)
+        public IActionResult DeleteEquip(int id) 
+        {
+            equipService.Delete(id);
+
+           return RedirectToAction("Index");
+
+        }
+
+        public IActionResult InsertEquip(EquipModel model,string operation)
         {
             try
             {
-                switch (equipService.ValidateEquip(model))
+                switch (equipService.ValidateEquip(model,operation))
                 {
                     case "stringError":
                         ModelState.AddModelError("Id", "Caracteres Inválidos nos Campos Abaixo");
@@ -57,7 +67,10 @@ namespace IndigoErp.Controllers
                 }
                     ViewBag.Ok = "ok";
                     model.Cnpj = HttpContext.Session.GetString("cnpj");
+                if (ViewBag.Mode == "U")
                     equipService.Insert(model);
+                else
+                    equipService.Edit(model);
                     return RedirectToAction("Index");
                 }
             catch (Exception ex) 

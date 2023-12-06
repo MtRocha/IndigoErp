@@ -61,11 +61,15 @@ namespace IndigoErp.DAO.Value_Entities
 
         public void Update(EquipModel model)
         {
-            string sql = "UPDATE EQUIPAMENTO" +
-                         "SET NOME = @nome, " +
-                         "NUMERO_DE_SERIE = @numeroSerie, " +
-                         "CNPJ_DOMINIO = @cnpj, " +
-                         "SETOR = @setor";
+            string sql = "UPDATE EQUIPAMENTO " +
+                         "SET NOME = @nome , " +
+                         "NUMERO_DE_SERIE = @numeroSerie , " +
+                         "CNPJ_DOMINIO = @cnpj , " +
+                         "SETOR = @setor , " +
+                         "MARCA = @marca , " +
+                         "MODELO = @modelo " +
+                         $"WHERE ID = {model.Id}";
+
 
             GeneralDAO.ExecutaSql(sql, CreateParameters(model));
 

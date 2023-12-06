@@ -32,9 +32,17 @@ function ValidateInt(value, isLowerThanZero, isEqualToZero) {
 //------------------------------------------------------------------------------//
 
 //Funcao de validação de Equipamento
-function ValidateEquip()
-function EditEquip() {
+function ValidateEquip() { }
+function EditEquip(item) {
 
-    window.location("/Equip/")
+    if (confirm("Deseja Realmente Editar Este Equipamento ?"))
+        location.href ="/Equip/EditEquip?id=" + item
+
+}
+
+function DeleteEquip(item) {
+
+    if (confirm("Deseja Realmente Excluir Este Equipamento ?"))
+        location.href = "/Equip/DeleteEquip?id=" + item
 
 }

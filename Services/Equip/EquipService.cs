@@ -8,7 +8,7 @@ namespace IndigoErp.Services
     {
         private ValidationService val = new ValidationService();
         private EquipDAO dao = new EquipDAO();
-        public string ValidateEquip(EquipModel model)
+        public string ValidateEquip(EquipModel model,string operation)
         {
 
             if (!val.ValidateString(model.Marca) || 
@@ -22,7 +22,7 @@ namespace IndigoErp.Services
             {
                 return "sectionNotChosed";
             }
-            else if (dao.SearchSimilar(model.NumeroSerie))
+            else if (dao.SearchSimilar(model.NumeroSerie) && operation != "U")
             {
                 return "similarFound";
             }
@@ -40,11 +40,30 @@ namespace IndigoErp.Services
             return model;
         }
 
+        public void Delete(int id)
+        {
+            dao.Delete("Equipamento",id);
+        }
+
         public string Insert(EquipModel model)
         {
             try
             {
                 dao.Insert(model);
+
+                return "ok";
+            }
+            catch (Exception ex)
+            {
+                return ex.ToString();
+            }
+        }
+
+        public string Edit(EquipModel model)
+        {
+            try
+            {
+                dao.Update(model);
 
                 return "ok";
             }
