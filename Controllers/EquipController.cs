@@ -67,10 +67,14 @@ namespace IndigoErp.Controllers
                 }
                     ViewBag.Ok = "ok";
                     model.Cnpj = HttpContext.Session.GetString("cnpj");
-                if (ViewBag.Mode == "U")
+                if (operation != "U")
+                {
                     equipService.Insert(model);
+                }
                 else
+                {
                     equipService.Edit(model);
+                }
                     return RedirectToAction("Index");
                 }
             catch (Exception ex) 
