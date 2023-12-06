@@ -2,17 +2,16 @@
 <section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
 
     <aside class="col-md-2">
-        <!-- Sidebar -->
         <nav id="sidebarMenu" class="sidebar bg-white">
             <div class="position-sticky">
                 <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple active">
-                    <i class=""></i><span class="list-text">Equipamentos Cadastrados</span>
+                    <i class=""></i><span class="list-text">Lista de Equipamentos</span>
                 </a>
                 <a asp-action="CreateEquip" class="list-group-item list-group-item-action py-2 ripple ">
                     <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Equipamento</span>
                 </a>
                 <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamentos</span>
+                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Equipamento</span>
                 </a>
             </div>
         </nav>
@@ -21,7 +20,7 @@
 
         @if (Model != null)
         {
-            <h1 class="display-6">Equipamentos Cadastrados</h1>
+            <h1 class="display-6" >Equipamentos Cadastrados</h1>
            
                
 
@@ -65,7 +64,7 @@
         }
         else
         {
-            <h1 class="display-4">Sem Dispositivos Cadastrados</h1>
+            <h1 class="display-4" style="margin-top:5%;">Sem Dispositivos Cadastrados</h1>
         }   
 
     </main>

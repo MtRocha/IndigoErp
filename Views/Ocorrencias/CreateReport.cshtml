@@ -1,0 +1,305 @@
+﻿@model ReportModel
+
+<section class="col-12 h-100 d-flex justify-content-between align-items-center ">
+    <aside class="col-md-2">
+        <nav id="sidebarMenu" class="sidebar bg-white">
+            @if (ViewBag.Mode != "U")
+            {
+                <div class="position-sticky">
+                    <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class=""></i><span class="list-text">Ocorrências Pendentes</span>
+                    </a>
+                    <a asp-action="CreateReport" class="list-group-item list-group-item-action py-2 ripple active">
+                        <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Nova Ocorrência</span>
+                    </a>
+                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Histórico de Ocorrências</span>
+                    </a>
+                </div>
+            }
+            else
+            {
+                <div class="position-sticky">
+                    <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class=""></i><span class="list-text"> <img class="img-fluid" src="~/images/logout.png">Voltar</span>
+                    </a>
+                </div>
+
+            }
+
+        </nav>
+    </aside>
+
+    <main class="col-md-10 d-flex flex-column justify-content-end align-items-center">
+
+        @if (ViewBag.Mode != "U")
+        {
+            <h1 style=" font-size:2rem; padding-top:50px;">Cadastro de Ocorrência</h1>
+        }
+        else
+        {
+            <h1 style="font-size:2rem; padding-top:50px;">Finalização de Ocorrência</h1>
+        }
+
+
+
+
+        <form class="d-flex flex-column justify-content-center align-items-center" id="form" asp-action="InsertEquip" asp-controller="Equip">
+           
+            <input id="retorno" hidden value="@ViewBag.Retorno" />
+                <input type="hidden" name="Operacao" value="@ViewBag.Operacao" />
+
+                <div class="d-flex w-100 h-100 flex-column justify-content-start align-items-end font-weight-bold">
+
+
+                    <div class="w-100 d-flex flex-column justify-content-around align-items-start">
+
+                        <div class="row d-flex justify-content-start m-1 ">
+
+                            <label class="col-form-label" for="celula"><span>Celula</span></label>
+
+                        </div>
+
+                        <select asp-for="Celula" asp-items="ViewBag.Celulas" class="form-control" id="celula">
+                        </select>
+
+                        <span asp-validation-for="Celula" class="text text-danger"></span>
+
+                    </div>
+
+                    <div class=" w-100 flex-column justify-content-around align-items-start" id="testeDiv">
+
+                        <div class=" d-flex flex-row w-100 justify-content-between align-items-center">
+
+                            <div class="flex-column w-50 ">
+
+                                <label class="col-form-label" for="numeroTeste"><span>Existe Teste Relacionado a Falha ? </span></label>
+
+                                <select name="TesteIncluso" class="form-control w-25" id="opcao">
+                                    <option value="nao">Não</option>
+                                    <option value="sim">Sim</option>
+                                </select>
+
+                            </div>
+
+                            <div class="flex-column w-50 " id="numTesteDiv" style="animation:fade-in;animation-duration:1s;">
+                                <label class="col-form-label" for="numeroTeste"><span>Número do Teste</span></label>
+                                <select asp-for="NumeroTeste" class="form-control" id="numeroTeste"></select>
+
+                            </div>
+                        </div>
+
+                        <span asp-validation-for="NumeroTeste" class="text text-danger"></span>
+
+                    </div>
+
+                    <div class="w-100  flex-column justify-content-around" id="origemDiv">
+
+                        <div class="row d-flex justify-content-start m-1 ">
+
+                            <label class="col-form-label" for="Origem"><span>Origem</span></label>
+
+                        </div>
+
+                        <select asp-for="Origem" asp-items="ViewBag.Origens" id="origem" class="form-control">
+                        </select>
+
+                        <span asp-validation-for="Origem" class="text text-danger"></span>
+
+                    </div>
+
+                    <div class="w-100 flex-column justify-content-around" id="componenteDiv" >
+
+                        <div class="row d-flex justify-content-start m-1 ">
+
+                            <label class="col-form-label" for="componente"><span>Componente</span></label>
+
+                        </div>
+
+                        <select asp-for="Componente" asp-items="ViewBag.Componentes" id="componente" class="form-control">
+                        </select>
+
+                        <span asp-validation-for="Componente" class="text text-danger"></span>
+
+                    </div>
+
+                    <div id="causaDiv" class="w-100  flex-column justify-content-around">
+
+                        <div class="row d-flex justify-content-start m-1 ">
+
+                            <label class="col-form-label" for="causa"><span>Causa</span></label>
+
+                        </div>
+
+                        <select asp-for="Tipo" asp-items="ViewBag.Causas" id="causa" class="form-control" required> </select>
+
+                        <span asp-validation-for="Tipo" class="text text-danger"></span>
+
+                    </div>
+
+                    <div class="w-100 d-flex flex-row justify-content-between align-items-center">
+
+                        <div class="w-50  flex-column justify-content-around align-items-start" id="dataDiv" >
+
+                            <div class="row d-flex justify-content-start m-1 ">
+
+                                <label class="col-form-label" for="data"><span>Data da Ocorrência</span></label>
+
+                            </div>
+
+                            <input type="date" asp-for="Data" class="form-control w-auto" id="data" value="@null" />
+
+                            <span asp-validation-for="Data" class="text text-danger"></span>
+
+                            <div id="mensagemErro" style="color: red; display: none;">
+
+                                Data inválida!
+
+                            </div>
+
+                        </div>
+
+
+                        <div class="w-25  flex-column justify-content-around align-items-start" id="inicioDiv">
+
+                            <div class="row d-flex justify-content-start m-1 ">
+
+                                <label class="col-form-label" for="inicio"><span>Inicio</span></label>
+
+                            </div>
+
+                            <input asp-for="Inicio" class="form-control" id="inicio" value="@null" type="time" />
+
+                            <span asp-validation-for="Inicio" class="text text-danger"></span>
+
+                            <div id="Inicio" hidden class="text text-danger">Digite um Horário Válido!</div>
+
+                        </div>
+
+                        <div class="flex-column w-50 " id="finalizarDiv">
+
+                            <label class="col-form-label" for="finalizarOcorrencia" style="margin-left:25%"><span>Finalizar a Ocorrência</span></label>
+
+                            <select name="Finalizacao" class="form-control w-75" id="finalizar" style="margin-left:25%;">
+                                <option value="selecione">Selecione</option>
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+
+                            <span id="erroFinal" class="text text-danger" style="display:none;margin-left:25%;">Escolha uma Opção</span>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="w-100 flex-row justify-content-start align-items-center" id="finalDiv">
+
+                        <div class="w-50 flex-column justify-content-around align-items-start">
+
+                            <div class="row d-flex justify-content-start m-1 ">
+
+                                <label class="col-form-label" for="dataFinal"><span>Data Final</span></label>
+
+                            </div>
+
+                            <input type="date" asp-for="DataFinal" class="form-control w-auto" id="data" value="@null" />
+
+                            <span asp-validation-for="DataFinal" class="text text-danger"></span>
+
+                        </div>
+
+                        <div class="w-75 flex-column justify-content-around align-items-start" id="finalDiv">
+
+                            <div class="row d-flex justify-content-start m-1 ">
+
+                                <label class="col-form-label" for="final"><span>Final</span></label>
+
+                            </div>
+
+                            <input asp-for="Final" class="form-control w-25" id="final" type="time" />
+
+                            <span asp-validation-for="Final" class="text text-danger"></span>
+
+                            <div id="Final" hidden class="text text-danger">Digite um Horário Válido!</div>
+
+                        </div>
+
+                    </div>
+
+                    <div class="w-100 flex-row justify-content-between align-items-center" id="descricaoDiv">
+
+                        <div class="w-100 d-flex flex-column justify-content-around align-items-start">
+
+                            <div class="row d-flex justify-content-start m-1 ">
+
+                                <label class="col-form-label" for="descricao"><span>Descrição</span></label>
+
+                            </div>
+
+                            <textarea asp-for="Descricao " maxlength="144" id="descricaoText" class="form-control h-100 w-100"></textarea>
+
+                            <span asp-validation-for="Descricao" class="text text-danger"></span>
+
+                            <div id="erroDesc" class="text-danger"></div>
+
+                        </div>
+
+                    </div>
+
+                </div>
+
+                <input class="btn btn-primary font-weight-bold" style="margin-bottom:5vh;margin-top:5vh;display:none;" id="botaoSalvar" type="button" onclick="javascript:ValidarReport()" value="Salvar dados" />
+
+                <br />
+           
+        </form>
+
+    </main>
+
+</section>
+
+<script>
+
+    const button = document.querySelector('.btn')
+    button.addEventListener('click', function () {
+
+        event.preventDefault()
+        ValidateEquip()
+    })
+
+</script>
+
+<style>
+
+    section label {
+        font-size: 25px;
+        margin-top: 10%;
+    }
+
+    .col-form-label {
+        font-weight: bold
+    }
+
+    .col-6 {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding: 20px;
+    }
+
+    .col-md-3 {
+        height: 100%;
+        display: flex;
+        opacity: 0;
+        animation: fade-in;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+

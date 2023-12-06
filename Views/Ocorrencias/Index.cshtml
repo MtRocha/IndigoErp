@@ -1,19 +1,16 @@
 ﻿<section>
-    <aside>
-        <!-- Sidebar -->
+    <aside class="col-md-2">
         <nav id="sidebarMenu" class="sidebar bg-white">
             <div class="position-sticky">
-                <div class="list-group list-group-flush mx-3 mt-4 fw-bold" style="font-size:120%;">
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-tachometer-alt fa-fw me-3"></i><span class="list-text">Ocorrências pendentes</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Nova Ocorrência</span>
-                    </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
-                        <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Histórico de Ocorrrencias</span>
-                    </a>
-                </div>
+                <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple active">
+                    <i class=""></i><span class="list-text">Ocorrências Pendentes</span>
+                </a>
+                <a asp-action="CreateReport" class="list-group-item list-group-item-action py-2 ripple ">
+                    <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Nova Ocorrência</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Histórico de Ocorrências</span>
+                </a>
             </div>
         </nav>
     </aside>

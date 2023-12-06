@@ -1,4 +1,4 @@
-﻿namespace F.E.R.A_1._0.Models
+﻿namespace IndigoErp.Models
     {
     public class OrigemFalhaViewModel : PadraoViewModel
         {

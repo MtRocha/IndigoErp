@@ -1,4 +1,4 @@
-﻿using F.E.R.A_1._0.Models;
+﻿using IndigoErp.Models;
 
 namespace IndigoErp.Models
 {
