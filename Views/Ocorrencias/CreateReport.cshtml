@@ -44,38 +44,32 @@
 
 
 
-        <form class="d-flex flex-column justify-content-center align-items-center" id="form" asp-action="InsertEquip" asp-controller="Equip">
+        <form class="col-6 d-flex flex-column justify-content-center align-items-center" id="form" asp-action="InsertEquip" asp-controller="Equip">
            
             <input id="retorno" hidden value="@ViewBag.Retorno" />
                 <input type="hidden" name="Operacao" value="@ViewBag.Operacao" />
 
                 <div class="d-flex w-100 h-100 flex-column justify-content-start align-items-end font-weight-bold">
 
+                    <div class="col-12 d-flex flex-column justify-content-around align-items-start">
 
-                    <div class="w-100 d-flex flex-column justify-content-around align-items-start">
-
-                        <div class="row d-flex justify-content-start m-1 ">
-
-                            <label class="col-form-label" for="celula"><span>Celula</span></label>
-
-                        </div>
-
-                        <select asp-for="Section" asp-items="ViewBag.Celulas" class="form-control" id="celula">
+                        <label class="col-form-label" for="section"><span>Setor</span></label>
+                        <select asp-for="Section" asp-items="ViewBag.Section" class="form-control" id="section">
                         </select>
 
                         <span asp-validation-for="Section" class="text text-danger"></span>
 
                     </div>
 
-                    <div class=" w-100 flex-column justify-content-around align-items-start" id="testeDiv">
+                    <div class="col-12 flex-column justify-content-around align-items-start" id="testeDiv">
 
-                        <div class=" d-flex flex-row w-100 justify-content-between align-items-center">
+                        <div class=" col-12 d-flex flex-row justify-content-between align-items-center">
 
-                            <div class="flex-column w-50 ">
+                            <div class="flex-column w-50">
 
-                                <label class="col-form-label" for="numeroTeste"><span>Existe Teste Relacionado a Falha ? </span></label>
+                                <label class="col-form-label" for="numeroTeste">Houve Manutenção Relacionada a Ocorrência ?</label>
 
-                                <select name="TesteIncluso" class="form-control w-25" id="opcao">
+                                <select name="TesteIncluso" class="form-control w-75" id="opcao">
                                     <option value="nao">Não</option>
                                     <option value="sim">Sim</option>
                                 </select>
@@ -83,7 +77,7 @@
                             </div>
 
                             <div class="flex-column w-50 " id="numTesteDiv" style="animation:fade-in;animation-duration:1s;">
-                                <label class="col-form-label" for="numeroTeste"><span>Número do Teste</span></label>
+                            <label class="col-form-label" for="numeroTeste">Qual o Tipo de Manutenção Realizada ?</label>
                                 <select asp-for="MaintenceTYpe" class="form-control" id="numeroTeste"></select>
 
                             </div>
@@ -112,7 +106,7 @@
 
                         <div class="row d-flex justify-content-start m-1 ">
 
-                            <label class="col-form-label" for="componente"><span>Componente</span></label>
+                            <label class="col-form-label" for="componente">Equipamento</label>
 
                         </div>
 
@@ -137,15 +131,12 @@
 
                     </div>
 
-                    <div class="w-100 d-flex flex-row justify-content-between align-items-center">
+                    <div class="col-12 d-flex flex-row justify-content-between align-items-center">
 
-                        <div class="w-50  flex-column justify-content-around align-items-start" id="dataDiv" >
+                        <div class="col-4 d-flex flex-column justify-content-around align-items-start" id="dataDiv" >
 
-                            <div class="row d-flex justify-content-start m-1 ">
+                            <label class="col-form-label" for="data">Data da Ocorrência</label>
 
-                                <label class="col-form-label" for="data"><span>Data da Ocorrência</span></label>
-
-                            </div>
 
                             <input type="date" asp-for="InitialDate" class="form-control w-auto" id="data" value="@null" />
 
@@ -160,13 +151,9 @@
                         </div>
 
 
-                        <div class="w-25  flex-column justify-content-around align-items-start" id="inicioDiv">
-
-                            <div class="row d-flex justify-content-start m-1 ">
-
-                                <label class="col-form-label" for="inicio"><span>Inicio</span></label>
-
-                            </div>
+                        <div class="col-2 flex-column justify-content-around align-items-start" id="inicioDiv">
+                          
+                                <label class="col-form-label" for="inicio">Inicio</label>
 
                             <input asp-for="Begin" class="form-control" id="inicio" value="@null" type="time" />
 
@@ -176,11 +163,11 @@
 
                         </div>
 
-                        <div class="flex-column w-50 " id="finalizarDiv">
+                    <div class="d-flex flex-column col-4 align-items-start" id="finalizarDiv">
 
-                            <label class="col-form-label" for="finalizarOcorrencia" style="margin-left:25%"><span>Finalizar a Ocorrência</span></label>
+                            <label class="col-form-label" for="finalizarOcorrencia">Finalizar a Ocorrência</label>
 
-                            <select name="Finalizacao" class="form-control w-75" id="finalizar" style="margin-left:25%;">
+                            <select name="Finalizacao" class="form-control w-75" id="finalizar">
                                 <option value="selecione">Selecione</option>
                                 <option value="nao">Não</option>
                                 <option value="sim">Sim</option>
@@ -193,7 +180,7 @@
 
                     </div>
 
-                    <div class="w-100 flex-row justify-content-start align-items-center" id="finalDiv">
+                    <div class="col-12 d-flex flex-row justify-content-start align-items-center" id="finalDiv">
 
                         <div class="w-50 flex-column justify-content-around align-items-start">
 

@@ -1,4 +1,5 @@
-﻿using IndigoErp.Models;
+﻿using IndigoErp.DAO.Value_Entities;
+using IndigoErp.Models;
 using IndigoErp.Services;
 using Microsoft.AspNetCore.Mvc;
 
@@ -8,7 +9,49 @@ namespace IndigoErp.Controllers
     {
         private EquipService equipService = new EquipService();
         private SetorService setorService = new SetorService();
-        private ValidationService validationService = new ValidationService();
+        private ValidationService val= new ValidationService();
+
+        public bool ValidateEquip(EquipModel model, string operation)
+        {
+            ModelState.Clear();
+
+            EquipDAO dao = new EquipDAO();
+
+            if (!val.ValidateString(model.Marca))
+            {
+                ModelState.AddModelError("Marca", "Caractéres Inválidos");
+                return false;
+            }
+            if (!val.ValidateString(model.Modelo))
+            {
+                ModelState.AddModelError("Modelo", "Caractéres Inválidos");
+                return false;
+            }
+            if (!val.ValidateString(model.Nome))
+            {
+                ModelState.AddModelError("Nome", "Caractéres Inválidos");
+                return false;
+            }
+            if (!val.ValidateString(model.NumeroSerie))
+            {
+                ModelState.AddModelError("NumeroSerie", "Caractéres Inválidos");
+                return false;
+            }
+            if (model.Setor == "Setor")
+            {
+                ModelState.AddModelError("Setor", "Escolha Um setor Para o Equipamento");
+                return false;
+            }
+            if (dao.SearchSimilar(model.NumeroSerie) && operation != "U")
+            {
+                ModelState.AddModelError("Id", "Equipamento já Existe");
+                return false;
+            }
+
+            return true;
+        }
+
+
         public IActionResult Index()
         {
             List<EquipModel> list = equipService.ListEquip("*","NOME","ASC");
@@ -47,11 +90,11 @@ namespace IndigoErp.Controllers
         {
             try
             {
-                validationService.ValidateEquip(model,operation);
-                if (!ModelState.IsValid)
+                
+                if (!ValidateEquip(model, operation))
                 {
                     ViewBag.Mode = operation;
-                    setorService.ListSections(HttpContext.Session.GetString("cnpj"));
+                    ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
                     return View("CreateEquip",model);
                 }
                 else

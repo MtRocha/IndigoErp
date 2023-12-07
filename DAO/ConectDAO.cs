@@ -11,9 +11,9 @@ namespace IndigoErp.DAO
         public static SqlConnection ConexaoDB()
         {
             //Url Pc Matheus
-            string connectingCode = "Data Source=NOTE_VW; Initial Catalog=INDIGODB;Integrated Security=true";
+            //string connectingCode = "Data Source=NOTE_VW; Initial Catalog=INDIGODB;Integrated Security=true";
             //Url do Pc 19
-            //string connectingCode = "Data Source=LAB3N-19\\SQLEXPRESS; Initial Catalog=INDIGODB;Integrated Security=true";
+            string connectingCode = "Data Source=LAB3N-19\\SQLEXPRESS; Initial Catalog=INDIGODB;Integrated Security=true";
             //Url do Pc 18
             //string connectingCode = "Data Source=LAB3N-18\\SQLEXPRESS; Initial Catalog=INDIGODB;Integrated Security=true";
             //Url do Site
