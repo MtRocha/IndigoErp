@@ -1,17 +1,16 @@
 ﻿using IndigoErp.DAO;
-using IndigoErp.Services;
 using IndigoErp.Models;
+using IndigoErp.Services;
 using Microsoft.AspNetCore.Mvc;
 
 namespace IndigoErp.Controllers
 {
     public class OcorrenciasController : Controller
     {
-        ReportService service = new ReportService();
+        private ReportService service = new ReportService();
 
         public bool ValidaReport(ReportModel report, string Operation, string HasMaintence)
         {
-
             ReportDAO dao = new ReportDAO();
 
             if (report.MaintenceTYpe == "Tipo de Manutenção" && HasMaintence == "sim")
@@ -82,7 +81,6 @@ namespace IndigoErp.Controllers
             return true;
         }
 
-
         public IActionResult Index()
         {
             return View();
@@ -90,17 +88,14 @@ namespace IndigoErp.Controllers
 
         public IActionResult CreateReport()
         {
-
             return View();
-
         }
 
         public IActionResult InserirReport(ReportModel report, string Operacao, int id, string TesteIncluso, string Finalizacao)
         {
             try
             {
-
-                if (!ValidaReport(report,Operacao,TesteIncluso))
+                if (!ValidaReport(report, Operacao, TesteIncluso))
                 {
                     ModelState.AddModelError("Origem", "Selecione uma Origem");
                     report.End = null;
@@ -127,7 +122,6 @@ namespace IndigoErp.Controllers
                         {
                             report.Status = "FINALIZADO";
                         }
-
 
                         report.EmployeeId = 0000;
 
@@ -158,4 +152,3 @@ namespace IndigoErp.Controllers
         }
     }
 }
-

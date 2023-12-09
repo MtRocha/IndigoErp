@@ -18,27 +18,26 @@ namespace IndigoErp.Controllers
             ViewBag.Message = "Insira seu E-mail para que possamos Enviar um Código de recuperação";
             ViewBag.Placeholder = "E-mail";
             return View("FrmAnyService");
-
         }
 
         public IActionResult Login(LoginModel login)
         {
             LoginDAO dao = new LoginDAO();
             UserModel model = dao.VerifyUser(login);
-            if ( model != null)
+            if (model != null)
             {
                 HttpContext.Session.SetString("Logged", "true");
                 HttpContext.Session.SetString("cnpj", model.Cnpj);
                 return RedirectToAction("Index", "Home");
-
             }
             else
             {
                 ModelState.Clear();
                 ModelState.AddModelError("Email", "E-Mail ou Senha Inválidos");
-                return View("Index",login);
+                return View("Index", login);
             }
         }
+
         public IActionResult SendVerificationCode(string email)
         {
             string subject = "Código de Recuperação";
@@ -49,16 +48,15 @@ namespace IndigoErp.Controllers
             mailService.SendMail(email, subject, body);
 
             return RedirectToAction("Index");
-        
         }
 
-        public IActionResult ForgetPassword() 
+        public IActionResult ForgetPassword()
         {
             return View("recuperacao");
         }
 
         public string GenerateCode()
-        { 
+        {
             var random = new Random();
             string code = string.Empty;
 
@@ -66,9 +64,8 @@ namespace IndigoErp.Controllers
             {
                 code += random.Next(0, 9).ToString();
             }
-        
+
             return code;
         }
-
     }
 }

@@ -1,24 +1,22 @@
-﻿ using IndigoErp.Models;
-using System;
-using System.Collections.Generic;
+﻿using IndigoErp.Models;
 using System.Data;
 using System.Data.SqlClient;
 
 namespace IndigoErp.DAO
-    {
+{
     public class ReportDAO : GeneralDAO
-        {
+    {
         private SqlParameter[] CriaParametros(ReportModel report)
-            {
+        {
             SqlParameter[] parametros = new SqlParameter[12];
             if (report.MaintenceTYpe == null)
-                {
+            {
                 parametros[0] = new SqlParameter("numeroTeste", DBNull.Value);
-                }
+            }
             else
-                {
+            {
                 parametros[0] = new SqlParameter("numeroTeste", report.MaintenceTYpe);
-                }
+            }
 
             parametros[1] = new SqlParameter("celula", report.Section);
 
@@ -29,25 +27,25 @@ namespace IndigoErp.DAO
             parametros[4] = new SqlParameter("componente", report.FailType.ToUpper());
 
             if (report.FailCause == "Causa" || report.Origin == "EXTERNA")
-                {
+            {
                 parametros[5] = new SqlParameter("tipo", DBNull.Value);
-                }
+            }
             else
-                {
+            {
                 parametros[5] = new SqlParameter("tipo", report.FailCause.ToUpper());
-                }
+            }
             parametros[6] = new SqlParameter("data", report.InitialDate);
 
             parametros[7] = new SqlParameter("inicio", report.Begin);
 
             if (report.Description == null)
-                {
+            {
                 parametros[8] = new SqlParameter("descricao", DBNull.Value);
-                }
+            }
             else
-                {
+            {
                 parametros[8] = new SqlParameter("descricao", report.Description);
-                }
+            }
 
             parametros[9] = new SqlParameter("final", report.End);
 
@@ -56,11 +54,10 @@ namespace IndigoErp.DAO
             parametros[11] = new SqlParameter("dataFinal", report.FinalDate);
 
             return parametros;
-            }
+        }
 
-         private ReportModel MontaObjeto(DataRow report)
+        private ReportModel MontaObjeto(DataRow report)
         {
-
             var r = new ReportModel();
 
             r.Id = Convert.ToInt32(report["ID"]);
@@ -78,10 +75,10 @@ namespace IndigoErp.DAO
             r.Status = (report["STATUS"]).ToString();
 
             return r;
-            }
+        }
 
         public List<ReportModel> Consulta()
-            {
+        {
             List<ReportModel> list = new List<ReportModel>();
 
             string consulta = "SELECT * FROM REPORTS WHERE STATUS = 'FINALIZADO' AND DATA_DA_OCORRENCIA >= DATEADD(DAY,-7,GETDATE()) ORDER BY DATA_DA_OCORRENCIA DESC";
@@ -89,15 +86,15 @@ namespace IndigoErp.DAO
             DataTable table = GeneralDAO.SelectSql(consulta, null);
 
             foreach (DataRow falha in table.Rows)
-                {
+            {
                 list.Add(MontaObjeto(falha));
-                }
-
-            return list;
             }
 
+            return list;
+        }
+
         public List<ReportModel> ConsultaGeral()
-            {
+        {
             List<ReportModel> list = new List<ReportModel>();
 
             string consulta = "SELECT * FROM REPORTS WHERE DATA_DA_OCORRENCIA >= DATEADD(DAY,-7,GETDATE()) ORDER BY DATA_DA_OCORRENCIA DESC";
@@ -105,29 +102,28 @@ namespace IndigoErp.DAO
             DataTable table = GeneralDAO.SelectSql(consulta, null);
 
             foreach (DataRow falha in table.Rows)
-                {
+            {
                 list.Add(MontaObjeto(falha));
-                }
-
-            return list;
             }
 
+            return list;
+        }
 
         public void Inserir(ReportModel report)
-            {
+        {
             string insercao = "INSERT INTO REPORTS (NUMERO_TESTE,CELULA_DE_REPORT,ID_FUNCIONARIO,ORIGEM_REPORT,COMPONENTE_DE_FALHA,TIPO_DE_FALHA,DESCRICAO,DATA_DA_OCORRENCIA,INICIO,FINAL,STATUS,DATA_FINAL)" +
             "VALUES (@numeroTeste,@celula,@idFuncionario,@origem,@componente,@tipo,@descricao,@data,@inicio,@final,@status,@dataFinal)";
             GeneralDAO.ExecutaSql(insercao, CriaParametros(report));
-            }
+        }
 
         public void Excluir(int id)
-            {
+        {
             string remocao = $"DELETE REPORTS WHERE ID =" + id;
             GeneralDAO.ExecutaSql(remocao, null);
-            }
+        }
 
         public List<ReportModel> ConsultaPendente()
-            {
+        {
             List<ReportModel> list = new List<ReportModel>();
 
             string consulta = "SELECT * FROM REPORTS WHERE STATUS = 'PENDENTE' ";
@@ -135,31 +131,31 @@ namespace IndigoErp.DAO
             DataTable table = GeneralDAO.SelectSql(consulta, null);
 
             foreach (DataRow falha in table.Rows)
-                {
+            {
                 list.Add(MontaObjeto(falha));
-                }
-
-            return list;
             }
 
+            return list;
+        }
+
         public ReportModel ConsultaPorId(int id)
-            {
+        {
             string consulta = "SELECT * FROM REPORTS WHERE ID = " + id;
 
             DataTable tabela = GeneralDAO.SelectSql(consulta, null);
 
             if (tabela.Rows.Count == 0)
-                {
+            {
                 return null;
-                }
-            else
-                {
-                return  MontaObjeto(tabela.Rows[0]);
-                }
             }
+            else
+            {
+                return MontaObjeto(tabela.Rows[0]);
+            }
+        }
 
         public List<ReportModel> ListagemPorNumTeste(string teste)
-            {
+        {
             var list = new List<ReportModel>();
 
             string consulta = $"SELECT * FROM REPORTS WHERE NUMERO_TESTE = '{teste}'";
@@ -167,25 +163,21 @@ namespace IndigoErp.DAO
             DataTable table = GeneralDAO.SelectSql(consulta, null);
 
             if (table.Rows.Count == 0)
-                {
-                return null;
-                }
-            else
-                {
-                foreach (DataRow item in table.Rows)
-                    {
-                    list.Add(MontaObjeto(item));
-                    }
-                return list;
-                }
-            }
-
-        
-        
-
-
-    public void AlterarReport(ReportModel report, int id)
             {
+                return null;
+            }
+            else
+            {
+                foreach (DataRow item in table.Rows)
+                {
+                    list.Add(MontaObjeto(item));
+                }
+                return list;
+            }
+        }
+
+        public void AlterarReport(ReportModel report, int id)
+        {
             string alteracao = "UPDATE[REPORTS]" +
                                "SET FINAL = @final , " +
                                "[DATA_FINAL] = @dataFinal ," +
@@ -201,6 +193,6 @@ namespace IndigoErp.DAO
                                $"WHERE ID = {id}";
 
             GeneralDAO.ExecutaSql(alteracao, CriaParametros(report));
-            }
         }
     }
+}

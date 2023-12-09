@@ -3,7 +3,6 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 
 namespace IndigoErp.Services
 {
-    
     public class SetorService
     {
         private SetorDAO dao = new SetorDAO();
@@ -14,10 +13,9 @@ namespace IndigoErp.Services
             List<SelectListItem> listItems = new List<SelectListItem>();
             listItems.Add(new SelectListItem("Setor", "Setor"));
 
-            foreach (string section in sections){
-
+            foreach (string section in sections)
+            {
                 listItems.Add(new SelectListItem(section, section));
-            
             }
             return listItems;
         }

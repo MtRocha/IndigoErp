@@ -1,8 +1,5 @@
-﻿
-using IndigoErp.DAO;
-using IndigoErp.Models;
+﻿using IndigoErp.Models;
 using System.Data;
-using System.Data.SqlClient;
 
 namespace IndigoErp.DAO
 {
@@ -11,28 +8,25 @@ namespace IndigoErp.DAO
         public UserModel VerifyUser(LoginModel login)
         {
             QueryModel query = new QueryModel("USUARIOS", "EMAIL", login.Email);
-            
+
             DataTable table = Query(query);
 
-            if (table == null) 
-            { 
-              return null;
-              
+            if (table == null)
+            {
+                return null;
             }
             else
             {
-
                 DataRow row = table.Rows[0];
                 if (row["SENHA"].ToString() == login.Password)
                 {
                     return CreateObject(row);
                 }
-                else 
+                else
                 {
                     return null;
                 }
             }
         }
-
     }
 }

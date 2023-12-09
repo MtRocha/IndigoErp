@@ -9,7 +9,7 @@ namespace IndigoErp.Controllers
     {
         private EquipService equipService = new EquipService();
         private SetorService setorService = new SetorService();
-        private ValidationService val= new ValidationService();
+        private ValidationService val = new ValidationService();
 
         public bool ValidateEquip(EquipModel model, string operation)
         {
@@ -51,10 +51,9 @@ namespace IndigoErp.Controllers
             return true;
         }
 
-
         public IActionResult Index()
         {
-            List<EquipModel> list = equipService.ListEquip("*","NOME","ASC");
+            List<EquipModel> list = equipService.ListEquip("*", "NOME", "ASC");
             return View(list);
         }
 
@@ -64,38 +63,33 @@ namespace IndigoErp.Controllers
             return View();
         }
 
-        public IActionResult EditEquip(int id) 
+        public IActionResult EditEquip(int id)
         {
-
             EquipModel model = equipService.GetEquip(id);
 
             ViewBag.Mode = "U";
 
             ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
 
-            return View("CreateEquip" ,model);
-        
-        
+            return View("CreateEquip", model);
         }
 
-        public IActionResult DeleteEquip(int id) 
+        public IActionResult DeleteEquip(int id)
         {
             equipService.Delete(id);
 
-           return RedirectToAction("Index");
-
+            return RedirectToAction("Index");
         }
 
-        public IActionResult InsertEquip(EquipModel model,string operation)
+        public IActionResult InsertEquip(EquipModel model, string operation)
         {
             try
             {
-                
                 if (!ValidateEquip(model, operation))
                 {
                     ViewBag.Mode = operation;
                     ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
-                    return View("CreateEquip",model);
+                    return View("CreateEquip", model);
                 }
                 else
                 {
@@ -117,8 +111,5 @@ namespace IndigoErp.Controllers
                 return View("Error", new ErrorViewModel());
             }
         }
-
-
-        
     }
 }

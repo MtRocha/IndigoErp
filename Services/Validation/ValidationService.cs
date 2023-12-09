@@ -1,10 +1,5 @@
-﻿using System.Text.RegularExpressions;
-using Microsoft.AspNetCore.Mvc;
-using Microsoft.AspNetCore.Mvc.Routing;
-using System.Diagnostics;
-using IndigoErp.Models;
-using IndigoErp.DAO.Value_Entities;
-using IndigoErp.DAO;
+﻿using Microsoft.AspNetCore.Mvc;
+using System.Text.RegularExpressions;
 
 namespace IndigoErp.Services
 {
@@ -18,25 +13,23 @@ namespace IndigoErp.Services
             {
                 return false;
             }
-            if (regex.IsMatch(value)) 
-            { 
+            if (regex.IsMatch(value))
+            {
                 return false;
             }
-            else { 
+            else
+            {
                 return true;
             }
-        
         }
 
         public bool ValidateInt(int value, bool isLowerThanZero, bool isEqualToZero)
         {
-
             if ((value == 0 && !isEqualToZero) || (value < 0 && !isLowerThanZero))
             {
                 return true;
             }
             else { return false; }
-
         }
     }
 }

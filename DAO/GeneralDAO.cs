@@ -1,13 +1,11 @@
 ﻿using IndigoErp.Models;
 using System.Data;
-using System.Data.Common;
 using System.Data.SqlClient;
 
 namespace IndigoErp.DAO
 {
     public class GeneralDAO
-        {
-
+    {
         private static SqlParameter[] CreateQuery(QueryModel query)
         {
             SqlParameter[] parameters = new SqlParameter[5];
@@ -26,7 +24,6 @@ namespace IndigoErp.DAO
             return parameters;
         }
 
-
         public DataTable Query(QueryModel query)
         {
             string sql = $"EXEC SPCONSULTA @table , @column, @id ";
@@ -40,7 +37,6 @@ namespace IndigoErp.DAO
             {
                 return null;
             }
-
         }
 
         public DataTable Listing(QueryModel query)
@@ -56,42 +52,37 @@ namespace IndigoErp.DAO
             {
                 return null;
             }
-
         }
 
         public void Delete(string table, int id)
         {
-        
             string sql = $"EXEC SPDELETE '{table}' , '{id}'";
 
             ExecutaSql(sql, null);
-
         }
 
-
         public static void ExecutaSql(string comando, SqlParameter[] parametro)
-            {
+        {
             using (SqlConnection conexao = ConectDAO.ConexaoDB())
-                {
+            {
                 using (SqlCommand cmd = new SqlCommand(comando, conexao))
-                    {
+                {
                     if (parametro != null)
-                        {
+                    {
                         cmd.Parameters.AddRange(parametro);
-                        }
+                    }
 
                     cmd.ExecuteNonQuery();
-
-                    }
                 }
             }
+        }
 
         public static DataTable SelectSql(string sql, SqlParameter[] parametro)
-            {
+        {
             using (SqlConnection conexao = ConectDAO.ConexaoDB())
-                {
+            {
                 using (SqlDataAdapter adapter = new SqlDataAdapter(sql, conexao))
-                    {
+                {
                     if (parametro != null)
                         adapter.SelectCommand.Parameters.AddRange(parametro);
 
@@ -100,8 +91,8 @@ namespace IndigoErp.DAO
 
                     conexao.Close();
                     return table;
-                    }
                 }
             }
         }
     }
+}

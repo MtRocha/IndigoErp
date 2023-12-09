@@ -11,13 +11,12 @@ namespace IndigoErp.Services
 
         private string mailName => "indigoerp3773@gmail.com";
 
-        private  string mailPassword => "gmwq eirn wmny asly";
+        private string mailPassword => "gmwq eirn wmny asly";
 
-        public  void SendMail(string email, string subject, string body)
-        { 
-        
+        public void SendMail(string email, string subject, string body)
+        {
             var mailMessage = new MailMessage();
-            var smtp = new SmtpClient(setAdress,setPortNumber);
+            var smtp = new SmtpClient(setAdress, setPortNumber);
 
             mailMessage.From = new MailAddress(mailName);
 
@@ -27,17 +26,15 @@ namespace IndigoErp.Services
 
             mailMessage.Body = body;
 
-            mailMessage.IsBodyHtml = false;;
+            mailMessage.IsBodyHtml = false; ;
 
-            smtp.EnableSsl= true;
+            smtp.EnableSsl = true;
 
-            smtp.UseDefaultCredentials= false;
+            smtp.UseDefaultCredentials = false;
 
             smtp.Credentials = new NetworkCredential(mailName, mailPassword);
 
             smtp.Send(mailMessage);
-
         }
-
     }
 }

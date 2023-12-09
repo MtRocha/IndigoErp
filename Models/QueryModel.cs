@@ -37,6 +37,5 @@
         public string Id { get; set; }
         public string Filter { get; set; }
         public string Order { get; set; }
-
     }
 }

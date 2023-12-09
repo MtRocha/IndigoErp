@@ -34,11 +34,11 @@
 
         @if (ViewBag.Mode != "U")
         {
-            <h1 style=" font-size:2rem; padding-top:50px;">Cadastro de Equipamento</h1>
+            <h1 style=" font-size:2rem; padding-top:18px;">Cadastro de Equipamento</h1>
         }
         else
         {
-            <h1 style="font-size:2rem; padding-top:50px;">Edição de Equipamento</h1>
+            <h1 style="font-size:2rem; padding-top:18px;">Edição de Equipamento</h1>
         }
 
 
@@ -52,27 +52,27 @@
             <div class="col-6" id="nome">
                 <span class="text-danger" asp-validation-for="Id"></span>
                <label for="nomeInput" class="col-form-label">Nome do Equipamento</label>
-                <input type="text" asp-for="Nome" class="form-control-sm w-100" id="nomeInput" required placeholder="Nome" />
+                <input type="text" asp-for="Nome" class="form-control w-100" id="nomeInput" required placeholder="Nome" />
                 <p class="alert-danger rounded-2 p-1 m-sm-1" style="display:none;">Campo Obrigatório</p>
            </div>
             <div class="col-6" id="numeroSerie">
                 <label for="numeroSerieInput" class="col-form-label">Número de Série</label>
-                <input type="number" asp-for="NumeroSerie" class="form-control-sm w-100" id="numeroSerieInput" required placeholder="Número de Série" />
+                <input type="text" asp-for="NumeroSerie" class="form-control w-100" id="numeroSerieInput" required placeholder="Número de Série" />
                 <p class="alert-danger rounded-2 p-1 m-sm-1" style="display:none;">Campo Obrigatório</p>
             </div>
             <div class="col-6" id="marca">
                 <label for="marcaInput" class="col-form-label">Marca do Equipamento</label>
-                <input type="text" asp-for="Marca" class="form-control-sm w-100" id="marcaInput" required placeholder="Marca" />
+                <input type="text" asp-for="Marca" class="form-control w-100" id="marcaInput" required placeholder="Marca" />
                 <p class="alert-danger rounded-2 p-1 m-sm-1" style="display:none;">Campo Obrigatório</p>
             </div>
             <div class="col-6" id="modelo">
                 <label for="modeloInput" class="col-form-label">Modelo do Equipamento</label>
-                <input type="text" asp-for="Modelo" class="form-control-sm w-100" id="modeloInput" required placeholder="Modelo" />
+                <input type="text" asp-for="Modelo" class="form-control w-100" id="modeloInput" required placeholder="Modelo" />
                 <p class="alert-danger rounded-2 p-1 m-sm-1" style="display:none;">Campo Obrigatório</p>
             </div>
             <div class="col-6" id="setor">
                 <label for="setorInput" class="col-form-label">Setor</label>
-                <select asp-for="Setor" asp-items="ViewBag.Sections" class="form-control-sm w-100" id="setorInput"></select>
+                <select asp-for="Setor" asp-items="ViewBag.Sections" class="form-control w-100" id="setorInput"></select>
                 <p class="alert-danger rounded-2 p-1 m-sm-1" style="display:none;">Selecione um Setor Para o Equipamento</p>
             </div>
 

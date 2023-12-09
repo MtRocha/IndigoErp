@@ -1,10 +1,7 @@
-﻿using IndigoErp.Models;
-
-namespace IndigoErp.Models
+﻿namespace IndigoErp.Models
 {
     public class SetorDAO : PadraoViewModel
     {
         public string Nome { get; set; }
-
     }
 }

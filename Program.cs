@@ -13,8 +13,6 @@ namespace IndigoErp
             {
                 options.Cookie.IsEssential = true;
                 options.IdleTimeout = TimeSpan.FromSeconds(3000);
-
-
             });
 
             // Add services to the container.

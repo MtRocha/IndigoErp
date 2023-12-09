@@ -1,9 +1,7 @@
-﻿using System;
-
-namespace IndigoErp.Models;
+﻿namespace IndigoErp.Models;
 
 public class ReportModel : PadraoViewModel
-    {
+{
     public int EmployeeId { get; set; }
     public string Section { get; set; }
     public string Origin { get; set; }
@@ -16,4 +14,4 @@ public class ReportModel : PadraoViewModel
     public DateTime? End { get; set; }
     public string MaintenceTYpe { get; set; }
     public string Status { get; set; }
-    }
+}

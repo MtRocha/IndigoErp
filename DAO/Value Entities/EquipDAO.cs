@@ -8,7 +8,6 @@ namespace IndigoErp.DAO.Value_Entities
     {
         private SqlParameter[] CreateParameters(EquipModel model)
         {
-
             SqlParameter[] parametros = new SqlParameter[7];
 
             parametros[0] = new SqlParameter("id", model.Id);
@@ -23,11 +22,10 @@ namespace IndigoErp.DAO.Value_Entities
         }
 
         public EquipModel CreateObject(DataRow row)
-        { 
-        
+        {
             EquipModel model = new EquipModel();
 
-            model.Id = (int) row["ID"];
+            model.Id = (int)row["ID"];
             model.Nome = row["NOME"].ToString();
             model.Setor = row["SETOR"].ToString();
             model.Cnpj = row["CNPJ_DOMINIO"].ToString();
@@ -56,7 +54,6 @@ namespace IndigoErp.DAO.Value_Entities
                          "@modelo )";
 
             GeneralDAO.ExecutaSql(sql, CreateParameters(model));
-
         }
 
         public void Update(EquipModel model)
@@ -70,14 +67,11 @@ namespace IndigoErp.DAO.Value_Entities
                          "MODELO = @modelo " +
                          $"WHERE ID = {model.Id}";
 
-
             GeneralDAO.ExecutaSql(sql, CreateParameters(model));
-
         }
 
         public EquipModel SearchEquip(int id)
         {
-
             QueryModel query = new QueryModel("EQUIPAMENTO", "ID", id.ToString());
 
             DataTable table = Query(query);
@@ -85,7 +79,6 @@ namespace IndigoErp.DAO.Value_Entities
             EquipModel model = CreateObject(table.Rows[0]);
 
             return model;
-
         }
 
         public bool SearchSimilar(string serialNumber)
@@ -96,6 +89,5 @@ namespace IndigoErp.DAO.Value_Entities
 
             return table != null ? true : false;
         }
-
     }
 }

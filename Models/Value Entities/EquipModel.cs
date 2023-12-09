@@ -1,6 +1,4 @@
-﻿using IndigoErp.Models;
-
-namespace IndigoErp.Models
+﻿namespace IndigoErp.Models
 {
     public class EquipModel : PadraoViewModel
     {
@@ -10,9 +8,5 @@ namespace IndigoErp.Models
         public string NumeroSerie { get; set; }
         public string Marca { get; set; }
         public string Modelo { get; set; }
-
-
-
-
     }
 }
