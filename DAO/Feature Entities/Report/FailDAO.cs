@@ -4,9 +4,9 @@ using System.Data.SqlClient;
 
 namespace IndigoErp.DAO
 {
-    public class FalhaDAO
+    public class FailDAO
     {
-        private SqlParameter[] CriaParametros(FalhaViewModel falha)
+        private SqlParameter[] CriaParametros(FailModel falha)
         {
             SqlParameter[] parametros = new SqlParameter[4];
             parametros[0] = new SqlParameter("id", falha.Id);
@@ -25,9 +25,9 @@ namespace IndigoErp.DAO
             return parametros;
         }
 
-        private FalhaViewModel MontaFalha(DataRow falha)
+        private FailModel MontaFalha(DataRow falha)
         {
-            FalhaViewModel f = new FalhaViewModel();
+            FailModel f = new FailModel();
 
             f.Id = Convert.ToInt32(falha["ID"]);
             f.Origem = Convert.ToString(falha["ORIGEM_DA_FALHA"]);
@@ -36,14 +36,14 @@ namespace IndigoErp.DAO
             return f;
         }
 
-        public List<FalhaViewModel> Consulta()
+        public List<FailModel> Consulta(string cnpj)
         {
-            List<FalhaViewModel> list = new List<FalhaViewModel>();
+            List<FailModel> list = new List<FailModel>();
 
             string consulta = "SELECT DISTINCT" +
              " cf.ID, cf.ORIGEM_DA_FALHA, cf.TIPO_DE_COMPONENTE, tf.CAUSA_DA_FALHA,tf.ID " +
              "FROM " +
-             "COMPONENTE_DE_FALHA cf " +
+             $"COMPONENTE_DE_FALHA cf WHERE CNPJ = '{cnpj}' " +
              "FULL JOIN " +
              "TIPO_DE_FALHA tf ON cf.ID = tf.ID ORDER BY ORIGEM_DA_FALHA,TIPO_DE_COMPONENTE,CAUSA_DA_FALHA";
 
@@ -57,7 +57,7 @@ namespace IndigoErp.DAO
             return list;
         }
 
-        public void Inserir(FalhaViewModel falha)
+        public void Inserir(FailModel falha)
         {
             if (falha.Origem == "INTERNA")
             {
@@ -82,7 +82,7 @@ namespace IndigoErp.DAO
             GeneralDAO.ExecutaSql(remocao, null);
         }
 
-        public FalhaViewModel ConsultaPorId(int id)
+        public FailModel ConsultaPorId(int id)
         {
             string consulta = " SELECT cf.ID, cf.ORIGEM_DA_FALHA, cf.TIPO_DE_COMPONENTE, tf.CAUSA_DA_FALHA " +
                                 " FROM " +
@@ -102,7 +102,7 @@ namespace IndigoErp.DAO
             }
         }
 
-        public void AlterarFalha(FalhaViewModel falha, int id)
+        public void AlterarFalha(FailModel falha, int id)
         {
             if (falha.Origem == "EXTERNA")
             {

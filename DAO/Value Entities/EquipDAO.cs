@@ -2,7 +2,7 @@
 using System.Data;
 using System.Data.SqlClient;
 
-namespace IndigoErp.DAO.Value_Entities
+namespace IndigoErp.DAO
 {
     public class EquipDAO : GeneralDAO
     {

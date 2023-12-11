@@ -1,27 +1,26 @@
-﻿using IndigoErp.DAO.Value_Entities;
+﻿using IndigoErp.DAO;
 using IndigoErp.Models;
 using System.Data;
 
 namespace IndigoErp.Services
 {
-    public class EquipService
+    public class ReportService
     {
-        private ValidationService val = new ValidationService();
-        private EquipDAO dao = new EquipDAO();
+        private ReportDAO dao = new ReportDAO();
 
-        public EquipModel GetEquip(int id)
+        public ReportModel GetReport(int id)
         {
-            EquipModel model = dao.SearchEquip(id);
+            ReportModel model = dao.SearchReport(id);
 
             return model;
         }
 
         public void Delete(int id)
         {
-            dao.Delete("Equipamento", id);
+            dao.Delete("Reportamento", id);
         }
 
-        public string Insert(EquipModel model)
+        public string Insert(ReportModel model)
         {
             try
             {
@@ -35,11 +34,11 @@ namespace IndigoErp.Services
             }
         }
 
-        public string Edit(EquipModel model)
+        public string Edit(ReportModel model)
         {
             try
             {
-                dao.Update(model);
+                dao.Update(model, model.Id);
 
                 return "ok";
             }
@@ -49,15 +48,15 @@ namespace IndigoErp.Services
             }
         }
 
-        public List<EquipModel> ListEquip(string column, string filter, string order)
+        public List<ReportModel> ListReport(string column, string filter, string order)
         {
             DataTable table = new DataTable();
 
-            QueryModel query = string.IsNullOrEmpty(filter) ? new QueryModel("EQUIPAMENTO", column) : new QueryModel("EQUIPAMENTO", column, filter, order);
+            QueryModel query = string.IsNullOrEmpty(filter) ? new QueryModel("REPORTS", column) : new QueryModel("REPORTS", column, filter, order);
 
             table = dao.Listing(query);
 
-            List<EquipModel> list = new List<EquipModel>();
+            List<ReportModel> list = new List<ReportModel>();
 
             if (table != null)
             {

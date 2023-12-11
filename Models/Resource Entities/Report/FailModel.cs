@@ -1,6 +1,6 @@
 ﻿namespace IndigoErp.Models
 {
-    public class FalhaViewModel : PadraoViewModel
+    public class FailModel : PadraoViewModel
     {
         public string Origem { get; set; }
         public string Componente { get; set; }

@@ -56,7 +56,7 @@ namespace IndigoErp.DAO
             return parametros;
         }
 
-        private ReportModel MontaObjeto(DataRow report)
+        public ReportModel CreateObject(DataRow report)
         {
             var r = new ReportModel();
 
@@ -87,7 +87,7 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
             {
-                list.Add(MontaObjeto(falha));
+                list.Add(CreateObject(falha));
             }
 
             return list;
@@ -103,13 +103,13 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
             {
-                list.Add(MontaObjeto(falha));
+                list.Add(CreateObject(falha));
             }
 
             return list;
         }
 
-        public void Inserir(ReportModel report)
+        public void Insert(ReportModel report)
         {
             string insercao = "INSERT INTO REPORTS (NUMERO_TESTE,CELULA_DE_REPORT,ID_FUNCIONARIO,ORIGEM_REPORT,COMPONENTE_DE_FALHA,TIPO_DE_FALHA,DESCRICAO,DATA_DA_OCORRENCIA,INICIO,FINAL,STATUS,DATA_FINAL)" +
             "VALUES (@numeroTeste,@celula,@idFuncionario,@origem,@componente,@tipo,@descricao,@data,@inicio,@final,@status,@dataFinal)";
@@ -132,13 +132,13 @@ namespace IndigoErp.DAO
 
             foreach (DataRow falha in table.Rows)
             {
-                list.Add(MontaObjeto(falha));
+                list.Add(CreateObject(falha));
             }
 
             return list;
         }
 
-        public ReportModel ConsultaPorId(int id)
+        public ReportModel SearchReport(int id)
         {
             string consulta = "SELECT * FROM REPORTS WHERE ID = " + id;
 
@@ -150,7 +150,7 @@ namespace IndigoErp.DAO
             }
             else
             {
-                return MontaObjeto(tabela.Rows[0]);
+                return CreateObject(tabela.Rows[0]);
             }
         }
 
@@ -170,13 +170,13 @@ namespace IndigoErp.DAO
             {
                 foreach (DataRow item in table.Rows)
                 {
-                    list.Add(MontaObjeto(item));
+                    list.Add(CreateObject(item));
                 }
                 return list;
             }
         }
 
-        public void AlterarReport(ReportModel report, int id)
+        public void Update(ReportModel report, int id)
         {
             string alteracao = "UPDATE[REPORTS]" +
                                "SET FINAL = @final , " +

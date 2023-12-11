@@ -125,7 +125,7 @@ namespace IndigoErp.Controllers
 
                         report.EmployeeId = 0000;
 
-                        dao.Inserir(report);
+                        dao.Insert(report);
 
                         ViewBag.Operacao = "sucesso";
                         return RedirectToAction("PgReports");
@@ -136,7 +136,7 @@ namespace IndigoErp.Controllers
 
                         ViewBag.Operacao = "sucesso";
                         report.Status = "FINALIZADO";
-                        dao.AlterarReport(report, id);
+                        dao.Update(report, id);
                         return RedirectToAction("Index");
                     }
                 }

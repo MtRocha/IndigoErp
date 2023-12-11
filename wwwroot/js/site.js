@@ -84,8 +84,6 @@ function ValidateEquip() {
     else if (setorInput.selectedOptions[0].text != "Setor") {
         erro = setor.querySelector('.alert-danger')
         erro.style.display = 'none'
-    }
-    else {
         form.submit()
     }
 }

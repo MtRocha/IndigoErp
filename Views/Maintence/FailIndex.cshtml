@@ -1,0 +1,84 @@
+﻿@model List<FailModel>
+<section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
+
+    <main class="col-10 d-flex flex-column justify-content-center align-items-center">
+
+        @if (Model != null)
+        {
+            <h1 class="display-6">Falhas Cadastradas</h1>
+
+
+
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <td>Falha</td>
+                        <td>Equipamento</td>
+                        <td>Origem</td>
+                        <td>Ações</td>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Tipo</td>
+                            <td>@item.Componente</td>
+                            <td>@item.Origem</td>
+                            <td class="btn-group dropright">
+                                <div class="dropdown">
+                                    <a class="nav-link " role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="~/images/setting.png">
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="javascript:DeleteFail    (@item.Id)">Excluir</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <h1 class="display-4" style="margin-top:5%;">Sem Dispositivos Cadastrados</h1>
+        }
+
+    </main>
+</section>
+
+<style>
+
+    section label {
+        font-size: 25px;
+        margin-top: 10%;
+    }
+
+    .col-form-label {
+        font-weight: bold
+    }
+
+    .col-6 {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding: 20px;
+    }
+
+    .col-md-3 {
+        height: 100%;
+        display: flex;
+        opacity: 0;
+        animation: fade-in;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>

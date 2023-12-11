@@ -1,4 +1,4 @@
-﻿using IndigoErp.DAO.Value_Entities;
+﻿using IndigoErp.DAO;
 using IndigoErp.Models;
 using IndigoErp.Services;
 using Microsoft.AspNetCore.Mvc;
