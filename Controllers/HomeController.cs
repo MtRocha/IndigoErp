@@ -6,6 +6,7 @@ namespace IndigoErp.Controllers
     {
         public IActionResult Index()
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             return View();
         }
 

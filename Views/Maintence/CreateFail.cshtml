@@ -1,0 +1,132 @@
+﻿@model FailModel
+
+<section class="col-12 h-100 d-flex justify-content-between align-items-center ">
+    <aside class="col-md-2">
+        <nav id="sidebarMenu" class="sidebar bg-white">
+                <div class="position-sticky">
+                    <a asp-action="FailIndex" class="list-group-item list-group-item-action py-2 ripple">
+                        <i class=""></i><span class="list-text"> <img class="img-fluid" src="~/images/logout.png">Voltar</span>
+                    </a>
+                </div>
+        </nav>
+    </aside>
+
+    <main class="col-md-10 d-flex flex-column justify-content-end align-items-center">
+
+        <h1 style=" font-size:2rem; padding-top:18px;">Cadastro de Falha</h1>
+
+
+
+
+
+        <form asp-action="InsertFail" asp-controller="Maintence" class="col-md-9 h-50 flex-column align-items-center" method="post">
+
+            <input type="hidden" asp-for="Cnpj"/>
+
+            <div class="d-flex h-100 flex-column justify-content-center align-items-center font-weight-bold">
+
+                <div class="w-100 d-flex flex-column justify-content-around">
+                    <div class="row d-flex justify-content-start m-1 ">
+                        <label class="col-form-label" for="Origem"><span>Origem</span></label>
+                    </div>
+                    <select asp-for="Origem" asp-items="ViewBag.Origens" id="origem" class="form-control" style="height:38px;">
+                        <option value="Origem Da Falha">Origem Da Falha</option>
+                        <option value="Falha Interna de Equipamento">Falha Interna de Equipamento</option>
+                        <option value="Falha Externa da Operação">Falha Externa da Operação</option>
+
+                    </select>
+                    <span asp-validation-for="Origem" class="text text-danger"></span>
+                </div>
+                <br>
+                <div class="w-100 flex-column justify-content-around" id="hidden" style="display:none">
+                    <div class="row d-flex justify-content-start m-1 ">
+                        <label class="col-form-label" for="Componente"><span>Componente</span></label>
+                    </div>
+                    <select asp-for="Componente" asp-items="ViewBag.Equips" id="origem" class="form-control" style="height:38px;">
+                        <option value="Equipamento Relacionado a Falha">Equipamento Relacionado a Falha</option>
+                    </select>
+                    <span asp-validation-for="Componente" class="text text-danger"></span>
+
+                </div>
+                <br>
+                <div class="w-100 d-flex     flex-column justify-content-around">
+                    <div class="row d-flex justify-content-start m-1 ">
+                        <label class="col-form-label" for="tipo"><span>Causa da Falha</span></label>
+                    </div>
+                    <input type="text" asp-for=Tipo class="form-control" id="tipo" autocomplete="off" placeholder="O que causou a Falha" />
+                    <span asp-validation-for="Tipo" class="text text-danger"></span>
+                </div>
+
+            </div>
+
+            <br />
+
+            <input class="btn btn-primary font-weight-bolder" type="submit" value="Salvar Falha" />
+
+        </form>
+
+    </main>
+
+</section>
+
+<script>
+
+    document.addEventListener('DOMContentLoaded', function () { MostrarTipo() })
+
+
+    const select = document.getElementById('origem')
+    select.addEventListener('change', function () { MostrarTipo() })
+
+    function MostrarTipo() {
+
+
+        const hidden = document.getElementById('hidden')
+        const input = document.getElementById('tipo')
+        const text = select.selectedOptions[0].textContent
+
+        if (text == "Falha Interna de Equipamento") {
+
+            hidden.style.display = "flex"
+
+        }
+        else {
+
+            hidden.style.display = "none"
+            input.value = ''
+        }
+    }
+
+</script>
+
+<style>
+
+    section label {
+        font-size: 25px;
+        margin-top: 10%;
+    }
+
+    .col-form-label {
+        font-weight: bold
+    }
+
+    .col-6 {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding: 20px;
+    }
+
+    .col-md-3 {
+        height: 100%;
+        display: flex;
+        opacity: 0;
+        animation: fade-in;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>

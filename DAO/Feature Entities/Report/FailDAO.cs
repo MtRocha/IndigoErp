@@ -8,7 +8,7 @@ namespace IndigoErp.DAO
     {
         private SqlParameter[] CriaParametros(FailModel falha)
         {
-            SqlParameter[] parametros = new SqlParameter[4];
+            SqlParameter[] parametros = new SqlParameter[5];
             parametros[0] = new SqlParameter("id", falha.Id);
             parametros[1] = new SqlParameter("origem", falha.Origem.ToUpper());
 
@@ -22,6 +22,8 @@ namespace IndigoErp.DAO
                 parametros[3] = new SqlParameter("tipo", falha.Tipo.ToUpper());
             }
 
+            parametros[4] = new SqlParameter("cnpj", falha.Cnpj.ToUpper());
+
             return parametros;
         }
 
@@ -30,8 +32,8 @@ namespace IndigoErp.DAO
             FailModel f = new FailModel();
 
             f.Id = Convert.ToInt32(falha["ID"]);
-            f.Origem = Convert.ToString(falha["ORIGEM_DA_FALHA"]);
-            f.Componente = Convert.ToString(falha["TIPO_DE_COMPONENTE"]);
+            f.Origem = Convert.ToString(falha["ORIGEM"]);
+            f.Componente = Convert.ToString(falha["NUMERO_EQUIPAMENTO"]);
             f.Tipo = Convert.ToString(falha["CAUSA_DA_FALHA"]);
             return f;
         }
@@ -40,12 +42,7 @@ namespace IndigoErp.DAO
         {
             List<FailModel> list = new List<FailModel>();
 
-            string consulta = "SELECT DISTINCT" +
-             " cf.ID, cf.ORIGEM_DA_FALHA, cf.TIPO_DE_COMPONENTE, tf.CAUSA_DA_FALHA,tf.ID " +
-             "FROM " +
-             $"COMPONENTE_DE_FALHA cf WHERE CNPJ = '{cnpj}' " +
-             "FULL JOIN " +
-             "TIPO_DE_FALHA tf ON cf.ID = tf.ID ORDER BY ORIGEM_DA_FALHA,TIPO_DE_COMPONENTE,CAUSA_DA_FALHA";
+            string consulta = "SELECT * FROM TIPO_DE_FALHA WHERE CNPJ =" + cnpj;
 
             DataTable table = GeneralDAO.SelectSql(consulta, null);
 
@@ -59,26 +56,16 @@ namespace IndigoErp.DAO
 
         public void Inserir(FailModel falha)
         {
-            if (falha.Origem == "INTERNA")
-            {
-                string insercao = "INSERT INTO COMPONENTE_DE_FALHA (ID,ORIGEM_DA_FALHA, TIPO_DE_COMPONENTE)" +
-                "VALUES (@id,@origem, @componente)" +
-                "INSERT INTO TIPO_DE_FALHA (ID,COMPONENTE,CAUSA_DA_FALHA)" +
-                 "VALUES(@id,@componente,@tipo)";
+                string insercao =  "INSERT INTO TIPO_DE_FALHA (ORIGEM,NUMERO_EQUIPAMENTO,CAUSA_DA_FALHA,CNPJ)" +
+                 "VALUES(@origem,@componente,@tipo,@cnpj)";
                 GeneralDAO.ExecutaSql(insercao, CriaParametros(falha));
-            }
-            else
-            {
-                string insercao = "INSERT INTO COMPONENTE_DE_FALHA (ID,ORIGEM_DA_FALHA, TIPO_DE_COMPONENTE)" +
-        "VALUES (@id,@origem, @componente)";
-                GeneralDAO.ExecutaSql(insercao, CriaParametros(falha));
-            }
+            
+
         }
 
         public void Excluir(int id)
         {
-            string remocao = $"DELETE COMPONENTE_DE_FALHA WHERE ID =" + id +
-                             $"DELETE TIPO_DE_FALHA WHERE ID =" + id;
+            string remocao = $"DELETE TIPO_DE_FALHA WHERE ID =" + id;
             GeneralDAO.ExecutaSql(remocao, null);
         }
 

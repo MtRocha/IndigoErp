@@ -54,7 +54,7 @@
                 <div class="col-12 d-flex flex-column justify-content-around align-items-start">
 
                     <label class="col-form-label" for="section"><span>Setor</span></label>
-                    <select asp-for="Section" asp-items="ViewBag.Section" class="form-control" id="section">
+                    <select asp-for="Section" asp-items="ViewBag.Sections" class="form-control" id="section">
                     </select>
 
                     <span asp-validation-for="Section" class="text text-danger"></span>
@@ -76,7 +76,7 @@
 
                         <label class="col-form-label" for="componente">Equipamento</label>
 
-                    <select asp-for="FailType" asp-items="ViewBag.Componentes" id="componente" class="form-control">
+                    <select asp-for="FailType" asp-items="ViewBag.Equips" id="componente" class="form-control">
                     </select>
 
                     <span asp-validation-for="FailType" class="text text-danger"></span>

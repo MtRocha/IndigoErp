@@ -97,6 +97,11 @@ function DeleteEquip(item) {
         location.href = "/Equip/DeleteEquip?id=" + item
 }
 
+function DeleteFail(item) {
+    if (confirm("Deseja Realmente Excluir Esta Falha ?"))
+        location.href = "DeleteFail?id=" + item
+}
+
 function Habilitar(item) {
     item.style.display = "flex"
 }

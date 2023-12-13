@@ -10,6 +10,7 @@ namespace IndigoErp.DAO
             var user = new UserModel();
 
             user.Email = row["EMAIL"].ToString();
+            user.Nome = row["NOME"].ToString();
             user.Cnpj = row["CNPJ"].ToString();
             user.Password = row["SENHA"].ToString();
             user.SecurityCode = row["CODIGO_SEGURANCA"].ToString();

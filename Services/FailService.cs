@@ -24,6 +24,8 @@ namespace IndigoErp.Services
         {
             try
             {
+                model.Componente = model.Origem != "Falha Interna de Equipamento" ? "Falha Sem Equipamento" : model.Componente;
+
                 dao.Inserir(model);
 
                 return "ok";

@@ -7,7 +7,8 @@ namespace IndigoErp.Controllers
 {
     public class MaintenceController : Controller
     {
-        private FailService failService;
+        private FailService failService = new FailService();
+        private EquipService equipService = new EquipService();
 
         #region Fail
 
@@ -18,34 +19,19 @@ namespace IndigoErp.Controllers
             ModelState.Clear();
             FailDAO dao = new FailDAO();
 
-            if (Operacao == "A" && dao.ConsultaPorId(model.Id) != null)
+            if (model.Origem != "Falha Interna de Equipamento" && model.Origem != "Falha Externa da Operação")
             {
-                ModelState.AddModelError("Id", "Id Já Esta em Uso");
+                ModelState.AddModelError("Origem", "Selecione uma Origem para a Falha");
                 return false;
             }
-            if (Operacao == "A" && model.Id <= 0)
-            {
-                ModelState.AddModelError("Id", "Id Inválido");
-                return false;
-            }
-            if (model.Origem != "EXTERNA" && model.Origem != "INTERNA")
-            {
-                ModelState.AddModelError("Origem", "Selecione uma Origem");
-                return false;
-            }
-            if (string.IsNullOrEmpty(model.Componente))
+            if ((model.Origem == "Falha Interna de Equipamento" && model.Componente == "Equipamento Relacionado a Falha"))
             {
                 ModelState.AddModelError("Componente", "O Componente da Falha não Pode Estar Vazio");
                 return false;
             }
-            if (model.Origem == "INTERNA" && string.IsNullOrEmpty(model.Tipo))
+            if (string.IsNullOrEmpty(model.Tipo))
             {
-                ModelState.AddModelError("Tipo", "O Tipo da Falha não Pode Estar Vazio");
-                return false;
-            }
-            if (model.Origem == "EXTERNA" && !string.IsNullOrEmpty(model.Tipo))
-            {
-                ModelState.AddModelError("Tipo", "O Tipo da Falha Deve Estar Vazio em uma Falha Externa");
+                ModelState.AddModelError("Tipo", "O Tipo da Falha não Deve Estar Vazio");
                 return false;
             }
             return true;
@@ -54,14 +40,16 @@ namespace IndigoErp.Controllers
 
         public IActionResult FailIndex()
         {
-            List <FailModel> list = failService.ListFails(HttpContext.Session.GetString("cnpj"));
+            string cnpj = HttpContext.Session.GetString("cnpj");
+            List <FailModel> list = failService.ListFails(cnpj);
             return View(list);
         }
 
         public IActionResult CreateFail()
         {   
             FailModel model = new FailModel();
-
+            model.Cnpj = HttpContext.Session.GetString("cnpj");
+            ViewBag.Equips = equipService.ListEquipSelect(HttpContext.Session.GetString("cnpj"));
             return View(model);
         }
 
@@ -74,7 +62,7 @@ namespace IndigoErp.Controllers
         public IActionResult DeleteFail(int id)
         {
             failService.Delete(id);
-            return RedirectToAction("Index");
+            return RedirectToAction("FailIndex");
         }
 
         public IActionResult InsertFail(FailModel model, string operation)
@@ -83,8 +71,9 @@ namespace IndigoErp.Controllers
             {
                 if (!ValidateFail(model, operation))
                 {
+                    ViewBag.Equips = equipService.ListEquipSelect(HttpContext.Session.GetString("cnpj"));
                     ViewBag.Mode = operation;
-                    return View("CreateEquip", model);
+                    return View("CreateFail", model);
                 }
                 else
                 {
@@ -97,7 +86,7 @@ namespace IndigoErp.Controllers
                     {
                         failService.Edit(model);
                     }
-                    return RedirectToAction("Index");
+                    return RedirectToAction("FailIndex");
                 }
             }
             catch (Exception ex)

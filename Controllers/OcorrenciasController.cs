@@ -8,7 +8,8 @@ namespace IndigoErp.Controllers
     public class OcorrenciasController : Controller
     {
         private ReportService service = new ReportService();
-
+        private EquipService equipService = new EquipService();
+        private SetorService setorService = new SetorService();
         public bool ValidaReport(ReportModel report, string Operation, string HasMaintence)
         {
             ReportDAO dao = new ReportDAO();
@@ -88,7 +89,10 @@ namespace IndigoErp.Controllers
 
         public IActionResult CreateReport()
         {
-            return View();
+            ReportModel report = new ReportModel();
+            ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
+            ViewBag.Equips = equipService.ListEquipSelect(HttpContext.Session.GetString("cnpj"));
+            return View(report);
         }
 
         public IActionResult InserirReport(ReportModel report, string Operacao, int id, string TesteIncluso, string Finalizacao)
@@ -98,6 +102,7 @@ namespace IndigoErp.Controllers
                 if (!ValidaReport(report, Operacao, TesteIncluso))
                 {
                     ModelState.AddModelError("Origem", "Selecione uma Origem");
+                    ViewBag.Equips = equipService.ListEquipSelect(HttpContext.Session.GetString("cnpj"));
                     report.End = null;
                     ViewBag.Titulo = "Operadores";
                     ViewBag.Operacao = Operacao;

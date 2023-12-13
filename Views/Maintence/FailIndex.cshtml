@@ -3,50 +3,41 @@
 
     <main class="col-10 d-flex flex-column justify-content-center align-items-center">
 
-        @if (Model != null)
-        {
-            <h1 class="display-6">Falhas Cadastradas</h1>
+            <h1 class="display-6" style="margin-top:5%;">Falhas Cadastradas</h1>
 
+            <a class="btn btn-outline-secondary w-100" style="font-size:20px;" asp-action="CreateFail" >Adicionar Falha</a>
 
-
-            <table class="table table-hover table-responsive">
-                <thead>
+        <table class="table table-hover table-responsive">
+            <thead>
+                <tr>
+                    <td>Origem</td>
+                    <td>Equipamento</td>
+                    <td>Falha</td>
+                    <td>Ação</td>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var item in Model)
+                {
                     <tr>
-                        <td>Falha</td>
-                        <td>Equipamento</td>
-                        <td>Origem</td>
-                        <td>Ações</td>
+                        <td>@item.Origem</td>
+                        <td>@item.Componente</td>
+                        <td>@item.Tipo</td>
+                        <td class="btn-group dropright">
+                            <div class="dropdown">
+                                <a class="nav-link " role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                    <img src="~/images/setting.png">
+                                </a>
+                                <ul class="dropdown-menu">
+                                    <li><a class="dropdown-item" href="javascript:DeleteFail(@item.Id)">Excluir</a></li>
+                                </ul>
+                            </div>
+                        </td>
+
                     </tr>
-                </thead>
-                <tbody>
-                    @foreach (var item in Model)
-                    {
-                        <tr>
-                            <td>@item.Tipo</td>
-                            <td>@item.Componente</td>
-                            <td>@item.Origem</td>
-                            <td class="btn-group dropright">
-                                <div class="dropdown">
-                                    <a class="nav-link " role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                                        <img src="~/images/setting.png">
-                                    </a>
-                                    <ul class="dropdown-menu">
-                                        <li><a class="dropdown-item" href="javascript:DeleteFail    (@item.Id)">Excluir</a></li>
-                                    </ul>
-                                </div>
-                            </td>
-
-                        </tr>
-                    }
-                </tbody>
-            </table>
-
-        }
-        else
-        {
-            <h1 class="display-4" style="margin-top:5%;">Sem Dispositivos Cadastrados</h1>
-        }
-
+                }
+            </tbody>
+        </table>
     </main>
 </section>
 

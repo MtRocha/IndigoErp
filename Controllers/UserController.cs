@@ -28,6 +28,7 @@ namespace IndigoErp.Controllers
             {
                 HttpContext.Session.SetString("Logged", "true");
                 HttpContext.Session.SetString("cnpj", model.Cnpj);
+                HttpContext.Session.SetString("nome", model.Nome);
                 return RedirectToAction("Index", "Home");
             }
             else
@@ -36,6 +37,15 @@ namespace IndigoErp.Controllers
                 ModelState.AddModelError("Email", "E-Mail ou Senha Inválidos");
                 return View("Index", login);
             }
+        }
+
+        public IActionResult LogOff()
+        {
+
+                ModelState.Clear();
+                HttpContext.Session.Clear();
+                return View("Index");
+            
         }
 
         public IActionResult SendVerificationCode(string email)
