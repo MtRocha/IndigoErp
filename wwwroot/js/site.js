@@ -87,6 +87,69 @@ function ValidateEquip() {
         form.submit()
     }
 }
+
+function BuscaCausa(text) {
+    const encodedText = encodeURIComponent(text);
+
+    const url = `/Ocorrencias/SearchFails?text=${encodedText}`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json()
+    ).then(data => {
+        if (data.lista && data.lista.length > 0) {
+            const selectElement = document.getElementById('causa');
+            selectElement.innerHTML = ''
+            const option = document.createElement('option');
+            option.text = "Causa";
+            option.value = "Causa";
+            selectElement.appendChild(option)
+            data.lista.forEach(componente => {
+                const option = document.createElement('option');
+                option.text = componente;
+                option.value = componente;
+                selectElement.appendChild(option)
+            });
+        }
+        else {
+            const selectElement = document.getElementById('causa');
+            selectElement.innerHTML = ''
+        }
+    }).catch(error => { console.error('Ocorreu um erro:', error); });
+}
+
+function BuscaComponentes(text) {
+    const encodedText = encodeURIComponent(text);
+
+    const url = `/Ocorrencias/SearchEquips?text=${encodedText}`;
+
+    fetch(url, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json'
+        }
+    }).then(response => response.json()
+    ).then(data => {
+        if (data.lista && data.lista.length > 0) {
+            const selectElement = document.getElementById('componente');
+            selectElement.innerHTML = ''
+            const option = document.createElement('option');
+            option.text = "Equipamento";
+            option.value = "Equipamento";
+            selectElement.appendChild(option)
+            data.lista.forEach(componente => {
+                const option = document.createElement('option');
+                option.text = componente;
+                option.value = componente;
+                selectElement.appendChild(option)
+            });
+        }
+    }).catch(error => { console.error('Ocorreu um erro:', error); });
+}
+
 function EditEquip(item) {
     if (confirm("Deseja Realmente Editar Este Equipamento ?"))
         location.href = "/Equip/EditEquip?id=" + item
@@ -95,6 +158,16 @@ function EditEquip(item) {
 function DeleteEquip(item) {
     if (confirm("Deseja Realmente Excluir Este Equipamento ?"))
         location.href = "/Equip/DeleteEquip?id=" + item
+}
+
+function EditEmployee(item) {
+    if (confirm("Deseja Realmente Editar Este Funcionário ?"))
+        location.href = "/Employee/EditEmployee?id=" + item
+}
+
+function DeleteEmployee(item) {
+    if (confirm("Deseja Realmente Excluir Este Funcionário ?"))
+        location.href = "/Employee/DeleteEmployee?id=" + item
 }
 
 function DeleteFail(item) {
@@ -109,3 +182,4 @@ function Habilitar(item) {
 function Desabilitar(item) {
     item.style.display = "none"
 }
+

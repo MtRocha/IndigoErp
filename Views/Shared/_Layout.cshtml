@@ -36,6 +36,11 @@
                             <img src="~/images/ocorrencias.png" height="35" />  <span class="navbar-text">Ocorrências</span>
                             </a>
                         </li>
+                    <li class="nav-item">
+                        <a class="navbar-brand" asp-action="Index" asp-controller="Employee">
+                            <img src="~/images/employees.png" height="35" />  <span class="navbar-text">Funcionários</span>
+                        </a>
+                    </li>
                     </ul>
                     <div class="nav-item dropdown">
                     <a class="nav-link dropdown-toggle" role="button" data-bs-toggle="dropdown" aria-expanded="false">
@@ -43,7 +48,6 @@
                         </a>
                     <ul class="dropdown-menu">
                         <li><a class="dropdown-item" asp-action="FailIndex" asp-controller="Maintence">Falhas</a></li>
-                        <li><a class="dropdown-item" asp-action="EmployeeIndex" asp-controller="Maintence">Funcionários</a></li>
                         <li><hr class="dropdown-divider"></li>
                         <li><a class="dropdown-item" asp-action="LogOff" asp-controller="User">Sair</a></li>
                     </ul>
@@ -54,6 +58,7 @@
                             <li><a class="dropdown-item" asp-action="Index" asp-controller="Indicadores">Action</a></li>
                             <li><a class="dropdown-item" asp-action="Index" asp-controller="Equip">Equipamentos</a></li>
                             <li><a class="dropdown-item" asp-action="Index" asp-controller="Ocorrencias">Ocorrência</a></li>
+                            <li><a class="dropdown-item" asp-action="Index" asp-controller="EMployee">Ocorrência</a></li>
                         </ul>
                     </div>
                 </div>

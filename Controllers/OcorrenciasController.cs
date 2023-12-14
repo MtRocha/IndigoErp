@@ -91,7 +91,6 @@ namespace IndigoErp.Controllers
         {
             ReportModel report = new ReportModel();
             ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
-            ViewBag.Equips = equipService.ListEquipSelect(HttpContext.Session.GetString("cnpj"));
             return View(report);
         }
 
@@ -102,7 +101,6 @@ namespace IndigoErp.Controllers
                 if (!ValidaReport(report, Operacao, TesteIncluso))
                 {
                     ModelState.AddModelError("Origem", "Selecione uma Origem");
-                    ViewBag.Equips = equipService.ListEquipSelect(HttpContext.Session.GetString("cnpj"));
                     report.End = null;
                     ViewBag.Titulo = "Operadores";
                     ViewBag.Operacao = Operacao;
@@ -155,5 +153,50 @@ namespace IndigoErp.Controllers
                 return View("Error", errorView);
             }
         }
+
+        [HttpGet]
+        public IActionResult SearchFails(string text)
+
+        {
+            try
+            {
+                FailDAO dao = new FailDAO();
+
+                List<string> lista = text != "Falha Externa da Operação" ? dao.ConsultaCausa(text) : dao.ConsultaCausa("Falha Sem Equipamento");
+                List<string> causas = new List<string>();
+
+                foreach (var componente in lista)
+                {
+                    causas.Add(componente.ToString());
+                }
+
+                return Json(new { lista = causas });
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+
+        }
+
+        [HttpGet]
+        public IActionResult SearchEquips(string text)
+
+        {
+            try
+            {
+                List<string> lista = equipService.ListEquipBySection(text);
+
+                return Json(new { lista = lista });
+            }
+            catch (Exception erro)
+            {
+                return View("Error", new ErrorViewModel());
+            }
+
+
+        }
+
     }
 }

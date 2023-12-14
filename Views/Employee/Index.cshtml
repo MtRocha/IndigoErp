@@ -1,0 +1,105 @@
+﻿@model List<EmployeeModel>
+<section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
+
+    <aside class="col-md-2">
+        <nav id="sidebarMenu" class="sidebar bg-white">
+            <div class="position-sticky">
+                <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple active">
+                    <i class=""></i><span class="list-text">Lista de Funcionários</span>
+                </a>
+                <a asp-action="CreateEmployee" class="list-group-item list-group-item-action py-2 ripple ">
+                    <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Funcionário</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Gerenciar Documentos</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Funcionarios</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+    <main class="col-8 d-flex flex-column justify-content-center align-items-center">
+
+        @if (Model != null)
+        {
+            <h1 class="display-6">Funcionários Cadastrados</h1>
+
+            <table class="table table-hover table-responsive">
+                <thead>
+                    <tr>
+                        <td>Nome</td>
+                        <td>Função</td>
+                        <td>Login</td>
+                        <td>Setor</td>
+                        <td>Ações</td>
+                       
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>@item.Nome</td>
+                            <td>@item.Funcao</td>
+                            <td>@item.Login</td>
+                            <td>@item.Setor</td>
+                            <td class="btn-group dropright">
+                                <div class="dropdown">
+                                    <a class="nav-link " role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <img src="~/images/setting.png">
+                                    </a>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="dropdown-item" href="javascript:EditEmployee(@item.Id)">Editar</a></li>
+                                        <li><a class="dropdown-item" href="javascript:DeleteEmployee(@item.Id)">Excluir</a></li>
+                                    </ul>
+                                </div>
+                            </td>
+
+                        </tr>
+                    }
+                </tbody>
+            </table>
+
+        }
+        else
+        {
+            <h1 class="display-4" style="margin-top:5%;">Sem Funcionários Cadastrados</h1>
+        }
+
+    </main>
+</section>
+
+<style>
+
+    section label {
+        font-size: 25px;
+        margin-top: 10%;
+    }
+
+    .col-form-label {
+        font-weight: bold
+    }
+
+    .col-6 {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding: 20px;
+    }
+
+    .col-md-3 {
+        height: 100%;
+        display: flex;
+        opacity: 0;
+        animation: fade-in;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+

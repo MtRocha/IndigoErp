@@ -97,59 +97,7 @@ namespace IndigoErp.Controllers
 
         #endregion Fail
 
-   /*     #region Employee
-
-        public IActionResult EmployeeIndex()
-        {
-            return View();
-        }
-
-        public IActionResult CreateEmployee()
-        {
-            return View();
-        }
-
-        public IActionResult EditEmployee()
-        {
-            return View();
-        }
-
-        public IActionResult DeleteEmployee(int id)
-        {
-            return RedirectToAction("Index");
-        }
-
-        public IActionResult InsertEmployee(EquipModel model, string operation)
-        {
-            try
-            {
-                if (!ValidateEquip(model, operation))
-                {
-                    ViewBag.Mode = operation;
-                    return View("CreateEquip", model);
-                }
-                else
-                {
-                    ViewBag.Ok = "ok";
-                    model.Cnpj = HttpContext.Session.GetString("cnpj");
-                    if (operation != "U")
-                    {
-                        equipService.Insert(model);
-                    }
-                    else
-                    {
-                        equipService.Edit(model);
-                    }
-                    return RedirectToAction("Index");
-                }
-            }
-            catch (Exception ex)
-            {
-                return View("Error", new ErrorViewModel());
-            }
-        }
-
-        #endregion */
+ 
 
         public IActionResult AccountIndex()
         {

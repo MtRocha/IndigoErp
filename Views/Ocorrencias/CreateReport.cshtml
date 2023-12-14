@@ -66,13 +66,16 @@
                     <label class="col-form-label" for="Origem">Origem</label>
 
                     <select asp-for="Origin" asp-items="ViewBag.Origens" id="origem" class="form-control">
+                        <option value="Origem Da Falha">Origem Da Falha</option>
+                        <option value="Falha Interna de Equipamento">Falha Interna de Equipamento</option>
+                        <option value="Falha Externa da Operação">Falha Externa da Operação</option>
                     </select>
 
                     <span asp-validation-for="Origin" class="text text-danger"></span>
 
                 </div>
 
-                <div class="col-12 d-flex flex-column justify-content-around" id="componenteDiv" >
+                <div class="col-12 flex-column justify-content-around" id="componenteDiv" style="display:none" >
 
                         <label class="col-form-label" for="componente">Equipamento</label>
 
@@ -223,6 +226,46 @@
         Desabilitar(erro)
     })
 
+    const section = document.getElementById('section')
+    section.addEventListener('change', function () { 
+    
+        BuscaComponentes(this.selectedOptions[0].text)
+
+    })
+    const componenteDiv = document.getElementById('componenteDiv')
+    const origem = document.getElementById('origem')
+    origem.addEventListener('change', function () {
+        const optionComponente = origem.selectedOptions[0]
+        const option = origem.selectedOptions[0]
+        const text = option.textContent
+
+        if (text != "Origem da Falha")
+        {    
+            BuscaCausa(text)
+        }
+        if (text == "Falha Interna de Equipamento") {
+            Habilitar(componenteDiv)
+        }
+        else {
+            Desabilitar(componenteDiv)
+        }
+    })
+    const componente = document.getElementById('componente')
+    componente.addEventListener('change', function () {
+
+        const option = componente.selectedOptions[0]
+        const descricao = document.getElementById('descricaoText')
+        const text = option.textContent
+        BuscaCausa(text)
+
+        if (text == "OUTROS") {
+            descricao.setAttribute('required', 'required')
+        }
+        else {
+            descricao.removeAttribute('required')
+        }
+
+    })
 </script>
 
 <style>

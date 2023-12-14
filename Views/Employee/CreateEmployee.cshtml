@@ -1,0 +1,154 @@
+﻿@model EmployeeModel
+<section class="col-12 h-75 d-flex justify-content-evenly align-items-center ">
+
+    <aside class="col-md-2">
+        <nav id="sidebarMenu" class="sidebar bg-white">
+            <div class="position-sticky">
+                <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class=""></i><span class="list-text">Lista de Funcionários</span>
+                </a>
+                <a asp-action="CreateEmployee" class="list-group-item list-group-item-action py-2 ripple active">
+                    <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Novo Funcionário</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Gerenciar Documentos</span>
+                </a>
+                <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Comparar Funcionarios</span>
+                </a>
+            </div>
+        </nav>
+    </aside>
+    <main class="col-8 d-flex flex-column justify-content-center align-items-center">
+
+        @if (ViewBag.Operacao != "U")
+        {
+            <h1 style=" font-size:2rem; padding-top:18px;">Cadastro de Funcionário</h1>
+        }
+        else
+        {
+            <h1 style="font-size:2rem; padding-top:18px;">Edição de Funcionário</h1>
+        }
+
+        <form asp-action="InserirFuncionario" asp-controller="Employee" class="col-md-9 h-100 flex-column justify-content-center align-items-center" method="post">
+
+            <input type="hidden" name="Operacao" value="@ViewBag.Operacao" />
+            <input type="hidden" asp-for="Id" />
+
+            <div class="d-flex h-100 flex-column justify-content-center align-items-center font-weight-bold">
+
+                <span asp-validation-for="Id" class="text text-danger"></span>
+
+                <div class="w-100  flex-column justify-content-around">
+
+                    <div class="row d-flex justify-content-start m-1 ">
+
+                        <label class="col-form-label" for="nome"><span>Nome</span></label>
+
+                    </div>
+
+                    <input type="text" asp-for="Nome" id="nome" class="form-control" autocomplete="off" required>
+
+                    <span asp-validation-for="Nome" class="text text-danger"></span>
+
+                </div>
+
+                <div class="w-100  flex-column justify-content-around">
+
+                    <div class="row d-flex justify-content-start m-1 ">
+
+                        <label class="col-form-label" for="login"><span>Login</span></label>
+
+                    </div>
+
+                    <input type="text" asp-for="Login" id="login" class="form-control" autocomplete="off" required>
+
+                    <span asp-validation-for="Login" class="text text-danger"></span>
+
+                </div>
+
+                <div class="w-100  flex-column justify-content-around">
+
+                    <div class="row d-flex justify-content-start m-1 ">
+
+                        <label class="col-form-label" for="senha"><span>Senha</span></label>
+
+                    </div>
+
+                    <input type="text" asp-for="Senha" id="senha" class="form-control" autocomplete="off" required>
+
+                    <span asp-validation-for="Senha" class="text text-danger"></span>
+
+                </div>
+
+                <div class="w-100  flex-column justify-content-around">
+
+                    <div class="row d-flex justify-content-start m-1 ">
+                        <label class="col-form-label" for="funcao"><span>Função</span></label>
+                    </div>
+
+                    <select type="text" asp-for="Funcao" asp-items="ViewBag.Funcao" id="funcao" class="form-control">
+
+                        <option value="Gestor">Gestor</option>
+                        <option value="Funcionário">Funcionário</option>
+
+                    </select>
+                    <span asp-validation-for="Funcao" class="text text-danger"></span>
+                </div>
+
+
+                <div class="w-100  flex-column justify-content-around">
+
+                    <div class="row d-flex justify-content-start m-1 ">
+                        <label class="col-form-label" for="turno"><span>Setor</span></label>
+                    </div>
+
+                    <select type="text" asp-for="Setor" asp-items="ViewBag.Sections" id="turno" class="form-control"></select>
+                    <span asp-validation-for="Setor" class="text text-danger"></span>
+                </div>
+
+            </div>
+
+            <br />
+
+            <input class="btn btn-primary font-weight-bolder" style="margin-bottom:5vh;" type="submit" value="Salvar Dados" />
+
+        </form>
+
+
+    </main>
+</section>
+
+<style>
+
+    section label {
+        font-size: 25px;
+        margin-top: 10%;
+    }
+
+    .col-form-label {
+        font-weight: bold
+    }
+
+    .col-6 {
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        align-items: start;
+        padding: 20px;
+    }
+
+    .col-md-3 {
+        height: 100%;
+        display: flex;
+        opacity: 0;
+        animation: fade-in;
+        animation-duration: 0.8s;
+        animation-fill-mode: forwards;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+    }
+
+</style>
+

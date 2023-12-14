@@ -146,7 +146,7 @@ namespace IndigoErp.DAO
         {
             List<string> list = new List<string>();
 
-            string consulta = $"SELECT DISTINCT CAUSA_DA_FALHA FROM TIPO_DE_FALHA WHERE COMPONENTE = '{texto}'";
+            string consulta = $"SELECT DISTINCT CAUSA_DA_FALHA FROM TIPO_DE_FALHA WHERE NUMERO_EQUIPAMENTO = '{texto}'";
 
             DataTable table = GeneralDAO.SelectSql(consulta, null);
 
