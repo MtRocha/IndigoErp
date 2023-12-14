@@ -53,18 +53,22 @@ namespace IndigoErp.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             List<EquipModel> list = equipService.ListEquip("*", "NOME", "ASC");
             return View(list);
         }
 
         public IActionResult CreateEquip()
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
             return View();
         }
 
         public IActionResult EditEquip(int id)
         {
+
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             EquipModel model = equipService.GetEquip(id);
 
             ViewBag.Mode = "U";
@@ -76,6 +80,7 @@ namespace IndigoErp.Controllers
 
         public IActionResult DeleteEquip(int id)
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             equipService.Delete(id);
 
             return RedirectToAction("Index");

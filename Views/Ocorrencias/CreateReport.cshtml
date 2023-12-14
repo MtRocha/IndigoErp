@@ -12,7 +12,7 @@
                     <a asp-action="CreateReport" class="list-group-item list-group-item-action py-2 ripple active">
                         <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Nova Ocorrência</span>
                     </a>
-                    <a href="#" class="list-group-item list-group-item-action py-2 ripple">
+                    <a asp-action="ReportHistory" class="list-group-item list-group-item-action py-2 ripple">
                         <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Histórico de Ocorrências</span>
                     </a>
                 </div>
@@ -32,7 +32,7 @@
 
     <main class="col-md-10 d-flex flex-column justify-content-end align-items-center">
 
-        @if (ViewBag.Mode != "U")
+        @if (ViewBag.operacao != "U")
         {
             <h1 style=" font-size:2rem; padding-top:50px;">Cadastro de Ocorrência</h1>
         }
@@ -42,147 +42,148 @@
         }
 
 
+   @if (ViewBag.Operacao != "U")
+        {
+            <form class="col-6 d-flex flex-column justify-content-center align-items-center" id="form" asp-action="InserirReport" asp-controller="Ocorrencias">
 
-
-        <form class="col-6 d-flex flex-column justify-content-center align-items-center" id="form" asp-action="InserirReport" asp-controller="Ocorrencias">
-           
-            <input id="retorno" hidden value="@ViewBag.Retorno" />
+                <input id="retorno" hidden value="@ViewBag.Retorno" />
                 <input type="hidden" name="Operacao" value="@ViewBag.Operacao" />
 
-            <div class="col-12 d-flex flex-column justify-content-start align-items-start font-weight-bold">
 
-                <div class="col-12 d-flex flex-column justify-content-around align-items-start">
+                <div class="col-12 d-flex flex-column justify-content-start align-items-start font-weight-bold">
 
-                    <label class="col-form-label" for="section"><span>Setor</span></label>
-                    <select asp-for="Section" asp-items="ViewBag.Sections" class="form-control" id="section">
-                    </select>
+                    <div class="col-12 d-flex flex-column justify-content-around align-items-start">
 
-                    <span asp-validation-for="Section" class="text text-danger"></span>
+                        <label class="col-form-label" for="section"><span>Setor</span></label>
+                        <select asp-for="Section" asp-items="ViewBag.Sections" class="form-control" id="section">
+                        </select>
 
-                </div>
+                        <span asp-validation-for="Section" class="text text-danger"></span>
 
-                <div class="col-12 d-flex flex-column justify-content-around" id="origemDiv">
+                    </div>
 
-                    <label class="col-form-label" for="Origem">Origem</label>
+                    <div class="col-12 d-flex flex-column justify-content-around" id="origemDiv">
 
-                    <select asp-for="Origin" asp-items="ViewBag.Origens" id="origem" class="form-control">
-                        <option value="Origem Da Falha">Origem Da Falha</option>
-                        <option value="Falha Interna de Equipamento">Falha Interna de Equipamento</option>
-                        <option value="Falha Externa da Operação">Falha Externa da Operação</option>
-                    </select>
+                        <label class="col-form-label" for="Origem">Origem</label>
 
-                    <span asp-validation-for="Origin" class="text text-danger"></span>
+                        <select asp-for="Origin" asp-items="ViewBag.Origens" id="origem" class="form-control">
+                            <option value="Origem Da Falha">Origem Da Falha</option>
+                            <option value="Falha Interna de Equipamento">Falha Interna de Equipamento</option>
+                            <option value="Falha Externa da Operação">Falha Externa da Operação</option>
+                        </select>
 
-                </div>
+                        <span asp-validation-for="Origin" class="text text-danger"></span>
 
-                <div class="col-12 flex-column justify-content-around" id="componenteDiv" style="display:none" >
+                    </div>
+
+                    <div class="col-12 flex-column justify-content-around" id="componenteDiv" style="display:none">
 
                         <label class="col-form-label" for="componente">Equipamento</label>
 
-                    <select asp-for="FailType" asp-items="ViewBag.Equips" id="componente" class="form-control">
-                    </select>
+                        <select asp-for="FailType" asp-items="ViewBag.Equips" id="componente" class="form-control">
+                        </select>
 
-                    <span asp-validation-for="FailType" class="text text-danger"></span>
+                        <span asp-validation-for="FailType" class="text text-danger"></span>
 
-                </div>
+                    </div>
 
-                <div id="causaDiv" class="col-12 d-flex flex-column justify-content-around">
+                    <div id="causaDiv" class="col-12 d-flex flex-column justify-content-around">
 
                         <label class="col-form-label" for="causa">Causa</label>
 
-                    <select asp-for="FailCause" asp-items="ViewBag.Causas" id="causa" class="form-control" required> </select>
+                        <select asp-for="FailCause" asp-items="ViewBag.Causas" id="causa" class="form-control" required> </select>
 
-                    <span asp-validation-for="FailCause" class="text text-danger"></span>
-
-                </div>
-
-                <div class="col-12 d-flex flex-row justify-content-between align-items-center">
-
-                    <div class="col-4 d-flex flex-column justify-content-around align-items-start" id="dataDiv" >
-
-                        <label class="col-form-label" for="data">Data da Ocorrência</label>
-
-
-                        <input type="date" asp-for="InitialDate" class="form-control form-control-sm" id="data" value="@null" />
-
-                        <span asp-validation-for="InitialDate" class="text text-danger"></span>
+                        <span asp-validation-for="FailCause" class="text text-danger"></span>
 
                     </div>
 
+                    <div class="col-12 d-flex flex-row justify-content-between align-items-center">
 
-                    <div class="col-3 d-flex flex-column justify-content-around align-items-start" id="inicioDiv">
-                          
-                        <label class="col-form-label" for="inicio">Inicio</label>
+                        <div class="col-4 d-flex flex-column justify-content-around align-items-start" id="dataDiv">
 
-                    <input asp-for="Begin" class="form-control form-control-sm" id="inicio" value="@null" type="time" />
+                            <label class="col-form-label" for="data">Data da Ocorrência</label>
 
-                        <span asp-validation-for="Begin" class="text text-danger"></span>
 
-                        <div id="Inicio" hidden class="text text-danger">Digite um Horário Válido!</div>
+                            <input type="date" asp-for="InitialDate" class="form-control form-control-sm" id="data" value="@null" />
+
+                            <span asp-validation-for="InitialDate" class="text text-danger"></span>
+
+                        </div>
+
+
+                        <div class="col-3 d-flex flex-column justify-content-around align-items-start" id="inicioDiv">
+
+                            <label class="col-form-label" for="inicio">Inicio</label>
+
+                            <input asp-for="Begin" class="form-control form-control-sm" id="inicio" value="@null" type="time" />
+
+                            <span asp-validation-for="Begin" class="text text-danger"></span>
+
+                            <div id="Inicio" hidden class="text text-danger">Digite um Horário Válido!</div>
+
+                        </div>
+
+                        <div class="col-4 d-flex flex-column align-items-start" id="finalizarDiv">
+
+                            <label class="col-form-label" for="finalizarOcorrencia">Finalizar a Ocorrência</label>
+
+                            <select name="Finalizacao" class="form-control  form-control-sm" id="finalizar">
+                                <option value="selecione">Selecione</option>
+                                <option value="nao">Não</option>
+                                <option value="sim">Sim</option>
+                            </select>
+
+                            <span id="erroFinal" class="text text-danger" style="display:none;margin-left:25%;">Escolha uma Opção</span>
+
+                        </div>
+
 
                     </div>
 
-                <div class="col-4 d-flex flex-column align-items-start" id="finalizarDiv">
+                    <div class="col-12 flex-row justify-content-between align-items-center" style="display:none;" id="finalDiv">
 
-                        <label class="col-form-label" for="finalizarOcorrencia">Finalizar a Ocorrência</label>
+                        <div class="col-4 d-flex flex-column justify-content-around align-items-start">
 
-                        <select name="Finalizacao" class="form-control  form-control-sm" id="finalizar">
-                            <option value="selecione">Selecione</option>
-                            <option value="nao">Não</option>
-                            <option value="sim">Sim</option>
-                        </select>
+                            <label class="col-form-label" for="dataFinal">Data Final</label>
 
-                        <span id="erroFinal" class="text text-danger" style="display:none;margin-left:25%;">Escolha uma Opção</span>
+                            <input type="date" asp-for="FinalDate" class="form-control form-control-sm" id="data" value="@null" />
+
+                            <span asp-validation-for="FinalDate" class="text text-danger"></span>
+
+                        </div>
+
+                        <div class="col-3 d-flex flex-column justify-content-around align-items-start">
+
+                            <label class="col-form-label" for="final">Final</label>
+
+                            <input asp-for="End" class="form-control form-control-sm" id="final" type="time" />
+
+                            <span asp-validation-for="End" class="text text-danger"></span>
+
+                            <div id="Final" hidden class="text text-danger">Digite um Horário Válido!</div>
+
+                        </div>
+
+                        <div class="col-4 d-flex flex-column justify-content-around align-items-start" id="numTesteDiv">
+                            <label class="col-form-label" for="numeroTeste">Tipo de Manutenção</label>
+                            <select asp-for="MaintenceTYpe" class="form-control form-control-sm" id="numeroTeste">
+                                <option value="Sem Manutenção Relacionada">Sem Manutenção Relacionada</option>
+                                <option value="Corretiva">Corretiva</option>
+                                <option value="Corretiva Programada">Corretiva Programada</option>
+                                <option value="Corretiva Não Programada">Corretiva Não Programada</option>
+                                <option value="Preventiva">Preventiva</option>
+                                <option value="Preditiva">Preditiva</option>
+                                <option value="Prescritiva">Prescritiva</option>
+                            </select>
+                            <span asp-validation-for="MaintenceTYpe" class="text text-danger"></span>
+                        </div>
+
+
+
 
                     </div>
 
-
-                </div>
-
-                <div class="col-12 flex-row justify-content-between align-items-center" style="display:none;" id="finalDiv">
-
-                    <div class="col-4 d-flex flex-column justify-content-around align-items-start">
-
-                        <label class="col-form-label" for="dataFinal">Data Final</label>
-
-                        <input type="date" asp-for="FinalDate" class="form-control form-control-sm" id="data" value="@null" />
-
-                        <span asp-validation-for="FinalDate" class="text text-danger"></span>
-
-                    </div>
-
-                    <div class="col-3 d-flex flex-column justify-content-around align-items-start">
-
-                        <label class="col-form-label" for="final">Final</label>
-
-                        <input asp-for="End" class="form-control form-control-sm" id="final" type="time" />
-
-                        <span asp-validation-for="End" class="text text-danger"></span>
-
-                        <div id="Final" hidden class="text text-danger">Digite um Horário Válido!</div>
-
-                    </div>
-
-                    <div class="col-4 d-flex flex-column justify-content-around align-items-start" id="numTesteDiv">
-                        <label class="col-form-label" for="numeroTeste">Tipo de Manutenção</label>
-                        <select asp-for="MaintenceTYpe" class="form-control form-control-sm" id="numeroTeste">
-                            <option value="Sem Manutenção Relacionada">Sem Manutenção Relacionada</option>
-                            <option value="Corretiva">Corretiva</option>
-                            <option value="Corretiva Programada">Corretiva Programada</option>
-                            <option value="Corretiva Não Programada">Corretiva Não Programada</option>
-                            <option value="Preventiva">Preventiva</option>
-                            <option value="Preditiva">Preditiva</option>
-                            <option value="Prescritiva">Prescritiva</option>
-                        </select>
-                        <span asp-validation-for="MaintenceTYpe" class="text text-danger"></span>
-                    </div>
-
-                 
-
-
-                </div>
-
-                <div class="w-100 flex-row justify-content-between align-items-center" id="descricaoDiv">
+                    <div class="w-100 flex-row justify-content-between align-items-center" id="descricaoDiv">
 
                         <label class="col-form-label" for="descricao">Descrição</label>
 
@@ -192,15 +193,180 @@
 
                         <div id="erroDesc" class="text-danger"></div>
 
+                    </div>
+
                 </div>
 
-            </div>
+                <br>
 
-            <br>
+                <button type="submit" class="btn btn-primary">Adicionar Ocorrência</button>
 
-            <button type="submit" class="btn btn-primary">Adicionar Ocorrência</button>
-           
-        </form>
+            </form>
+
+        }
+        else
+        {
+
+
+            <form class="col-6 d-flex flex-column justify-content-center align-items-center" id="form" asp-action="InserirReport" asp-controller="Ocorrencias">
+                <input type="hidden" asp-for="Id" />
+                <input id="retorno" hidden value="@ViewBag.Retorno" />
+                <input type="hidden" name="Operacao" value="@ViewBag.Operacao" />
+
+                <div class="col-12 d-flex flex-column justify-content-start align-items-start font-weight-bold">
+
+                    <div class="col-12 d-flex flex-column justify-content-around align-items-start">
+
+                        <label class="col-form-label" for="section"><span>Setor</span></label>
+                        <input type="text" asp-for="Section" readonly asp-items="ViewBag.Sections" class="form-control" id="section">
+
+
+                        <span asp-validation-for="Section" class="text text-danger"></span>
+
+                    </div>
+
+                    <div class="col-12 d-flex flex-column justify-content-around" id="origemDiv">
+
+                        <label class="col-form-label" for="Origem">Origem</label>
+
+                        <input type="text" asp-for="Origin" readonly asp-items="ViewBag.Origens" id="origem" class="form-control">
+
+
+                        <span asp-validation-for="Origin" class="text text-danger"></span>
+
+                    </div>
+
+                    @if (Model.Origin == "Falha Interna de Equipamento")
+                    {
+                        <div class="col-12 d-flex flex-column justify-content-around">
+
+                            <label class="col-form-label" for="componente">Equipamento</label>
+
+                            <input type="text" asp-for="FailType" readonly  asp-items="ViewBag.Equips" id="componente" class="form-control">
+
+                            <span asp-validation-for="FailType" class="text text-danger"></span>
+
+                        </div>
+                    }
+                    else
+                    {
+                        <input type="hidden" asp-for="FailType" value="Ocorrência Sem Equipamento Relacionado" readonly asp-items="ViewBag.Equips" id="componente" class="form-control">
+                    }
+                    <div id="causaDiv" class="col-12 d-flex flex-column justify-content-around">
+
+                        <label class="col-form-label" for="causa">Causa</label>
+
+                        <input type="text" asp-for="FailCause" readonly asp-for="FailCause" id="causa" class="form-control" required>
+
+                        <span asp-validation-for="FailCause" class="text text-danger"></span>
+
+                    </div>
+
+                    <div class="col-12 d-flex flex-row justify-content-between align-items-center">
+
+                        <div class="col-4 d-flex flex-column justify-content-around align-items-start" id="dataDiv">
+
+                            <label class="col-form-label" for="data">Data da Ocorrência</label>
+
+
+                            <input type="text" readonly asp-for="InitialDate" class="form-control form-control-sm" id="data" value="@Convert.ToDateTime(@Model.InitialDate).ToShortDateString()" />
+
+                            <span asp-validation-for="InitialDate" class="text text-danger"></span>
+
+                        </div>
+
+
+                        <div class="col-3 d-flex flex-column justify-content-around align-items-start" id="inicioDiv">
+
+                            <label class="col-form-label" for="inicio">Inicio</label>
+
+                            <input asp-for="Begin"  readonly class="form-control form-control-sm" id="inicio" value="@Convert.ToDateTime(@Model.Begin).ToShortTimeString()" type="text" />
+
+                            <span asp-validation-for="Begin" class="text text-danger"></span>
+
+                            <div id="Inicio" hidden class="text text-danger">Digite um Horário Válido!</div>
+
+                        </div>
+                        <div class="col-4 d-flex flex-column align-items-start" id="finalizarDiv">
+
+                            <label class="col-form-label" for="finalizarOcorrencia">Finalizar a Ocorrência</label>
+
+                            <select readonly name="Finalizacao" class="form-control  form-control-sm" id="finalizar">
+                                <option value="sim">Sim</option>
+                            </select>
+
+                            <span id="erroFinal" class="text text-danger" style="display:none;margin-left:25%;">Escolha uma Opção</span>
+
+                        </div>
+
+
+                    </div>
+
+                    <div class="col-12 d-flex flex-row justify-content-between align-items-center" id="finalDiv">
+
+                        <div class="col-4 d-flex flex-column justify-content-around align-items-start">
+
+                            <label class="col-form-label" for="dataFinal">Data Final</label>
+
+                            <input type="date" asp-for="FinalDate" class="form-control form-control-sm" id="data" value="@null" />
+
+                            <span asp-validation-for="FinalDate" class="text text-danger"></span>
+
+                        </div>
+
+                        <div class="col-3 d-flex flex-column justify-content-around align-items-start">
+
+                            <label class="col-form-label" for="final">Final</label>
+
+                            <input asp-for="End" class="form-control form-control-sm" id="final" type="time" />
+
+                            <span asp-validation-for="End" class="text text-danger"></span>
+
+                            <div id="Final" hidden class="text text-danger">Digite um Horário Válido!</div>
+
+                        </div>
+
+                        <div class="col-4 d-flex flex-column justify-content-around align-items-start" id="numTesteDiv">
+                            <label class="col-form-label" for="numeroTeste">Tipo de Manutenção</label>
+                            <select asp-for="MaintenceTYpe" class="form-control form-control-sm" id="numeroTeste">
+                                <option value="Sem Manutenção Relacionada">Sem Manutenção Relacionada</option>
+                                <option value="Corretiva">Corretiva</option>
+                                <option value="Corretiva Programada">Corretiva Programada</option>
+                                <option value="Corretiva Não Programada">Corretiva Não Programada</option>
+                                <option value="Preventiva">Preventiva</option>
+                                <option value="Preditiva">Preditiva</option>
+                                <option value="Prescritiva">Prescritiva</option>
+                            </select>
+                            <span asp-validation-for="MaintenceTYpe" class="text text-danger"></span>
+                        </div>
+
+
+
+
+                    </div>
+
+                    <div class="w-100 flex-row justify-content-between align-items-center" id="descricaoDiv">
+
+                        <label class="col-form-label" for="descricao">Descrição</label>
+
+                        <textarea asp-for="Description " maxlength="144" id="descricaoText" class="form-control h-100 w-100"></textarea>
+
+                        <span asp-validation-for="Description" class="text text-danger"></span>
+
+                        <div id="erroDesc" class="text-danger"></div>
+
+                    </div>
+
+                </div>
+
+                <br>
+
+                <button type="submit" class="btn btn-primary">Adicionar Ocorrência</button>
+
+            </form>
+
+      }
+            
 
     </main>
 

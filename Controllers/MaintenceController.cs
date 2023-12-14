@@ -40,13 +40,15 @@ namespace IndigoErp.Controllers
 
         public IActionResult FailIndex()
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             string cnpj = HttpContext.Session.GetString("cnpj");
             List <FailModel> list = failService.ListFails(cnpj);
             return View(list);
         }
 
         public IActionResult CreateFail()
-        {   
+        {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             FailModel model = new FailModel();
             model.Cnpj = HttpContext.Session.GetString("cnpj");
             ViewBag.Equips = equipService.ListEquipSelect(HttpContext.Session.GetString("cnpj"));
@@ -55,12 +57,14 @@ namespace IndigoErp.Controllers
 
         public IActionResult EditFail(int id)
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             FailModel model = new FailModel();
             return View();
         }
 
         public IActionResult DeleteFail(int id)
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             failService.Delete(id);
             return RedirectToAction("FailIndex");
         }
@@ -101,6 +105,7 @@ namespace IndigoErp.Controllers
 
         public IActionResult AccountIndex()
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             return View();
         }
     }

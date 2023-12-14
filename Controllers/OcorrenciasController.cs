@@ -24,7 +24,7 @@ namespace IndigoErp.Controllers
                 ModelState.AddModelError("Celula", "Selecione uma Célula");
                 return false;
             }
-            if (report.Origin != "Falha Interna de Equipamento" && report.Origin != "Falha Externa da Operação")
+            if (report.Origin != "Falha Interna de Equipamento" && report.Origin != "Falha Externa da Operação" && report.Origin != "FALHA INTERNA DE EQUIPAMNETO" && report.Origin != "FALHA EXTERNA DA OPERAÇÃO")
             {
                 ModelState.AddModelError("Origem", "Selecione uma Origem");
                 return false;
@@ -84,18 +84,36 @@ namespace IndigoErp.Controllers
 
         public IActionResult Index()
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             ReportDAO dao = new ReportDAO();
             List<ReportModel> list = dao.ConsultaPendente(HttpContext.Session.GetString("cnpj"));
-            return View();
+            return View(list);
+        }
+
+        public IActionResult ReportHistory()
+        {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
+            ReportDAO dao = new ReportDAO();
+            List<ReportModel> list = dao.Consulta(HttpContext.Session.GetString("cnpj"));
+            return View("ReportHistory",list);
         }
 
         public IActionResult CreateReport()
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             ReportModel report = new ReportModel();
             ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
             return View(report);
         }
 
+        public IActionResult EndReport(int id)
+        {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
+            ReportDAO dao = new ReportDAO();
+            ReportModel report = dao.SearchReport(id);
+            ViewBag.Operacao = "U";
+            return View("CreateReport", report);
+        }
         public IActionResult InserirReport(ReportModel report, string Operacao, int id, string TesteIncluso, string Finalizacao)
         {
             try
@@ -115,7 +133,7 @@ namespace IndigoErp.Controllers
                     {
                         report.MaintenceTYpe = "Ocorrência Sem Tipo de Manutenção ";
                     }
-                    if (ViewBag.Operacao == null)
+                    if (Operacao == null)
                     {
                         ReportDAO dao = new ReportDAO();
 
@@ -138,7 +156,8 @@ namespace IndigoErp.Controllers
                     else
                     {
                         ReportDAO dao = new ReportDAO();
-
+                        report.EmployeeId = HttpContext.Session.GetString("nome"); ;
+                        report.Cnpj = HttpContext.Session.GetString("cnpj");
                         ViewBag.Operacao = "sucesso";
                         report.Status = "FINALIZADO";
                         dao.Update(report, id);

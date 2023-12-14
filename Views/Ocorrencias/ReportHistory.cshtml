@@ -3,13 +3,13 @@
     <aside class="col-md-2">
         <nav id="sidebarMenu" class="sidebar bg-white">
             <div class="position-sticky">
-                <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple active">
+                <a asp-action="Index" class="list-group-item list-group-item-action py-2 ripple ">
                     <i class=""></i><span class="list-text">Ocorrências Pendentes</span>
                 </a>
                 <a asp-action="CreateReport" class="list-group-item list-group-item-action py-2 ripple ">
                     <i class="fas fa-chart-area fa-fw me-3"></i><span class="list-text">Nova Ocorrência</span>
                 </a>
-                <a asp-action="ReportHistory" class="list-group-item list-group-item-action py-2 ripple">
+                <a asp-action="ReportHistory" class="list-group-item list-group-item-action py-2 ripple active">
                     <i class="fas fa-lock fa-fw me-3"></i><span class="list-text">Histórico de Ocorrências</span>
                 </a>
             </div>
@@ -17,9 +17,7 @@
     </aside>
     <main class="col-9 d-flex flex-column justify-content-center align-items-center">
 
-        @if (Model.Count > 0)
-        {
-            <h1 class="display-4">Ocorrências Pendentes</h1>
+            <h1 class="display-4">Ocorrências Finalizadas</h1>
 
             <table class="table table-hover table-responsive">
                 <thead>
@@ -29,8 +27,8 @@
                         <td>Origem</td>
                         <td>Causa</td>
                         <td>Inicio</td>
-                        <td>Ações</td>
-
+                        <td>Fim</td>
+                        <td>Manutenção</td>
                     </tr>
                 </thead>
                 <tbody>
@@ -42,20 +40,19 @@
                             <td>@item.Origin</td>
                             <td>@item.FailCause</td>
                             <td>
-                                @Convert.ToDateTime(item.InitialDate).ToShortDateString()
-                                @Convert.ToDateTime(item.Begin).ToShortTimeString()</td>
-                            <td><a class="btn btn-outline-secondary" onclick="javascript:EndReport(@item.Id)">Finalizar</a></td>
+                                @Convert.ToDateTime(item.InitialDate).ToShortDateString() ás
+                                @Convert.ToDateTime(item.Begin).ToShortTimeString()
+                            </td>
 
+                        <td>
+                            @Convert.ToDateTime(item.FinalDate).ToShortDateString() ás
+                            @Convert.ToDateTime(item.End).ToShortTimeString()
+                        </td>
+                        <td>@item.MaintenceTYpe</td>
                         </tr>
                     }
                 </tbody>
             </table>
-
-        }
-        else
-        {
-            <h1 class="display-6" style="margin-top:5%;">Sem Ocorrências Pendentes</h1>
-        }
 
     </main>
 

@@ -1,6 +1,6 @@
 ﻿@model LoginModel
 @{
-    Layout = "_LayoutHome";
+    Layout = "_LayoutLogin";
 
 }
 
@@ -14,7 +14,7 @@
         <div class="container">
             <form asp-action="SendVerificationCode" asp-controller="User">
                 <div class="header">
-                    <img src="/images/logo.jpg" style="width:65%;" alt="Logo">
+                    <img src="/images/logo.png" style="width:65%;" alt="Logo">
                 </div>
                 <div class="message">
                     <h1 style="font-size:30px">@ViewBag.Title</h1>

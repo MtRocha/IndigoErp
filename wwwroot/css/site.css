@@ -38,9 +38,14 @@ html {
     }
 }
 
+nav {
+    background-color: #0085B5;
+}
+
 body {
     height: inherit;
     width: inherit;
+    background-color:aliceblue;
 }
 
 span {
@@ -72,7 +77,16 @@ li img {
 
 .nav-link {
     width: 20%;
+   
 }
+
+a, nav-link dropdown-toggle, nav-item dropdown {
+    color: white;
+}
+
+ a,   nav-link dropdown-toggle:hover, nav-item dropdown:hover {
+        color: black;
+    }
 
 .navbar-text {
     display: none;

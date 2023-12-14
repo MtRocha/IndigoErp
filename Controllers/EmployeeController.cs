@@ -42,12 +42,14 @@ namespace IndigoErp.Controllers
 
         public IActionResult Index()
         {
-             List<EmployeeModel> falhas = dao.Consulta(HttpContext.Session.GetString("cnpj"));
+            ViewBag.Name = HttpContext.Session.GetString("nome");
+            List<EmployeeModel> falhas = dao.Consulta(HttpContext.Session.GetString("cnpj"));
             return View(falhas);
         }
 
         public IActionResult CreateEmployee()
         {
+            ViewBag.Name = HttpContext.Session.GetString("nome");
             SetorService service = new SetorService();
             ViewBag.Sections = service.ListSections(HttpContext.Session.GetString("cnpj"));
             EmployeeModel model = new EmployeeModel();
@@ -105,7 +107,9 @@ namespace IndigoErp.Controllers
         public IActionResult EditEmployee(int id)
         {
             try
+
             {
+                ViewBag.Name = HttpContext.Session.GetString("nome");
                 ViewBag.Operacao = "U";
                 SetorService service = new SetorService();
                 ViewBag.Sections = service.ListSections(HttpContext.Session.GetString("cnpj"));

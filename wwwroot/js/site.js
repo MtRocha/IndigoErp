@@ -183,3 +183,7 @@ function Desabilitar(item) {
     item.style.display = "none"
 }
 
+function EndReport(item) {
+    if (confirm("Deseja Finaliar Esta Ocorrência ?"))
+        location.href = "/Ocorrencias/EndReport?id=" + item
+}
