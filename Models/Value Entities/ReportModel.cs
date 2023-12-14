@@ -2,7 +2,8 @@
 
 public class ReportModel : PadraoViewModel
 {
-    public int EmployeeId { get; set; }
+    public string EmployeeId { get; set; }
+    public string Cnpj { get; set; }
     public string Section { get; set; }
     public string Origin { get; set; }
     public string FailType { get; set; }

@@ -114,7 +114,6 @@ namespace IndigoErp.Services
             table = dao.Query(query);
             List<EquipModel> equipList = new List<EquipModel>();
             List<string> itemList = new List<string>();
-            itemList.Add("Equipamento");
 
             if (table != null)
             {

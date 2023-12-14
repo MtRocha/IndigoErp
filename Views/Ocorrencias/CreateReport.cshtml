@@ -44,7 +44,7 @@
 
 
 
-        <form class="col-6 d-flex flex-column justify-content-center align-items-center" id="form" asp-action="InsertEquip" asp-controller="Equip">
+        <form class="col-6 d-flex flex-column justify-content-center align-items-center" id="form" asp-action="InserirReport" asp-controller="Ocorrencias">
            
             <input id="retorno" hidden value="@ViewBag.Retorno" />
                 <input type="hidden" name="Operacao" value="@ViewBag.Operacao" />
@@ -165,7 +165,15 @@
 
                     <div class="col-4 d-flex flex-column justify-content-around align-items-start" id="numTesteDiv">
                         <label class="col-form-label" for="numeroTeste">Tipo de Manutenção</label>
-                        <select asp-for="MaintenceTYpe" class="form-control form-control-sm" id="numeroTeste"></select>
+                        <select asp-for="MaintenceTYpe" class="form-control form-control-sm" id="numeroTeste">
+                            <option value="Sem Manutenção Relacionada">Sem Manutenção Relacionada</option>
+                            <option value="Corretiva">Corretiva</option>
+                            <option value="Corretiva Programada">Corretiva Programada</option>
+                            <option value="Corretiva Não Programada">Corretiva Não Programada</option>
+                            <option value="Preventiva">Preventiva</option>
+                            <option value="Preditiva">Preditiva</option>
+                            <option value="Prescritiva">Prescritiva</option>
+                        </select>
                         <span asp-validation-for="MaintenceTYpe" class="text text-danger"></span>
                     </div>
 
@@ -190,7 +198,7 @@
 
             <br>
 
-            <button type="button" class="btn btn-primary" >Adicionar Ocorrência</button>
+            <button type="submit" class="btn btn-primary">Adicionar Ocorrência</button>
            
         </form>
 
@@ -200,12 +208,8 @@
 
 <script>
 
-    const button = document.querySelector('.btn')
-    button.addEventListener('click', function () {
+  
 
-        event.preventDefault()
-        ValidateReport()
-    })
 
     const finalizaDiv = document.getElementById('finalDiv')
     const finalizar = document.getElementById('finalizar')
@@ -266,6 +270,9 @@
         }
 
     })
+
+  
+
 </script>
 
 <style>

@@ -24,7 +24,7 @@ namespace IndigoErp.Controllers
                 ModelState.AddModelError("Celula", "Selecione uma Célula");
                 return false;
             }
-            if (report.Origin != "INTERNA" && report.Origin != "EXTERNA")
+            if (report.Origin != "Falha Interna de Equipamento" && report.Origin != "Falha Externa da Operação")
             {
                 ModelState.AddModelError("Origem", "Selecione uma Origem");
                 return false;
@@ -44,7 +44,7 @@ namespace IndigoErp.Controllers
                 ModelState.AddModelError("Inicio", "Horário Inválido");
                 return false;
             }
-            if (Operation != "I" && report.End == null)
+            if (Operation != null && report.End == null)
             {
                 ModelState.AddModelError("Final", "Digite um Horário");
                 return false;
@@ -64,7 +64,7 @@ namespace IndigoErp.Controllers
                 ModelState.AddModelError("Inicio", "Horário Inválido");
                 return false;
             }
-            if ((report.FinalDate < report.InitialDate || report.FinalDate > DateTime.Today) || report.FinalDate == null && Operation != "I" || report.FinalDate == DateTime.MinValue)
+            if ((report.FinalDate < report.InitialDate || report.FinalDate > DateTime.Today) || report.FinalDate == null && Operation != null || report.FinalDate == DateTime.MinValue)
             {
                 ModelState.AddModelError("DataFinal", " Data Inválida");
                 return false;
@@ -74,7 +74,7 @@ namespace IndigoErp.Controllers
                 ModelState.AddModelError("Final", "Horário Inválido");
                 return false;
             }
-            if (report.End > DateTime.Now && report.FinalDate == DateTime.Today || (report.FinalDate == null || Convert.ToDateTime(report.End).Hour == 0) && Operation != "I")
+            if (report.End > DateTime.Now && report.FinalDate == DateTime.Today || (report.FinalDate == null || Convert.ToDateTime(report.End).Hour == 0) && Operation != null)
             {
                 ModelState.AddModelError("Final", "Horário Inválido");
                 return false;
@@ -84,6 +84,8 @@ namespace IndigoErp.Controllers
 
         public IActionResult Index()
         {
+            ReportDAO dao = new ReportDAO();
+            List<ReportModel> list = dao.ConsultaPendente(HttpContext.Session.GetString("cnpj"));
             return View();
         }
 
@@ -100,12 +102,12 @@ namespace IndigoErp.Controllers
             {
                 if (!ValidaReport(report, Operacao, TesteIncluso))
                 {
-                    ModelState.AddModelError("Origem", "Selecione uma Origem");
+                    ViewBag.Sections = setorService.ListSections(HttpContext.Session.GetString("cnpj"));
                     report.End = null;
                     ViewBag.Titulo = "Operadores";
                     ViewBag.Operacao = Operacao;
                     ViewBag.Id = id;
-                    return View("FrmReport", report);
+                    return View("CreateReport", report);
                 }
                 else
                 {
@@ -113,7 +115,7 @@ namespace IndigoErp.Controllers
                     {
                         report.MaintenceTYpe = "Ocorrência Sem Tipo de Manutenção ";
                     }
-                    if (ViewBag.Operacao == "I")
+                    if (ViewBag.Operacao == null)
                     {
                         ReportDAO dao = new ReportDAO();
 
@@ -126,12 +128,12 @@ namespace IndigoErp.Controllers
                             report.Status = "FINALIZADO";
                         }
 
-                        report.EmployeeId = 0000;
-
+                        report.EmployeeId = HttpContext.Session.GetString("nome"); ;
+                        report.Cnpj = HttpContext.Session.GetString("cnpj");
                         dao.Insert(report);
 
                         ViewBag.Operacao = "sucesso";
-                        return RedirectToAction("PgReports");
+                        return RedirectToAction("Index");
                     }
                     else
                     {

@@ -8,19 +8,20 @@ namespace IndigoErp.DAO
     {
         private SqlParameter[] CriaParametros(ReportModel report)
         {
-            SqlParameter[] parametros = new SqlParameter[12];
+            SqlParameter[] parametros = new SqlParameter[13];
             if (report.MaintenceTYpe == null)
             {
-                parametros[0] = new SqlParameter("numeroTeste", DBNull.Value);
+                parametros[0] = new SqlParameter("tipoManutencao", DBNull.Value);
             }
             else
             {
-                parametros[0] = new SqlParameter("numeroTeste", report.MaintenceTYpe);
+                parametros[0] = new SqlParameter("tipoManutencao", report.MaintenceTYpe);
             }
 
             parametros[1] = new SqlParameter("celula", report.Section);
 
             parametros[2] = new SqlParameter("idFuncionario", report.EmployeeId);
+
 
             parametros[3] = new SqlParameter("origem", report.Origin.ToUpper());
 
@@ -47,11 +48,13 @@ namespace IndigoErp.DAO
                 parametros[8] = new SqlParameter("descricao", report.Description);
             }
 
-            parametros[9] = new SqlParameter("final", report.End);
+            parametros[9] = report.End == null ? new SqlParameter("final", report.End) : new SqlParameter("final", DBNull.Value);
 
             parametros[10] = new SqlParameter("status", report.Status);
 
-            parametros[11] = new SqlParameter("dataFinal", report.FinalDate);
+            parametros[11] = report.FinalDate == null ? new SqlParameter("dataFinal", report.FinalDate) : new SqlParameter("dataFinal", DBNull.Value);
+
+            parametros[12] = new SqlParameter("cnpj", report.Cnpj);
 
             return parametros;
         }
@@ -61,9 +64,9 @@ namespace IndigoErp.DAO
             var r = new ReportModel();
 
             r.Id = Convert.ToInt32(report["ID"]);
-            r.MaintenceTYpe = report["NUMERO_TESTE"].ToString();
-            r.EmployeeId = Convert.ToInt32(report["ID_FUNCIONARIO"]);
-            r.Section = report["CELULA_DE_REPORT"].ToString();
+            r.MaintenceTYpe = report["TIPO_MANUTENCAO"].ToString();
+            r.EmployeeId = report["ID_FUNCIONARIO"].ToString();
+            r.Section = report["SETOR"].ToString();
             r.Origin = Convert.ToString(report["ORIGEM_REPORT"]);
             r.FailType = Convert.ToString(report["COMPONENTE_DE_FALHA"]);
             r.FailCause = Convert.ToString(report["TIPO_DE_FALHA"]);
@@ -77,11 +80,11 @@ namespace IndigoErp.DAO
             return r;
         }
 
-        public List<ReportModel> Consulta()
+        public List<ReportModel> Consulta(string cnpj)
         {
             List<ReportModel> list = new List<ReportModel>();
 
-            string consulta = "SELECT * FROM REPORTS WHERE STATUS = 'FINALIZADO' AND DATA_DA_OCORRENCIA >= DATEADD(DAY,-7,GETDATE()) ORDER BY DATA_DA_OCORRENCIA DESC";
+            string consulta = $"SELECT * FROM REPORTS WHERE STATUS = 'FINALIZADO' AND DATA_DA_OCORRENCIA >= DATEADD(DAY,-7,GETDATE()) AND CNPJ_ORIGEM = '{cnpj}' ORDER BY DATA_DA_OCORRENCIA DESC";
 
             DataTable table = GeneralDAO.SelectSql(consulta, null);
 
@@ -111,8 +114,8 @@ namespace IndigoErp.DAO
 
         public void Insert(ReportModel report)
         {
-            string insercao = "INSERT INTO REPORTS (NUMERO_TESTE,CELULA_DE_REPORT,ID_FUNCIONARIO,ORIGEM_REPORT,COMPONENTE_DE_FALHA,TIPO_DE_FALHA,DESCRICAO,DATA_DA_OCORRENCIA,INICIO,FINAL,STATUS,DATA_FINAL)" +
-            "VALUES (@numeroTeste,@celula,@idFuncionario,@origem,@componente,@tipo,@descricao,@data,@inicio,@final,@status,@dataFinal)";
+            string insercao = "INSERT INTO REPORTS (TIPO_MANUTENCAO,SETOR,ID_FUNCIONARIO,ORIGEM_REPORT,COMPONENTE_DE_FALHA,TIPO_DE_FALHA,DESCRICAO,DATA_DA_OCORRENCIA,INICIO,FINAL,STATUS,DATA_FINAL,CNPJ_ORIGEM)" +
+            "VALUES (@tipoManutencao,@celula,@idFuncionario,@origem,@componente,@tipo,@descricao,@data,@inicio,@final,@status,@dataFinal,@cnpj)";
             GeneralDAO.ExecutaSql(insercao, CriaParametros(report));
         }
 
@@ -122,11 +125,11 @@ namespace IndigoErp.DAO
             GeneralDAO.ExecutaSql(remocao, null);
         }
 
-        public List<ReportModel> ConsultaPendente()
+        public List<ReportModel> ConsultaPendente(string cnpj)
         {
             List<ReportModel> list = new List<ReportModel>();
 
-            string consulta = "SELECT * FROM REPORTS WHERE STATUS = 'PENDENTE' ";
+            string consulta = $aqa"SELECT * FROM REPORTS WHERE STATUS = 'PENDENTE' AND CNPJ_ORIGEM = '{cnpj}' ";
 
             DataTable table = GeneralDAO.SelectSql(consulta, null);
 
